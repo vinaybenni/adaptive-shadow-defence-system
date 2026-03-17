@@ -1,0 +1,14 @@
+[Unit]
+Description=Risk Agent 2 (Traffic Routing)
+After=network.target redis-server.service agent1.service
+
+[Service]
+User=agent2
+Group=agent2
+WorkingDirectory=/opt/project/backend
+Environment="PYTHONPATH=/opt/project/backend"
+ExecStart=/opt/project/backend/agent2_traffic/venv/bin/uvicorn agent2_traffic.main:app --host 0.0.0.0 --port 8010
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

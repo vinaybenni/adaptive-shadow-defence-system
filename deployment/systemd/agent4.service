@@ -1,0 +1,14 @@
+[Unit]
+Description=Risk Agent 4 (Learning & Adaptation)
+After=network.target redis-server.service agent1.service agent3.service
+
+[Service]
+User=agent4
+Group=agent4
+WorkingDirectory=/opt/project/backend
+Environment="PYTHONPATH=/opt/project/backend"
+ExecStart=/opt/project/backend/agent4_learning/venv/bin/python agent4_learning/main.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

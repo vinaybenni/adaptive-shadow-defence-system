@@ -1,0 +1,14 @@
+[Unit]
+Description=Risk Agent 3 (Shadow Environment)
+After=network.target redis-server.service
+
+[Service]
+User=agent3
+Group=agent3
+WorkingDirectory=/opt/project/backend
+Environment="PYTHONPATH=/opt/project/backend"
+ExecStart=/opt/project/backend/agent3_shadow/venv/bin/uvicorn agent3_shadow.main:app --host 0.0.0.0 --port 8003
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
