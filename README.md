@@ -26,6 +26,12 @@ The backend consists of several Python-based agents. Ensure you have Python 3.10
 - **Agent 3 (Shadow Environment):** Port `8003`
 - **Dashboard (Frontend):** Port `5173`
 
+**to open the prots use this cmd
+netsh advfirewall firewall add rule name="ASDS_Web_80" dir=in action=allow protocol=TCP localport=80
+netsh advfirewall firewall add rule name="ASDS_Telemetry_8010" dir=in action=allow protocol=TCP localport=8010
+netsh advfirewall firewall add rule name="ASDS_Shadow_8003" dir=in action=allow protocol=TCP localport=8003
+
+
 **Running the Agents:**
 Each agent folder has a `requirements.txt`. Install them using `pip install -r requirements.txt` and start the services using the provided `.bat` or `.sh` scripts in the root directory.
 
