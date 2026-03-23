@@ -191,6 +191,101 @@ const LogTable = ({ logs, emptyMsg }) => (
     </div>
 );
 
+const ShadowMonitor = ({ stats, logs }) => {
+    const [activeFilter, setActiveFilter] = useState('all');
+
+    const attackData = Object.entries(stats.attackTypes || {})
+        .map(([name, count]) => ({
+            name: name.replace(/_/g, ' ').toUpperCase(),
+            count
+        }))
+        .sort((a, b) => b.count - a.count);
+
+    const filteredLogs = logs.filter(log => {
+        if (activeFilter === 'all') return true;
+        if (activeFilter === 'attacks') {
+            const content = `${log.path} ${log.payload}`.toLowerCase();
+            return /sql_injection|xss|path_traversal|os_command/.test(content);
+        }
+        return true;
+    });
+
+    return (
+        <div className="p-6">
+            <h1 className="text-3xl font-bold mb-6 text-purple-400">
+                Shadow Monitor (Deception Environment)
+            </h1>
+
+            <div className="grid grid-cols-3 gap-6 mb-8">
+                <div 
+                    onClick={() => setActiveFilter('all')}
+                    className={`p-6 rounded-xl border-2 transition-all cursor-pointer hover:shadow-lg ${activeFilter === 'all' ? 'bg-purple-900/40 border-purple-500' : 'bg-slate-900 border-slate-800'}`}
+                >
+                    <div className="text-slate-400 text-sm font-medium mb-1">Total Request In Shadow Domain </div>
+                    <div className="text-4xl font-black text-white">{stats.totalRequests.toLocaleString()}</div>
+                    {/* <div className="mt-2 text-[10px] text-purple-400 uppercase tracking-tighter font-bold"></div> */}
+                </div>
+
+                <div 
+                    onClick={() => setActiveFilter('attacks')}
+                    className={`p-6 rounded-xl border-2 transition-all cursor-pointer hover:shadow-lg ${activeFilter === 'attacks' ? 'bg-red-900/40 border-red-500' : 'bg-slate-900 border-slate-800'}`}
+                >
+                    <div className="text-slate-400 text-sm font-medium mb-1">Detected Attacks</div>
+                    <div className="text-4xl font-black text-red-500">{stats.uniqueAttackTypes || 0} Types</div>
+                    {/* <div className="mt-2 text-[10px] text-red-400 uppercase tracking-tighter font-bold">SQLi, XSS, etc.</div> */}
+                </div>
+
+                <div 
+                    className="p-6 rounded-xl border-2 bg-slate-900 border-slate-800"
+                >
+                    <div className="text-slate-400 text-sm font-medium mb-1">Unique Attackers</div>
+                    <div className="text-4xl font-black text-orange-500">{stats.uniqueAttackers || 0}</div>
+                    {/* <div className="mt-2 text-[10px] text-orange-400 uppercase tracking-tighter font-bold">Distinct IP Sources</div> */}
+                </div>
+            </div>
+
+            <div className="bg-slate-900 rounded-xl border border-slate-800 overflow-hidden">
+                <div className="p-4 border-b border-slate-800 flex justify-between items-center bg-slate-800/50">
+                    <h3 className="font-bold text-slate-200 flex items-center gap-2">
+                        {activeFilter === 'all' ? 'Real-time Shadow Interactions' : 'Filtered Shadow Attack Feed'}
+                    </h3>
+                    <div className="text-xs text-slate-500">{filteredLogs.length} events showing</div>
+                </div>
+                <div className="overflow-x-auto">
+                    <table className="w-full text-left text-sm">
+                        <thead className="bg-slate-950/50 text-slate-500">
+                            <tr>
+                                <th className="p-4 font-semibold uppercase text-[10px]">Time</th>
+                                <th className="p-4 font-semibold uppercase text-[10px]">Source IP</th>
+                                <th className="p-4 font-semibold uppercase text-[10px]">Target Path</th>
+                                <th className="p-4 font-semibold uppercase text-[10px]">Payload Snippet</th>
+                                <th className="p-4 font-semibold uppercase text-[10px]">Agent</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-800/50">
+                            {filteredLogs.length === 0 ? (
+                                <tr>
+                                    <td colSpan="5" className="p-12 text-center text-slate-600 italic">No shadow activity detected yet.</td>
+                                </tr>
+                            ) : (
+                                filteredLogs.map((log, i) => (
+                                    <tr key={i} className="hover:bg-slate-800/30 transition-colors">
+                                        <td className="p-4 font-mono text-slate-400 text-[11px] whitespace-nowrap">{new Date(log.timestamp).toLocaleTimeString()}</td>
+                                        <td className="p-4 text-orange-400 font-bold">{log.attacker_ip}</td>
+                                        <td className="p-4 text-slate-300 font-mono text-[12px]"><span className="text-slate-500">/{log.shadow_host}</span>{log.path}</td>
+                                        <td className="p-4 text-slate-500 italic max-w-xs truncate">{log.payload || "N/A"}</td>
+                                        <td className="p-4 text-slate-400 text-[11px] max-w-[150px] truncate">{log.user_agent}</td>
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const Applications = () => {
     const [apps, setApps] = useState([]);
     const [realUrl, setRealUrl] = useState("");
@@ -488,6 +583,13 @@ function App() {
     });
     const [logs, setLogs] = useState([]);
     const [proposals, setProposals] = useState([]);
+    const [shadowStats, setShadowStats] = useState({
+        totalRequests: 0,
+        uniqueAttackers: 0,
+        attackTypes: {},
+        uniqueAttackTypes: 0
+    });
+    const [shadowLogs, setShadowLogs] = useState([]);
     const [connected, setConnected] = useState(false);
 
     useEffect(() => {
@@ -507,6 +609,8 @@ function App() {
                             event: log.explain || log.tags?.join(", ") || (log.channel === "login.success" ? "Successful Login" : "Traffic hit")
                         })));
                     }
+                    if (data.stats && data.stats.shadowStats) setShadowStats(data.stats.shadowStats);
+                    if (data.shadowLogs) setShadowLogs(data.shadowLogs);
                 }
             } catch (e) { console.error("History fetch failed", e); }
         };
@@ -582,10 +686,29 @@ function App() {
                             suspiciousUsers: 0,
                             attacksBlocked: 0,
                             uniqueAttackTypes: 0,
-                            shadowRouting: 0,
-                            attackTypes: {}
-                        });
-                        setLogs([]);
+                             shadowRouting: 0,
+                             attackTypes: {}
+                         });
+                         setShadowStats({
+                             totalRequests: 0,
+                             uniqueAttackers: 0,
+                             attackTypes: {},
+                             uniqueAttackTypes: 0
+                         });
+                         setLogs([]);
+                         setShadowLogs([]);
+                     }
+                    
+                    // Always update stats if provided in any message
+                    if (data.stats) {
+                        setStats(prev => ({ ...prev, ...data.stats }));
+                        if (data.stats.shadowStats) {
+                             setShadowStats(data.stats.shadowStats);
+                        }
+                    }
+
+                    if (data.channel === "shadow.activity") {
+                        setShadowLogs(prev => [data, ...prev].slice(0, 50));
                     }
                 } catch (e) { console.error("WS Parse Error", e); }
             };
@@ -633,9 +756,14 @@ function App() {
                     <button onClick={() => setActiveTab('protection')} className={`flex items-center gap-3 w-full px-4 py-3 rounded-lg transition-colors ${activeTab === 'protection' ? (isDark ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-900') : 'text-slate-400 hover:bg-slate-800/50'}`}>
                         <AlertTriangle size={20} /> Protection
                     </button>
-                    <button onClick={() => setActiveTab('settings')} className={`flex items-center gap-3 w-full px-4 py-3 rounded-lg transition-colors ${activeTab === 'settings' ? (isDark ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-900') : 'text-slate-400 hover:bg-slate-800/50'}`}>
-                        <Settings size={20} /> Settings
-                    </button>
+                     <button onClick={() => setActiveTab('settings')} className={`flex items-center gap-3 w-full px-4 py-3 rounded-lg transition-colors ${activeTab === 'settings' ? (isDark ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-900') : 'text-slate-400 hover:bg-slate-800/50'}`}>
+                         <Settings size={20} /> Settings
+                     </button>
+                     <div className="pt-4 mt-4 border-t border-slate-800">
+                        <button onClick={() => setActiveTab('shadow')} className={`flex items-center gap-3 w-full px-4 py-3 rounded-lg transition-all border-2 ${activeTab === 'shadow' ? 'bg-purple-900/20 border-purple-500 text-purple-400' : 'bg-transparent border-transparent text-slate-500 hover:bg-slate-800/50'}`}>
+                            <Shield size={20} className={activeTab === 'shadow' ? 'text-purple-400' : 'text-slate-500'} /> Shadow Monitor
+                        </button>
+                     </div>
                 </nav>
                 <div className={`p-4 border-t text-xs text-center ${isDark ? 'border-slate-800 text-slate-500' : 'border-slate-200 text-slate-400'}`}>
                     System Online <br /> {connected ? "Telemetry Live" : "Offline"}
@@ -647,7 +775,8 @@ function App() {
                 {activeTab === 'dashboard' && <Dashboard stats={stats} logs={logs} connected={connected} />}
                 {activeTab === 'applications' && <Applications />}
                 {activeTab === 'protection' && <ProtectionRules proposals={proposals} />}
-                {activeTab === 'settings' && <AppSettings isDark={isDark} toggleTheme={toggleTheme} onReset={handleResetStats} />}
+                 {activeTab === 'settings' && <AppSettings isDark={isDark} toggleTheme={toggleTheme} onReset={handleResetStats} />}
+                 {activeTab === 'shadow' && <ShadowMonitor stats={shadowStats} logs={shadowLogs} />}
             </div>
         </div>
     );

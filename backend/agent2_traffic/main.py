@@ -9,6 +9,7 @@ from fastapi import FastAPI, BackgroundTasks, WebSocket, WebSocketDisconnect, Re
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import json
+import re
 
 # Add backend to path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
@@ -82,7 +83,7 @@ async def broadcast_redis_events():
     """Listens to Redis and broadcasts to all connected WebSockets."""
     logger.info("Started WebSocket Broadcast Listener")
     pubsub = redis_client.redis.pubsub()
-    await pubsub.subscribe("risk.events", "login.success", "route.decisions", "agent4.proposals")
+    await pubsub.subscribe("risk.events", "login.success", "route.decisions", "agent4.proposals", "shadow.activity")
     
     async for message in pubsub.listen():
         if message['type'] == 'message':
@@ -118,17 +119,58 @@ async def broadcast_redis_events():
                                     # Use a Redis Hash to count attack types
                                     await redis_client.redis.hincrby("stats.attack_types", tag, 1)
 
+                # Handle Shadow Activity specifically
+                elif channel == "shadow.activity":
+                    log_entry = {"channel": channel, **data}
+                    await redis_client.redis.lpush("shadow.logs", json.dumps(log_entry))
+                    await redis_client.redis.ltrim("shadow.logs", 0, 99) 
+                    
+                    # Increment Shadow Total
+                    await redis_client.redis.incr("stats.shadow_total")
+                    
+                    # Track Unique Shadow IPs
+                    attacker_ip = data.get('attacker_ip')
+                    if attacker_ip:
+                         await redis_client.redis.sadd("stats.shadow_unique_ips", attacker_ip)
+                    
+                    # Analyze for attack types (Local simple check to avoid cross-agent calls)
+                    payload = data.get('payload', '').lower()
+                    path = data.get('path', '').lower()
+                    content = f"{path} {payload}"
+                    
+                    patterns = {
+                        "sql_injection": r"(\'\s*(OR|AND)\s+[\'\"\d]|\bUNION\b|\bSELECT\b|--|\bOR\b\s+['\"]?1['\"]?\s*=\s*['\"]?1|SLEEP\s*\()",
+                        "xss": r"(<script|alert\(|onerror|onload|javascript:|<iframe)",
+                        "path_traversal": r"(\.\.\/|\.\.\\|/etc/passwd)",
+                        "os_command": r"(&&|\|\||;|`|\$\(|ping|netstat|whoami|cat)"
+                    }
+                    
+                    for atk_name, pattern in patterns.items():
+                        if re.search(pattern, content, re.IGNORECASE):
+                             await redis_client.redis.hincrby("stats.shadow_attack_types", atk_name, 1)
+
                 # Fetch latest stats to send with the message (authoritative)
                 total = await redis_client.redis.get("stats.total_requests")
                 normal = await redis_client.redis.get("stats.normal_users")
                 suspicious = await redis_client.redis.get("stats.suspicious_users")
                 blocked = await redis_client.redis.get("stats.attacks_blocked")
                 
+                # SHADOW STATS
+                s_total = await redis_client.redis.get("stats.shadow_total")
+                s_unique_ips = await redis_client.redis.scard("stats.shadow_unique_ips")
+                s_attack_types = await redis_client.redis.hgetall("stats.shadow_attack_types")
+                
                 stats_payload = {
                     "totalRequests": int(total) if total else 0,
                     "normalUsers": int(normal) if normal else 0,
                     "suspiciousUsers": int(suspicious) if suspicious else 0,
-                    "attacksBlocked": int(blocked) if blocked else 0
+                    "attacksBlocked": int(blocked) if blocked else 0,
+                    "shadowStats": {
+                        "totalRequests": int(s_total) if s_total else 0,
+                        "uniqueAttackers": int(s_unique_ips) if s_unique_ips else 0,
+                        "attackTypes": {k: int(v) for k, v in s_attack_types.items()} if s_attack_types else {},
+                        "uniqueAttackTypes": len(s_attack_types) if s_attack_types else 0
+                    }
                 }
                 
                 # Fetch attack types tally
@@ -219,31 +261,17 @@ async def receive_telemetry(data: dict, request: Request):
                                 action = "none"
                             else:
                                 if target_type == 'shadow' and app_config.shadow_upstream:
-                                    # Robust Path Mapping
-                                    from urllib.parse import urlparse
+                                    # Use the registered shadow URL directly (as requested by user)
+                                    url = app_config.shadow_upstream
                                     
-                                    real_base = app_config.real_upstream
-                                    shadow_base = app_config.shadow_upstream
-                                    
-                                    # Strip trailing filename if present (e.g., login.php)
-                                    if "." in real_base.split("/")[-1]:
-                                        real_base = "/".join(real_base.split("/")[:-1]) + "/"
-                                    if "." in shadow_base.split("/")[-1]:
-                                        shadow_base = "/".join(shadow_base.split("/")[:-1]) + "/"
-                                        
-                                    real_path_prefix = urlparse(real_base).path
-                                    current_path = meta.path
-                                    
-                                    if current_path.startswith(real_path_prefix):
-                                        rel_path = current_path[len(real_path_prefix):]
-                                        url = shadow_base.rstrip('/') + '/' + rel_path.lstrip('/')
-                                    else:
-                                        # Fallback to registered shadow upstream
-                                        url = app_config.shadow_upstream
-                                    
-                                    # Preserve query string
+                                    # Preserve query string if present in original request
                                     if "?" in meta.full_url:
-                                        url += "?" + meta.full_url.split("?", 1)[1]
+                                        query_string = meta.full_url.split("?", 1)[1]
+                                        if "?" in url:
+                                            url += "&" + query_string
+                                        else:
+                                            url += "?" + query_string
+
                                 
                                 action = "redirect"
                                 
@@ -330,6 +358,18 @@ async def get_dashboard_stats():
     stats["attackTypes"] = {k: int(v) for k, v in raw_attack_types.items()} if raw_attack_types else {}
     stats["uniqueAttackTypes"] = len(stats["attackTypes"])
     
+    # SHADOW STATS
+    s_total = await redis_client.redis.get("stats.shadow_total")
+    s_unique_ips = await redis_client.redis.scard("stats.shadow_unique_ips")
+    s_attack_types = await redis_client.redis.hgetall("stats.shadow_attack_types")
+    
+    stats["shadowStats"] = {
+        "totalRequests": int(s_total) if s_total else 0,
+        "uniqueAttackers": int(s_unique_ips) if s_unique_ips else 0,
+        "attackTypes": {k: int(v) for k, v in s_attack_types.items()} if s_attack_types else {},
+        "uniqueAttackTypes": len(s_attack_types) if s_attack_types else 0
+    }
+
     raw_logs = await redis_client.redis.lrange("dashboard.logs", 0, 49)
     logs = []
     for rl in raw_logs:
@@ -337,8 +377,16 @@ async def get_dashboard_stats():
             logs.append(json.loads(rl))
         except:
             pass
+
+    raw_shadow_logs = await redis_client.redis.lrange("shadow.logs", 0, 49)
+    shadow_logs = []
+    for rl in raw_shadow_logs:
+        try:
+             shadow_logs.append(json.loads(rl))
+        except:
+             pass
             
-    return {"stats": stats, "logs": logs}
+    return {"stats": stats, "logs": logs, "shadowLogs": shadow_logs}
 
 @app.get("/api/v1/apps")
 async def get_apps():
@@ -381,9 +429,19 @@ async def reset_stats():
             "normalUsers": 0,
             "suspiciousUsers": 0,
             "attacksBlocked": 0,
-            "attackTypes": {}
+            "attackTypes": {},
+            "shadowStats": {
+                "totalRequests": 0,
+                "uniqueAttackers": 0,
+                "attackTypes": {},
+                "uniqueAttackTypes": 0
+            }
         }
     }
+    await redis_client.redis.delete("shadow.logs")
+    await redis_client.redis.delete("stats.shadow_total")
+    await redis_client.redis.delete("stats.shadow_unique_ips")
+    await redis_client.redis.delete("stats.shadow_attack_types")
     await manager.broadcast(clear_event)
     
     return {"status": "ok", "message": "Dashboard data cleared"}

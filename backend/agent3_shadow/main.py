@@ -1,6 +1,7 @@
 import sys
 import os
 import asyncio
+from datetime import datetime
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 
@@ -34,12 +35,13 @@ async def catch_all(request: Request, path: str):
         body_str = "<binary>"
 
     log_entry = AttackerLog(
-        timestamp="", 
+        timestamp=datetime.utcnow().isoformat() + "Z",
         attacker_ip=request.client.host,
         shadow_host=request.headers.get("host", "unknown"),
         path=path,
         method=request.method,
         payload=body_str[:1000],  # Truncate
+        user_agent=request.headers.get("user-agent", "unknown"),
         notes="Trapped in shadow environment"
     )
     
