@@ -213,7 +213,7 @@ const ShadowMonitor = ({ stats, logs }) => {
     return (
         <div className="p-6">
             <h1 className="text-3xl font-bold mb-6 text-purple-400">
-                Shadow Monitor (Deception Environment)
+                Shadow Monitor
             </h1>
 
             <div className="grid grid-cols-3 gap-6 mb-8">
@@ -222,7 +222,7 @@ const ShadowMonitor = ({ stats, logs }) => {
                     className={`p-6 rounded-xl border-2 transition-all cursor-pointer hover:shadow-lg ${activeFilter === 'all' ? 'bg-purple-900/40 border-purple-500' : 'bg-slate-900 border-slate-800'}`}
                 >
                     <div className="text-slate-400 text-sm font-medium mb-1">Total Request In Shadow Domain </div>
-                    <div className="text-4xl font-black text-white">{stats.totalRequests.toLocaleString()}</div>
+                    <div className="text-2xl font-black text-white">{stats.totalRequests.toLocaleString()}</div>
                     {/* <div className="mt-2 text-[10px] text-purple-400 uppercase tracking-tighter font-bold"></div> */}
                 </div>
 
@@ -231,7 +231,7 @@ const ShadowMonitor = ({ stats, logs }) => {
                     className={`p-6 rounded-xl border-2 transition-all cursor-pointer hover:shadow-lg ${activeFilter === 'attacks' ? 'bg-red-900/40 border-red-500' : 'bg-slate-900 border-slate-800'}`}
                 >
                     <div className="text-slate-400 text-sm font-medium mb-1">Detected Attacks</div>
-                    <div className="text-4xl font-black text-red-500">{stats.uniqueAttackTypes || 0} Types</div>
+                    <div className="text-2xl font-black text-red-500">{stats.uniqueAttackTypes || 0} Types</div>
                     {/* <div className="mt-2 text-[10px] text-red-400 uppercase tracking-tighter font-bold">SQLi, XSS, etc.</div> */}
                 </div>
 
@@ -239,7 +239,7 @@ const ShadowMonitor = ({ stats, logs }) => {
                     className="p-6 rounded-xl border-2 bg-slate-900 border-slate-800"
                 >
                     <div className="text-slate-400 text-sm font-medium mb-1">Unique Attackers</div>
-                    <div className="text-4xl font-black text-orange-500">{stats.uniqueAttackers || 0}</div>
+                    <div className="text-2xl font-black text-orange-500">{stats.uniqueAttackers || 0}</div>
                     {/* <div className="mt-2 text-[10px] text-orange-400 uppercase tracking-tighter font-bold">Distinct IP Sources</div> */}
                 </div>
             </div>

@@ -260,18 +260,13 @@ async def receive_telemetry(data: dict, request: Request):
                                 logger.info(f"User is already on {target_type} environment ({url}). Skipping redirect loop.")
                                 action = "none"
                             else:
-                                if target_type == 'shadow' and app_config.shadow_upstream:
-                                    # Use the registered shadow URL directly (as requested by user)
-                                    url = app_config.shadow_upstream
+                                if target_type == 'shadow':
+                                    url = routing_manager.resolve_upstream(app_config, target_type)
+                                    logger.warning(f"HIGH RISK Detected. Routing to Shadow: {url}")
                                     
-                                    # Preserve query string if present in original request
+                                    # Preserve query string
                                     if "?" in meta.full_url:
-                                        query_string = meta.full_url.split("?", 1)[1]
-                                        if "?" in url:
-                                            url += "&" + query_string
-                                        else:
-                                            url += "?" + query_string
-
+                                        url += "?" + meta.full_url.split("?", 1)[1]
                                 
                                 action = "redirect"
                                 

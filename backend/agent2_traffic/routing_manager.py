@@ -111,7 +111,10 @@ class RoutingManager:
 
     def resolve_upstream(self, config: AppConfig, target_type: str) -> str:
         if target_type == "shadow":
-            # Fallback to internal Shadow Agent if no custom shadow URL provided
+            # HARD OVERRIDE: Forcing localhost tests to your new shadow environment
+            if "localhost" in config.real_upstream:
+                logger.warning(f"Forcing Shadow Target Override for localhost: http://localhost/DVWA-rnaster/")
+                return "http://localhost/DVWA-rnaster/"
             return config.shadow_upstream or "http://localhost:8003"
         elif target_type == "hardened":
             return config.hardened_upstream

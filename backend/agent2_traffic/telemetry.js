@@ -78,16 +78,21 @@
 
         const form = e.target;
 
-        // ALWAYS allow login page to proceed (never block authentication directly)
         const currentPath = window.location.pathname.toLowerCase();
         if (currentPath.includes('login.php') || currentPath.includes('login/') || currentPath.endsWith('login')) {
-            console.log("Risk System: Login page detected. Sending non-blocking telemetry and allowing form to proceed.");
+            console.log("Risk System: Login page detected. Verifying and allowing non-blocking flow.");
             sendTelemetry('hit', {
                 method: (form.getAttribute('method') || 'GET').toUpperCase(),
                 path: form.getAttribute('action') || window.location.pathname,
-                payload: "login_attempt=true" // Scrub passwords, just record the attempt
+                payload: "login_attempt=true"
+            }).then(result => {
+                // Even on login pages, if the Risk is HIGH, move to shadow
+                if (result.action === 'redirect' && result.url) {
+                    console.warn("Risk System: Critical risk on login. Moving to shadow.");
+                    window.location.href = result.url;
+                }
             });
-            return; // Let the browser handle the form submission naturally
+            return; // Still return to allow original form handler if no redirect occurs within timeout
         }
 
         e.preventDefault();
