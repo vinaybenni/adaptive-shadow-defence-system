@@ -7,8 +7,18 @@
     const AGENT_URL = "http://" + currentHost + ":8010/api/v1/telemetry";
 
     // Immediate Breach Prevention: Hide content if URL looks suspicious
-    const attackPatterns = /(' OR '1'='1|--|union|select|insert|delete|update|drop|truncate|alter|xp_cmdshell)/i;
-    if (attackPatterns.test(window.location.search) || attackPatterns.test(window.location.hash)) {
+    const attackPatterns = /('\s*(OR|AND)\b\s*[\'\"\d\)\(]|--|union|select|insert|delete|update|drop|truncate|alter|xp_cmdshell|WAITFOR\s+DELAY|SLEEP\s*\(|;|pg_sleep|benchmark|request_uri\s*\()|' OR '1'='1|' OR 1=1/i;
+    
+    function isSuspiciousContent(text) {
+        if (!text) return false;
+        try {
+            return attackPatterns.test(text) || attackPatterns.test(decodeURIComponent(text));
+        } catch (e) {
+            return attackPatterns.test(text);
+        }
+    }
+
+    if (isSuspiciousContent(window.location.search) || isSuspiciousContent(window.location.hash)) {
         console.warn("Risk System: Suspicious URL detected. Hiding content until verified...");
         document.documentElement.style.display = 'none';
     }

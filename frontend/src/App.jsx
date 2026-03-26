@@ -93,7 +93,7 @@ const Dashboard = ({ stats, logs, connected }) => {
             ) : activeFilter === 'suspicious-only' ? (
                 <div className="bg-slate-800 p-4 rounded-lg border border-orange-700">
                     <h3 className="text-orange-400 font-bold mb-4 flex items-center gap-2">
-                        <AlertTriangle size={18} /> Suspicious Activity (Score &gt; 20)
+                        <AlertTriangle size={18} /> Suspicious Activity (Score &gt; 90)
                     </h3>
                     <LogTable logs={suspiciousLogs} emptyMsg="No suspicious activity detected yet." />
                 </div>
@@ -217,7 +217,7 @@ const ShadowMonitor = ({ stats, logs }) => {
             </h1>
 
             <div className="grid grid-cols-3 gap-6 mb-8">
-                <div 
+                <div
                     onClick={() => setActiveFilter('all')}
                     className={`p-6 rounded-xl border-2 transition-all cursor-pointer hover:shadow-lg ${activeFilter === 'all' ? 'bg-purple-900/40 border-purple-500' : 'bg-slate-900 border-slate-800'}`}
                 >
@@ -226,7 +226,7 @@ const ShadowMonitor = ({ stats, logs }) => {
                     {/* <div className="mt-2 text-[10px] text-purple-400 uppercase tracking-tighter font-bold"></div> */}
                 </div>
 
-                <div 
+                <div
                     onClick={() => setActiveFilter('attacks')}
                     className={`p-6 rounded-xl border-2 transition-all cursor-pointer hover:shadow-lg ${activeFilter === 'attacks' ? 'bg-red-900/40 border-red-500' : 'bg-slate-900 border-slate-800'}`}
                 >
@@ -235,7 +235,7 @@ const ShadowMonitor = ({ stats, logs }) => {
                     {/* <div className="mt-2 text-[10px] text-red-400 uppercase tracking-tighter font-bold">SQLi, XSS, etc.</div> */}
                 </div>
 
-                <div 
+                <div
                     className="p-6 rounded-xl border-2 bg-slate-900 border-slate-800"
                 >
                     <div className="text-slate-400 text-sm font-medium mb-1">Unique Attackers</div>
@@ -686,24 +686,24 @@ function App() {
                             suspiciousUsers: 0,
                             attacksBlocked: 0,
                             uniqueAttackTypes: 0,
-                             shadowRouting: 0,
-                             attackTypes: {}
-                         });
-                         setShadowStats({
-                             totalRequests: 0,
-                             uniqueAttackers: 0,
-                             attackTypes: {},
-                             uniqueAttackTypes: 0
-                         });
-                         setLogs([]);
-                         setShadowLogs([]);
-                     }
-                    
+                            shadowRouting: 0,
+                            attackTypes: {}
+                        });
+                        setShadowStats({
+                            totalRequests: 0,
+                            uniqueAttackers: 0,
+                            attackTypes: {},
+                            uniqueAttackTypes: 0
+                        });
+                        setLogs([]);
+                        setShadowLogs([]);
+                    }
+
                     // Always update stats if provided in any message
                     if (data.stats) {
                         setStats(prev => ({ ...prev, ...data.stats }));
                         if (data.stats.shadowStats) {
-                             setShadowStats(data.stats.shadowStats);
+                            setShadowStats(data.stats.shadowStats);
                         }
                     }
 
@@ -756,14 +756,14 @@ function App() {
                     <button onClick={() => setActiveTab('protection')} className={`flex items-center gap-3 w-full px-4 py-3 rounded-lg transition-colors ${activeTab === 'protection' ? (isDark ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-900') : 'text-slate-400 hover:bg-slate-800/50'}`}>
                         <AlertTriangle size={20} /> Protection
                     </button>
-                     <button onClick={() => setActiveTab('settings')} className={`flex items-center gap-3 w-full px-4 py-3 rounded-lg transition-colors ${activeTab === 'settings' ? (isDark ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-900') : 'text-slate-400 hover:bg-slate-800/50'}`}>
-                         <Settings size={20} /> Settings
-                     </button>
-                     <div className="pt-4 mt-4 border-t border-slate-800">
+                    <button onClick={() => setActiveTab('settings')} className={`flex items-center gap-3 w-full px-4 py-3 rounded-lg transition-colors ${activeTab === 'settings' ? (isDark ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-900') : 'text-slate-400 hover:bg-slate-800/50'}`}>
+                        <Settings size={20} /> Settings
+                    </button>
+                    <div className="pt-4 mt-4 border-t border-slate-800">
                         <button onClick={() => setActiveTab('shadow')} className={`flex items-center gap-3 w-full px-4 py-3 rounded-lg transition-all border-2 ${activeTab === 'shadow' ? 'bg-purple-900/20 border-purple-500 text-purple-400' : 'bg-transparent border-transparent text-slate-500 hover:bg-slate-800/50'}`}>
                             <Shield size={20} className={activeTab === 'shadow' ? 'text-purple-400' : 'text-slate-500'} /> Shadow Monitor
                         </button>
-                     </div>
+                    </div>
                 </nav>
                 <div className={`p-4 border-t text-xs text-center ${isDark ? 'border-slate-800 text-slate-500' : 'border-slate-200 text-slate-400'}`}>
                     System Online <br /> {connected ? "Telemetry Live" : "Offline"}
@@ -775,8 +775,8 @@ function App() {
                 {activeTab === 'dashboard' && <Dashboard stats={stats} logs={logs} connected={connected} />}
                 {activeTab === 'applications' && <Applications />}
                 {activeTab === 'protection' && <ProtectionRules proposals={proposals} />}
-                 {activeTab === 'settings' && <AppSettings isDark={isDark} toggleTheme={toggleTheme} onReset={handleResetStats} />}
-                 {activeTab === 'shadow' && <ShadowMonitor stats={shadowStats} logs={shadowLogs} />}
+                {activeTab === 'settings' && <AppSettings isDark={isDark} toggleTheme={toggleTheme} onReset={handleResetStats} />}
+                {activeTab === 'shadow' && <ShadowMonitor stats={shadowStats} logs={shadowLogs} />}
             </div>
         </div>
     );

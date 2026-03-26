@@ -1,5 +1,6 @@
 import re
 import time
+import urllib.parse
 from collections import defaultdict
 from shared.schemas import RequestMetadata, RiskAssessment
 
@@ -11,7 +12,7 @@ class RiskEngine:
         # 2. Attack Patterns (Regex)
         self.patterns = {
             "sql_injection": re.compile(
-                r"(\'\s*(OR|AND)\s+[\'\"\d]|\bUNION\b.{0,20}\bSELECT\b|\bSELECT\b.{0,50}\bFROM\b|\bINSERT\b.{0,20}\bINTO\b|\bDROP\b.{0,20}\bTABLE\b|--|\bOR\b\s+['\"]?1['\"]?\s*=\s*['\"]?1|xp_cmdshell|WAITFOR\s+DELAY|SLEEP\s*\()", 
+                r"(\'\s*(OR|AND)\b\s*[\'\"\d\)\(]|\bUNION\b.{0,20}\bSELECT\b|\bSELECT\b.{0,50}\bFROM\b|\bINSERT\b.{0,20}\bINTO\b|\bDROP\b.{0,20}\bTABLE\b|--|\bOR\b\s+['\"]?1['\"]?\s*=\s*['\"]?1|xp_cmdshell|WAITFOR\s+DELAY|SLEEP\s*\(|;|pg_sleep|benchmark|request_uri\s*\()", 
                 re.IGNORECASE
             ),
             "xss": re.compile(r"(<script|alert\(|onerror|onload|javascript:|<iframe|document\.cookie|eval\(|unescape\()", re.IGNORECASE),
@@ -41,7 +42,8 @@ class RiskEngine:
                 break
 
         # -- Rule 2: Pattern Matching (Payload & Path) --
-        content_to_check = f"{meta.path} {meta.host} {meta.full_url} {meta.payload}".lower()
+        raw_content = f"{meta.path} {meta.host} {meta.full_url} {meta.payload}".lower()
+        content_to_check = urllib.parse.unquote_plus(raw_content)
         
         for attack_type, pattern in self.patterns.items():
             if pattern.search(content_to_check):

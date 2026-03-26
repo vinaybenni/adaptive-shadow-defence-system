@@ -212,14 +212,33 @@ async def receive_telemetry(data: dict, request: Request):
         logger.warning(f"BLOCKED IP attempt: {data.get('client_ip')}")
         return {"status": "blocked", "action": "block", "url": ""}
 
-    # Filter Shadow Traffic: Ignore any telemetry from the shadow environment
-    full_url = data.get('full_url', '')
-    if routing_manager.is_shadow_url(full_url):
-        logger.info(f"Shadow Bypasser: Ignoring telemetry from shadow environment: {full_url}")
-        return {"status": "ignored", "action": "none"}
-
     payload_str = data.get('payload', '')
     payload_size = len(payload_str.encode()) if payload_str else 0
+
+    # 1. Authoritative Counting: Track EVERY hit before any filters
+    is_shadow = routing_manager.is_shadow_url(data.get('full_url', ''))
+    host_registered = routing_manager.get_route(data.get('host', ''))
+    
+    # Increment Total Statistics (Redis)
+    await redis_client.redis.incr("stats.total_requests")
+    if is_shadow:
+        await redis_client.redis.incr("stats.shadow_total")
+
+    # 2. Shadow Bypasser (Still ignore for Scoring, but NOT for Counting)
+    if is_shadow:
+        logger.info(f"Shadow Telemetry [{request_id}]: Counting hit but skipping scoring.")
+        # We publish to shadow channel so the Shadow Monitor picks it up
+        shadow_log = {
+            "channel": "shadow.activity",
+            "attacker_ip": client_ip,
+            "timestamp": datetime.utcnow().isoformat() + "Z",
+            "path": data.get('path'),
+            "method": data.get('method', 'GET'),
+            "payload": payload_str[:500],
+            "user_agent": request.headers.get("user-agent", "unknown"),
+        }
+        await redis_client.publish("shadow.activity", shadow_log)
+        return {"status": "received", "action": "none"}
 
     if data.get('event') == 'hit':
         meta = RequestMetadata(
@@ -250,42 +269,72 @@ async def receive_telemetry(data: dict, request: Request):
                         if assessment.risk == "HIGH":
                             # Decide target and resolve URL
                             target_type = routing_manager.decide_target(app_config, assessment.score, assessment.risk)
-                            url = routing_manager.resolve_upstream(app_config, target_type)
                             
-                            # BREAK REDIRECT LOOP
-                            current_full_url = data.get('full_url', '').lower()
-                            target_url_lower = url.lower() if url else ''
-                            
-                            if target_type != 'real' and target_url_lower and current_full_url.startswith(target_url_lower):
-                                logger.info(f"User is already on {target_type} environment ({url}). Skipping redirect loop.")
+                            # CRITICAL: If protection is OFF, force action to none regardless of risk
+                            if not app_config.protection_enabled:
+                                logger.info(f"Protection is OFF for {meta.host}. Skipping block/redirect.")
                                 action = "none"
                             else:
-                                if target_type == 'shadow':
-                                    url = routing_manager.resolve_upstream(app_config, target_type)
-                                    logger.warning(f"HIGH RISK Detected. Routing to Shadow: {url}")
-                                    
-                                    # Preserve query string
-                                    if "?" in meta.full_url:
-                                        url += "?" + meta.full_url.split("?", 1)[1]
+                                url = routing_manager.resolve_upstream(app_config, target_type)
                                 
-                                action = "redirect"
+                                # BREAK REDIRECT LOOP
+                                current_full_url = data.get('full_url', '').lower()
+                                target_url_lower = url.lower() if url else ''
                                 
-                                # Dynamic Host Swap for Cross-Device Support
-                                from urllib.parse import urlparse, urlunparse
-                                try:
-                                    parsed_url = urlparse(url)
-                                    client_host = meta.host # The host the user is currently using (IP or localhost)
+                                if target_type != 'real' and target_url_lower and current_full_url.startswith(target_url_lower):
+                                    logger.info(f"User is already on {target_type} environment ({url}). Skipping redirect loop.")
+                                    action = "none"
+                                else:
+                                    # Forced Dynamic Shadow Redirect
+                                    if target_type == 'shadow':
+                                        current_host = meta.host
+                                        # Path Preservation: Dynamically swap from Real to Shadow path
+                                        if "/DVWA-master/" in meta.full_url:
+                                            url = meta.full_url.replace("/DVWA-master/", "/DVWA-rnaster/")
+                                        else:
+                                            url = f"http://{current_host}/DVWA-rnaster/login.php"
+                                            if "?" in meta.full_url:
+                                                url += "?" + meta.full_url.split("?", 1)[1]
+                                            
+                                        logger.warning(f"HIGH RISK Detected. Routing to Dynamic Shadow: {url}")
                                     
-                                    if parsed_url.hostname == 'localhost' and client_host != 'localhost':
-                                        # Swap localhost with the actual IP/Host used by the client
-                                        new_netloc = client_host
-                                        if parsed_url.port:
-                                            new_netloc += f":{parsed_url.port}"
-                                        url = urlunparse(parsed_url._replace(netloc=new_netloc))
-                                except Exception as e:
-                                    logger.error(f"Host swap error: {e}")
+                                    action = "redirect"
+                                    
+                                    # Dynamic Host Swap for Cross-Device Support
+                                    from urllib.parse import urlparse, urlunparse
+                                    try:
+                                        parsed_url = urlparse(url)
+                                        client_host = meta.host
+                                        
+                                        if parsed_url.hostname == 'localhost' and client_host != 'localhost':
+                                            new_netloc = client_host
+                                            if parsed_url.port:
+                                                new_netloc += f":{parsed_url.port}"
+                                            url = urlunparse(parsed_url._replace(netloc=new_netloc))
+                                    except Exception as e:
+                                        logger.error(f"Host swap error: {e}")
 
                                 logger.warning(f"HIGH RISK detected for {meta.client_ip} on {meta.host}. Redirecting to {target_type} at {url}")
+                                
+                                # 3. Publish Risk Event for Dashboard & Stats
+                                risk_event = {
+                                    "client_ip": meta.client_ip,
+                                    "timestamp": datetime.utcnow().isoformat() + "Z",
+                                    "path": meta.path,
+                                    "risk": assessment.risk,
+                                    "score": assessment.score,
+                                    "tags": assessment.tags,
+                                    "explanation": assessment.explain,
+                                    "method": meta.method,
+                                    "payload": meta.payload[:500],
+                                    "host": meta.host,
+                                    "action": action,
+                                    "target": target_type,
+                                    "msg_id": request_id
+                                }
+                                await redis_client.publish("risk.events", risk_event)
+                                # FAST RETURN FOR IMMEDIATE REDIRECT
+                                return {"status": "received", "action": action, "url": url}
             else:
                 logger.info(f"Host {meta.host} unregistered. Skipping scoring and risk publication.")
         except Exception as e:
@@ -294,13 +343,9 @@ async def receive_telemetry(data: dict, request: Request):
         # Process Scoring Result (if scored)
         # (This block was not changed, just indicating placement)
 
-        # COUNT EVERY REQUEST: We no longer deduplicate standard 'hit' events because 
-        # page load + form submission happen rapidly and should count as 2 separate requests.
-        if routing_manager.get_route(meta.host):
-            # PERSISTENCE: Increment total stats for every single hit
-            await redis_client.redis.incr("stats.total_requests")
-        else:
-            logger.info(f"Telemetry [{request_id}]: Host {meta.host} not registered. Skipping stats increment.")
+        # The total_requests increment is now centralized at the top of the function.
+        if not routing_manager.get_route(meta.host):
+            logger.info(f"Telemetry [{request_id}]: Host {meta.host} unregistered. Scoring skipped, but hit was counted.")
 
     elif data.get('event') == 'login_success':
         # DE-DUPLICATION CHECK: Only count login_success once per visit
