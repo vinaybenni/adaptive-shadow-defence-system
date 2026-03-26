@@ -1,4 +1,0 @@
-# Remove the rules and close the ports
-netsh advfirewall firewall delete rule name="ASDS_Web_80"
-netsh advfirewall firewall delete rule name="ASDS_Telemetry_8010"
-netsh advfirewall firewall delete rule name="ASDS_Shadow_8003"
