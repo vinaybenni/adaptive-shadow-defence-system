@@ -6,6 +6,7 @@ import httpx
 from datetime import datetime
 from typing import Dict, List, Optional
 from fastapi import FastAPI, BackgroundTasks, WebSocket, WebSocketDisconnect, Request
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import json
@@ -437,6 +438,29 @@ async def add_app(config: AppConfig):
     logger.info(f"Adding/Updating app: {config.domain}")
     await routing_manager.add_or_update_app(config)
     return {"status": "ok"}
+
+@app.get("/api/v1/logs/{agent_id}")
+async def download_log(agent_id: str):
+    """Serve log files for different agents."""
+    # Base directory is backend/agent2_traffic
+    log_paths = {
+        "agent1": "../agent1_risk/logs/agent1/service.log",
+        "agent2": "logs/agent2/service.log",
+        "agent3": "../agent3_shadow/logs/agent3/service.log"
+    }
+    
+    path = log_paths.get(agent_id.lower())
+    if not path:
+        return JSONResponse(status_code=400, content={"error": "Invalid agent ID"})
+        
+    abs_path = os.path.abspath(os.path.join(os.path.dirname(__file__), path))
+    
+    if os.path.exists(abs_path):
+        logger.info(f"Serving log download for {agent_id}: {abs_path}")
+        return FileResponse(abs_path, filename=f"{agent_id}_service.log")
+        
+    logger.error(f"Log file NOT FOUND for {agent_id} at {abs_path}")
+    return JSONResponse(status_code=404, content={"error": f"Log file for {agent_id} not found at expected path"})
 
 @app.delete("/api/v1/apps/{domain}")
 async def delete_app(domain: str):

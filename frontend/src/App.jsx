@@ -28,84 +28,90 @@ const Dashboard = ({ stats, logs, connected }) => {
                 Security Dashboard
                 {connected && <span className="ml-4 text-xs bg-emerald-900 text-emerald-300 px-2 py-1 rounded-full align-middle">LIVE</span>}
             </h1>
-            <div className="grid grid-cols-4 gap-4 mb-8">
+            <div className="grid grid-cols-4 gap-6 mb-10">
                 <div
                     onClick={() => setActiveFilter(activeFilter === 'risk-split' ? 'all' : 'risk-split')}
-                    className={`p-4 rounded-lg border transition-all cursor-pointer hover:scale-[1.02] ${activeFilter === 'risk-split' ? 'bg-indigo-900/40 border-indigo-500 ring-2 ring-indigo-500/20' : 'bg-slate-800 border-slate-700'}`}
+                    className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer hover:scale-[1.03] hover:shadow-xl hover:shadow-indigo-500/10 backdrop-blur-md ${activeFilter === 'risk-split' ? 'bg-indigo-900/40 border-indigo-500 ring-4 ring-indigo-500/10' : 'bg-slate-900/60 border-slate-800'}`}
                 >
-                    <div className="text-slate-400 text-sm">Total Requests</div>
-                    <div className="text-2xl font-bold text-slate-100">{stats.totalRequests.toLocaleString()}</div>
-                    <div className="text-[10px] text-indigo-400 mt-1 uppercase font-bold">{activeFilter === 'risk-split' ? 'Viewing Split' : 'Click to Split Risk'}</div>
+                    <div className="text-slate-400 text-xs uppercase tracking-widest font-bold mb-1">Total Requests</div>
+                    <div className="text-3xl font-black text-white">{stats.totalRequests.toLocaleString()}</div>
+                    <div className="text-[10px] text-indigo-400 mt-2 font-black italic">{activeFilter === 'risk-split' ? 'VIEWING SPLIT' : 'CLICK TO REVEAL RISK'}</div>
                 </div>
 
                 <div
                     onClick={() => setActiveFilter(activeFilter === 'normal-only' ? 'all' : 'normal-only')}
-                    className={`p-4 rounded-lg border transition-all cursor-pointer hover:scale-[1.02] ${activeFilter === 'normal-only' ? 'bg-emerald-900/40 border-emerald-500 ring-2 ring-emerald-500/20' : 'bg-slate-800 border-slate-700'}`}
+                    className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer hover:scale-[1.03] hover:shadow-xl hover:shadow-emerald-500/10 backdrop-blur-md ${activeFilter === 'normal-only' ? 'bg-emerald-900/40 border-emerald-500 ring-4 ring-emerald-500/10' : 'bg-slate-900/60 border-slate-800'}`}
                 >
-                    <div className="text-slate-400 text-sm">Normal User</div>
-                    <div className="text-2xl font-bold text-emerald-400">{stats.normalUsers || 0}</div>
-                    <div className="text-[10px] text-emerald-400 mt-1 uppercase font-bold">{activeFilter === 'normal-only' ? 'Filtering Success' : 'Click to Filter'}</div>
+                    <div className="text-slate-400 text-xs uppercase tracking-widest font-bold mb-1">Normal User</div>
+                    <div className="text-3xl font-black text-emerald-400">{stats.normalUsers || 0}</div>
+                    <div className="text-[10px] text-emerald-400 mt-2 font-black italic">{activeFilter === 'normal-only' ? 'FILTERING SUCCESS' : 'CLICK TO FILTER'}</div>
                 </div>
 
                 <div
                     onClick={() => setActiveFilter(activeFilter === 'suspicious-only' ? 'all' : 'suspicious-only')}
-                    className={`p-4 rounded-lg border transition-all cursor-pointer hover:scale-[1.02] ${activeFilter === 'suspicious-only' ? 'bg-orange-900/40 border-orange-500 ring-2 ring-orange-500/20' : 'bg-slate-800 border-slate-700'}`}
+                    className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer hover:scale-[1.03] hover:shadow-xl hover:shadow-orange-500/10 backdrop-blur-md ${activeFilter === 'suspicious-only' ? 'bg-orange-900/40 border-orange-500 ring-4 ring-orange-500/10' : 'bg-slate-900/60 border-slate-800'}`}
                 >
-                    <div className="text-slate-400 text-sm">Suspicious Users</div>
-                    <div className="text-2xl font-bold text-orange-400">{stats.suspiciousUsers}</div>
-                    <div className="text-[10px] text-orange-400 mt-1 uppercase font-bold">{activeFilter === 'suspicious-only' ? 'Filtering Suspicious' : 'Click to Filter'}</div>
+                    <div className="text-slate-400 text-xs uppercase tracking-widest font-bold mb-1">Suspicious Users</div>
+                    <div className="text-3xl font-black text-orange-400">{stats.suspiciousUsers}</div>
+                    <div className="text-[10px] text-orange-400 mt-2 font-black italic">{activeFilter === 'suspicious-only' ? 'FILTERING RISK' : 'CLICK TO FILTER'}</div>
                 </div>
+                
                 <div
                     onClick={() => setActiveFilter(activeFilter === 'blocked-only' ? 'all' : 'blocked-only')}
-                    className={`p-4 rounded-lg border transition-all cursor-pointer hover:scale-[1.02] ${activeFilter === 'blocked-only' ? 'bg-red-900/40 border-red-500 ring-2 ring-red-500/20' : 'bg-slate-800 border-slate-700'}`}
+                    className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer hover:scale-[1.03] hover:shadow-xl hover:shadow-red-500/10 backdrop-blur-md ${activeFilter === 'blocked-only' ? 'bg-red-900/40 border-red-500 ring-4 ring-red-500/10' : 'bg-slate-900/60 border-slate-800'}`}
                 >
-                    <div className="text-slate-400 text-sm">Attack Type</div>
-                    <div className="text-2xl font-bold text-red-500">{stats.uniqueAttackTypes || 0}</div>
-                    <div className="text-[10px] text-red-400 mt-1 uppercase font-bold">{activeFilter === 'blocked-only' ? 'Viewing Types' : 'Click to View Types'}</div>
+                    <div className="text-slate-400 text-xs uppercase tracking-widest font-bold mb-1">Attack Type</div>
+                    <div className="text-3xl font-black text-red-500">{stats.uniqueAttackTypes || 0}</div>
+                    <div className="text-[10px] text-red-400 mt-2 font-black italic">{activeFilter === 'blocked-only' ? 'VIEWING THREATS' : 'CLICK TO ANALYZE'}</div>
                 </div>
             </div>
 
             {/* Content Area */}
             {activeFilter === 'risk-split' ? (
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-2 gap-8">
                     {/* Low Risk Column */}
-                    <div className="bg-slate-900/50 p-4 rounded-lg border border-emerald-900/30">
-                        <h3 className="text-emerald-400 font-bold mb-4 flex items-center gap-2">
-                            <Activity size={18} /> Low Risk Traffic
+                    <div className="bg-slate-900/40 backdrop-blur-md p-6 rounded-3xl border border-emerald-500/10 shadow-2xl">
+                        <h3 className="text-emerald-400 font-black mb-6 flex items-center gap-3 uppercase tracking-widest text-sm">
+                            <div className="bg-emerald-500/20 p-1.5 rounded-lg border border-emerald-500/30"><Activity size={18} /></div> 
+                            Low Risk Traffic
                         </h3>
                         <LogTable logs={lowRiskLogs} emptyMsg="No low risk hits yet." />
                     </div>
                     {/* High Risk Column */}
-                    <div className="bg-slate-900/50 p-4 rounded-lg border border-red-900/30">
-                        <h3 className="text-red-400 font-bold mb-4 flex items-center gap-2">
-                            <AlertTriangle size={18} /> High Risk Traffic
+                    <div className="bg-slate-900/40 backdrop-blur-md p-6 rounded-3xl border border-red-500/10 shadow-2xl">
+                        <h3 className="text-red-400 font-black mb-6 flex items-center gap-3 uppercase tracking-widest text-sm">
+                            <div className="bg-red-500/20 p-1.5 rounded-lg border border-red-500/30"><AlertTriangle size={18} /></div>
+                            High Risk Traffic
                         </h3>
                         <LogTable logs={highRiskLogs} emptyMsg="No high risk hits yet." />
                     </div>
                 </div>
             ) : activeFilter === 'normal-only' ? (
-                <div className="bg-slate-800 p-4 rounded-lg border border-emerald-700">
-                    <h3 className="text-emerald-400 font-bold mb-4 flex items-center gap-2">
-                        <CheckCircle size={18} /> Successful Logins Only
+                <div className="bg-slate-900/40 backdrop-blur-md p-6 rounded-3xl border border-emerald-500/10 shadow-2xl">
+                    <h3 className="text-emerald-400 font-black mb-6 flex items-center gap-3 uppercase tracking-widest text-sm">
+                        <div className="bg-emerald-500/20 p-1.5 rounded-lg border border-emerald-500/30"><CheckCircle size={18} /></div>
+                        Successful Logins Only
                     </h3>
                     <LogTable logs={normalLogs} emptyMsg="No successful logins logged yet." />
                 </div>
             ) : activeFilter === 'suspicious-only' ? (
-                <div className="bg-slate-800 p-4 rounded-lg border border-orange-700">
-                    <h3 className="text-orange-400 font-bold mb-4 flex items-center gap-2">
-                        <AlertTriangle size={18} /> Suspicious Activity (Score &gt; 90)
+                <div className="bg-slate-900/40 backdrop-blur-md p-6 rounded-3xl border border-orange-500/10 shadow-2xl">
+                    <h3 className="text-orange-400 font-black mb-6 flex items-center gap-3 uppercase tracking-widest text-sm">
+                        <div className="bg-orange-500/20 p-1.5 rounded-lg border border-orange-500/30"><AlertTriangle size={18} /></div>
+                        Suspicious Activity (Score &gt; 90)
                     </h3>
                     <LogTable logs={suspiciousLogs} emptyMsg="No suspicious activity detected yet." />
                 </div>
             ) : activeFilter === 'blocked-only' ? (
-                <div className="bg-slate-800 p-4 rounded-lg border border-red-700 h-80 flex flex-col">
-                    <h3 className="text-red-400 font-bold mb-4 flex items-center gap-2 shrink-0">
-                        <Shield size={18} className="text-red-500" /> Blocked Attacks Breakdown
+                <div className="bg-slate-900/40 backdrop-blur-md p-8 rounded-3xl border border-red-500/10 shadow-2xl h-[450px] flex flex-col">
+                    <h3 className="text-red-400 font-black mb-8 flex items-center gap-3 uppercase tracking-widest text-sm shrink-0">
+                        <div className="bg-red-500/20 p-1.5 rounded-lg border border-red-500/30"><Shield size={18} /></div>
+                        Threat Intelligence Feed
                     </h3>
 
                     {attackTypeData.length === 0 ? (
-                        <div className="flex-1 flex items-center justify-center text-slate-500 italic">
-                            No attack types accurately tracked yet.
+                        <div className="flex-1 flex items-center justify-center text-slate-600 italic font-medium">
+                            No persistent threats detected in current cycle.
                         </div>
                     ) : (
                         <div className="flex-1 w-full relative">
@@ -113,25 +119,26 @@ const Dashboard = ({ stats, logs, connected }) => {
                                 <BarChart
                                     data={attackTypeData}
                                     layout="vertical"
-                                    margin={{ top: 5, right: 30, left: 40, bottom: 5 }}
+                                    margin={{ top: 0, right: 30, left: 60, bottom: 0 }}
                                 >
-                                    <CartesianGrid strokeDasharray="3 3" stroke="#334155" horizontal={false} />
+                                    <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" horizontal={false} />
                                     <XAxis type="number" hide />
                                     <YAxis
                                         dataKey="name"
                                         type="category"
                                         axisLine={false}
                                         tickLine={false}
-                                        tick={{ fill: '#94a3b8', fontSize: 11, fontWeight: 'bold' }}
+                                        tick={{ fill: '#64748b', fontSize: 10, fontWeight: '900' }}
+                                        width={80}
                                     />
                                     <Tooltip
-                                        cursor={{ fill: '#1e293b' }}
-                                        contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '4px' }}
-                                        itemStyle={{ color: '#f87171' }}
+                                        cursor={{ fill: '#1e293b', opacity: 0.4 }}
+                                        contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '12px', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}
+                                        itemStyle={{ color: '#f87171', fontWeight: 'bold' }}
                                     />
-                                    <Bar dataKey="count" radius={[0, 4, 4, 0]} maxBarSize={40}>
+                                    <Bar dataKey="count" radius={[0, 8, 8, 0]} barSize={32}>
                                         {attackTypeData.map((entry, index) => (
-                                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} fillOpacity={0.8} />
                                         ))}
                                     </Bar>
                                 </BarChart>
@@ -140,11 +147,12 @@ const Dashboard = ({ stats, logs, connected }) => {
                     )}
                 </div>
             ) : (
-                <div className="bg-slate-800 p-4 rounded-lg border border-slate-700">
-                    <h3 className="text-slate-200 font-bold mb-4 flex items-center gap-2">
-                        <Activity size={18} /> Live Activity Feed (IP Tracking)
+                <div className="bg-slate-900/40 backdrop-blur-md p-6 rounded-3xl border border-slate-800 shadow-2xl">
+                    <h3 className="text-slate-200 font-black mb-6 flex items-center gap-3 uppercase tracking-widest text-sm">
+                        <div className="bg-indigo-500/10 p-1.5 rounded-lg border border-indigo-500/30"><Activity size={18} className="text-indigo-400" /></div>
+                        Live Intelligence Feed
                     </h3>
-                    <LogTable logs={logs} emptyMsg="Waiting for traffic..." />
+                    <LogTable logs={logs} emptyMsg="System online. Awaiting telemetry..." />
                 </div>
             )}
         </div>
@@ -194,13 +202,6 @@ const LogTable = ({ logs, emptyMsg }) => (
 const ShadowMonitor = ({ stats, logs }) => {
     const [activeFilter, setActiveFilter] = useState('all');
 
-    const attackData = Object.entries(stats.attackTypes || {})
-        .map(([name, count]) => ({
-            name: name.replace(/_/g, ' ').toUpperCase(),
-            count
-        }))
-        .sort((a, b) => b.count - a.count);
-
     const filteredLogs = logs.filter(log => {
         if (activeFilter === 'all') return true;
         if (activeFilter === 'attacks') {
@@ -212,69 +213,72 @@ const ShadowMonitor = ({ stats, logs }) => {
 
     return (
         <div className="p-6">
-            <h1 className="text-3xl font-bold mb-6 text-purple-400">
-                Shadow Monitor
+            <h1 className="text-3xl font-black mb-10 text-purple-400 uppercase tracking-tighter shadow-purple-500/20">
+                Shadow Intelligence Monitor
             </h1>
 
-            <div className="grid grid-cols-3 gap-6 mb-8">
+            <div className="grid grid-cols-3 gap-8 mb-10">
                 <div
                     onClick={() => setActiveFilter('all')}
-                    className={`p-6 rounded-xl border-2 transition-all cursor-pointer hover:shadow-lg ${activeFilter === 'all' ? 'bg-purple-900/40 border-purple-500' : 'bg-slate-900 border-slate-800'}`}
+                    className={`p-8 rounded-3xl border transition-all duration-500 cursor-pointer hover:scale-[1.03] hover:shadow-2xl backdrop-blur-md ${activeFilter === 'all' ? 'bg-purple-900/30 border-purple-500 ring-4 ring-purple-500/10' : 'bg-slate-900/40 border-slate-800 shadow-xl'}`}
                 >
-                    <div className="text-slate-400 text-sm font-medium mb-1">Total Request In Shadow Domain </div>
-                    <div className="text-2xl font-black text-white">{stats.totalRequests.toLocaleString()}</div>
-                    {/* <div className="mt-2 text-[10px] text-purple-400 uppercase tracking-tighter font-bold"></div> */}
+                    <div className="text-slate-500 text-xs uppercase tracking-widest font-black mb-2">Shadow Ingress</div>
+                    <div className="text-4xl font-black text-white">{stats.totalRequests.toLocaleString()}</div>
+                    <div className="mt-3 text-[10px] text-purple-400 font-black uppercase italic tracking-widest">{activeFilter === 'all' ? '● MONITORING ALL' : 'CLICK TO EXPAND'}</div>
                 </div>
 
                 <div
                     onClick={() => setActiveFilter('attacks')}
-                    className={`p-6 rounded-xl border-2 transition-all cursor-pointer hover:shadow-lg ${activeFilter === 'attacks' ? 'bg-red-900/40 border-red-500' : 'bg-slate-900 border-slate-800'}`}
+                    className={`p-8 rounded-3xl border transition-all duration-500 cursor-pointer hover:scale-[1.03] hover:shadow-2xl backdrop-blur-md ${activeFilter === 'attacks' ? 'bg-red-900/30 border-red-500 ring-4 ring-red-500/10' : 'bg-slate-900/40 border-slate-800 shadow-xl'}`}
                 >
-                    <div className="text-slate-400 text-sm font-medium mb-1">Detected Attacks</div>
-                    <div className="text-2xl font-black text-red-500">{stats.uniqueAttackTypes || 0} Types</div>
-                    {/* <div className="mt-2 text-[10px] text-red-400 uppercase tracking-tighter font-bold">SQLi, XSS, etc.</div> */}
+                    <div className="text-slate-500 text-xs uppercase tracking-widest font-black mb-2">Neutralized Threats</div>
+                    <div className="text-4xl font-black text-red-500">{stats.uniqueAttackTypes || 0} <span className="text-lg text-red-900/60 uppercase">Vectors</span></div>
+                    <div className="mt-3 text-[10px] text-red-400 font-black uppercase italic tracking-widest">{activeFilter === 'attacks' ? '● FILTERING THREATS' : 'CLICK TO ANALYZE'}</div>
                 </div>
 
-                <div
-                    className="p-6 rounded-xl border-2 bg-slate-900 border-slate-800"
-                >
-                    <div className="text-slate-400 text-sm font-medium mb-1">Unique Attackers</div>
-                    <div className="text-2xl font-black text-orange-500">{stats.uniqueAttackers || 0}</div>
-                    {/* <div className="mt-2 text-[10px] text-orange-400 uppercase tracking-tighter font-bold">Distinct IP Sources</div> */}
+                <div className="p-8 rounded-3xl border bg-slate-900/40 border-slate-800 backdrop-blur-md shadow-xl transition-all duration-500 hover:shadow-orange-500/5">
+                    <div className="text-slate-500 text-xs uppercase tracking-widest font-black mb-2">Unique Adversaries</div>
+                    <div className="text-4xl font-black text-orange-500">{stats.uniqueAttackers || 0}</div>
+                    <div className="mt-3 text-[10px] text-orange-400 font-black uppercase italic tracking-widest">TRACEABLE ENTITIES</div>
                 </div>
             </div>
 
-            <div className="bg-slate-900 rounded-xl border border-slate-800 overflow-hidden">
-                <div className="p-4 border-b border-slate-800 flex justify-between items-center bg-slate-800/50">
-                    <h3 className="font-bold text-slate-200 flex items-center gap-2">
-                        {activeFilter === 'all' ? 'Real-time Shadow Interactions' : 'Filtered Shadow Attack Feed'}
+            <div className="bg-slate-900/40 backdrop-blur-md rounded-3xl border border-slate-800 shadow-2xl overflow-hidden ring-1 ring-white/5">
+                <div className="p-6 border-b border-slate-800/50 flex justify-between items-center bg-slate-950/20">
+                    <h3 className="font-black text-slate-200 flex items-center gap-3 uppercase tracking-widest text-xs">
+                        <div className="bg-purple-500/10 p-1.5 rounded-lg border border-purple-500/30 text-purple-400"><Shield size={18} /></div>
+                        {activeFilter === 'all' ? 'Live Shadow Interaction Stream' : 'Filtered Threat Vectors'}
                     </h3>
-                    <div className="text-xs text-slate-500">{filteredLogs.length} events showing</div>
+                    <div className="text-[10px] bg-slate-800 px-3 py-1 rounded-full text-slate-500 font-black uppercase tracking-widest">{filteredLogs.length} EVENTS LOADED</div>
                 </div>
                 <div className="overflow-x-auto">
-                    <table className="w-full text-left text-sm">
-                        <thead className="bg-slate-950/50 text-slate-500">
+                    <table className="w-full text-left text-sm border-spacing-y-2">
+                        <thead className="bg-slate-950/40 text-slate-500">
                             <tr>
-                                <th className="p-4 font-semibold uppercase text-[10px]">Time</th>
-                                <th className="p-4 font-semibold uppercase text-[10px]">Source IP</th>
-                                <th className="p-4 font-semibold uppercase text-[10px]">Target Path</th>
-                                <th className="p-4 font-semibold uppercase text-[10px]">Payload Snippet</th>
-                                <th className="p-4 font-semibold uppercase text-[10px]">Agent</th>
+                                <th className="p-6 font-black uppercase text-[10px] tracking-widest">Timestamp</th>
+                                <th className="p-6 font-black uppercase text-[10px] tracking-widest">Origin IP</th>
+                                <th className="p-6 font-black uppercase text-[10px] tracking-widest">Vector Path</th>
+                                <th className="p-6 font-black uppercase text-[10px] tracking-widest">Payload Data</th>
+                                <th className="p-6 font-black uppercase text-[10px] tracking-widest">Client Sign</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-800/50">
+                        <tbody className="divide-y divide-slate-800/30">
                             {filteredLogs.length === 0 ? (
                                 <tr>
-                                    <td colSpan="5" className="p-12 text-center text-slate-600 italic">No shadow activity detected yet.</td>
+                                    <td colSpan="5" className="p-20 text-center text-slate-700 italic font-medium uppercase tracking-widest text-xs">Waiting for shadow ingress...</td>
                                 </tr>
                             ) : (
                                 filteredLogs.map((log, i) => (
-                                    <tr key={i} className="hover:bg-slate-800/30 transition-colors">
-                                        <td className="p-4 font-mono text-slate-400 text-[11px] whitespace-nowrap">{new Date(log.timestamp).toLocaleTimeString()}</td>
-                                        <td className="p-4 text-orange-400 font-bold">{log.attacker_ip}</td>
-                                        <td className="p-4 text-slate-300 font-mono text-[12px]"><span className="text-slate-500">/{log.shadow_host}</span>{log.path}</td>
-                                        <td className="p-4 text-slate-500 italic max-w-xs truncate">{log.payload || "N/A"}</td>
-                                        <td className="p-4 text-slate-400 text-[11px] max-w-[150px] truncate">{log.user_agent}</td>
+                                    <tr key={i} className="hover:bg-purple-500/5 transition-all duration-300">
+                                        <td className="p-6 font-mono text-slate-500 text-[11px] whitespace-nowrap">{new Date(log.timestamp).toLocaleTimeString()}</td>
+                                        <td className="p-6">
+                                            <span className="bg-orange-900/20 text-orange-400 font-black px-2 py-1 rounded border border-orange-500/20 text-xs">
+                                                {log.attacker_ip}
+                                            </span>
+                                        </td>
+                                        <td className="p-6 text-slate-300 font-mono text-[12px]"><span className="text-slate-600 block text-[9px] uppercase font-bold tracking-tighter opacity-50 mb-1">Host: {log.shadow_host}</span>/{log.path}</td>
+                                        <td className="p-6 text-slate-500 italic max-w-xs truncate font-medium">{log.payload || "CLEAN INGRESS"}</td>
+                                        <td className="p-6 text-slate-600 text-[10px] max-w-[150px] truncate uppercase font-bold">{log.user_agent}</td>
                                     </tr>
                                 ))
                             )}
@@ -535,33 +539,69 @@ const ProtectionRules = ({ proposals }) => {
 
 const AppSettings = ({ isDark, toggleTheme, onReset }) => (
     <div className="p-6">
-        <h1 className="text-3xl font-bold mb-6 text-gray-400">Settings</h1>
+        <h1 className="text-3xl font-black mb-8 text-slate-500 uppercase tracking-tighter">Settings & Configuration</h1>
 
-        <div className="space-y-6">
-            <div className="bg-slate-800 p-4 rounded border border-slate-700">
-                <h3 className="font-bold mb-4 text-slate-200">Appearance</h3>
+        <div className="space-y-8">
+            <div className="bg-slate-900/40 backdrop-blur-md p-6 rounded-3xl border border-slate-800 shadow-2xl">
+                <h3 className="font-black mb-6 text-slate-300 uppercase tracking-widest text-xs flex items-center gap-2">
+                    <div className="bg-slate-800 p-1.5 rounded-lg border border-slate-700"><Sun size={16} /></div> Appearance
+                </h3>
                 <div className="flex items-center justify-between">
-                    <span className="text-slate-400">Theme</span>
-                    <button onClick={toggleTheme} className="flex items-center gap-2 bg-slate-900 border border-slate-600 px-4 py-2 rounded text-slate-200 hover:bg-slate-700 transition-colors">
-                        {isDark ? <><Moon size={16} /> Dark Mode</> : <><Sun size={16} /> Light Mode</>}
+                    <span className="text-slate-400 font-medium">System Theme</span>
+                    <button onClick={toggleTheme} className="flex items-center gap-2 bg-slate-900 border border-slate-700 px-6 py-2.5 rounded-xl text-slate-200 hover:bg-slate-800 hover:border-indigo-500/50 transition-all duration-300 shadow-lg">
+                        {isDark ? <><Moon size={16} className="text-indigo-400" /> Dark Mode</> : <><Sun size={16} className="text-yellow-400" /> Light Mode</>}
                     </button>
                 </div>
             </div>
 
-            <div className="bg-slate-800 p-4 rounded border border-red-900/30">
-                <h3 className="font-bold mb-2 text-red-500">Danger Zone</h3>
-                <p className="text-xs text-slate-500 mb-4">Once you clear the dashboard data, there is no going back. Please be certain.</p>
+            <div className="bg-slate-900/40 backdrop-blur-md p-6 rounded-3xl border border-slate-800 shadow-2xl">
+                <h3 className="font-black mb-6 text-slate-300 uppercase tracking-widest text-xs flex items-center gap-2">
+                    <div className="bg-emerald-500/10 p-1.5 rounded-lg border border-emerald-500/20"><Activity size={16} className="text-emerald-500" /></div> Diagnostics & Logs
+                </h3>
                 <div className="flex items-center justify-between">
-                    <span className="text-slate-400 text-sm">Clear Statistics & Logs</span>
+                    <span className="text-slate-400 font-medium">Operational Intelligence</span>
+                    <div className="relative group">
+                        <button className="flex items-center gap-3 bg-emerald-600 hover:bg-emerald-500 px-6 py-2.5 rounded-xl text-white font-bold transition-all duration-300 shadow-[0_10px_20px_rgba(16,185,129,0.2)] hover:shadow-[0_10px_25px_rgba(16,185,129,0.3)] hover:scale-[1.05]">
+                            <List size={18} /> Download Logs
+                        </button>
+                        <div className="absolute right-0 mt-3 w-56 bg-slate-900/95 backdrop-blur-xl border border-slate-700 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 overflow-hidden ring-1 ring-white/5">
+                            {['Agent 1', 'Agent 2', 'Agent 3'].map(agent => (
+                                <button
+                                    key={agent}
+                                    onClick={() => {
+                                        const url = `http://localhost:8010/api/v1/logs/${agent.toLowerCase().replace(' ', '')}`;
+                                        const link = document.createElement('a');
+                                        link.href = url;
+                                        link.setAttribute('download', `${agent.toLowerCase().replace(' ', '_')}.log`);
+                                        document.body.appendChild(link);
+                                        link.click();
+                                        document.body.removeChild(link);
+                                    }}
+                                    className="w-full text-left px-5 py-4 text-sm text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-400 transition-all duration-200 border-b border-slate-800 last:border-0 flex items-center justify-between group/item"
+                                >
+                                    <span className="font-bold">{agent} Logs</span>
+                                    <span className="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded-md text-slate-500 font-black group-hover/item:bg-emerald-500/20 group-hover/item:text-emerald-400 transition-colors uppercase">.log</span>
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="bg-red-900/10 backdrop-blur-md p-6 rounded-3xl border border-red-900/30 shadow-2xl">
+                <h3 className="font-black mb-2 text-red-500 uppercase tracking-widest text-xs">Danger Zone</h3>
+                <p className="text-xs text-slate-500 mb-6 font-medium">Permanent destruction of logs and telemetry data. This action is irreversible.</p>
+                <div className="flex items-center justify-between">
+                    <span className="text-slate-400 text-sm font-bold">Clear Core Intelligence</span>
                     <button
                         onClick={() => {
                             if (window.confirm("Are you sure you want to clear ALL dashboard statistics and logs? This cannot be undone.")) {
                                 onReset();
                             }
                         }}
-                        className="flex items-center gap-2 bg-red-900/30 border border-red-800 px-4 py-2 rounded text-red-400 hover:bg-red-800 hover:text-white transition-all text-sm font-bold"
+                        className="flex items-center gap-2 bg-red-900/20 border border-red-800/50 px-6 py-2.5 rounded-xl text-red-400 hover:bg-red-600 hover:text-white transition-all duration-300 text-sm font-black shadow-lg"
                     >
-                        <Trash2 size={16} /> Clear Data
+                        <Trash2 size={16} /> WIPE DATA
                     </button>
                 </div>
             </div>
@@ -741,27 +781,29 @@ function App() {
     return (
         <div className={`flex h-screen ${isDark ? 'bg-slate-950 text-slate-100' : 'bg-slate-100 text-slate-900'} font-sans transition-colors duration-200`}>
             {/* Sidebar */}
-            <div className={`w-64 border-r flex flex-col ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-                <div className="p-6 flex items-center gap-3">
-                    <Shield className="text-emerald-500 w-8 h-8" />
-                    <span className={`font-bold text-xl tracking-wider ${isDark ? 'text-white' : 'text-slate-800'}`}>ASDS</span>
+            <div className={`w-64 border-r flex flex-col ${isDark ? 'bg-slate-900/60 backdrop-blur-xl border-slate-800/50' : 'bg-white/80 backdrop-blur-xl border-slate-200'}`}>
+                <div className="p-8 flex items-center gap-3">
+                    <div className="bg-emerald-500/10 p-2 rounded-xl border border-emerald-500/20">
+                        <Shield className="text-emerald-500 w-8 h-8 drop-shadow-[0_0_8px_rgba(16,185,129,0.3)]" />
+                    </div>
+                    <span className={`font-black text-2xl tracking-tighter ${isDark ? 'text-white' : 'text-slate-800'}`}>ASDS</span>
                 </div>
-                <nav className="flex-1 px-4 py-4 space-y-2">
-                    <button onClick={() => setActiveTab('dashboard')} className={`flex items-center gap-3 w-full px-4 py-3 rounded-lg transition-colors ${activeTab === 'dashboard' ? (isDark ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-900') : 'text-slate-400 hover:bg-slate-800/50'}`}>
-                        <Activity size={20} /> Dashboard
+                <nav className="flex-1 px-4 py-4 space-y-3">
+                    <button onClick={() => setActiveTab('dashboard')} className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-all duration-300 ${activeTab === 'dashboard' ? 'bg-indigo-600/10 text-indigo-400 border border-indigo-500/30 shadow-[0_0_15px_rgba(99,102,241,0.1)]' : 'text-slate-500 hover:bg-slate-800/40 hover:text-slate-300'}`}>
+                        <Activity size={20} /> <span className="font-bold text-sm">Dashboard</span>
                     </button>
-                    <button onClick={() => setActiveTab('applications')} className={`flex items-center gap-3 w-full px-4 py-3 rounded-lg transition-colors ${activeTab === 'applications' ? (isDark ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-900') : 'text-slate-400 hover:bg-slate-800/50'}`}>
-                        <List size={20} /> Applications
+                    <button onClick={() => setActiveTab('applications')} className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-all duration-300 ${activeTab === 'applications' ? 'bg-blue-600/10 text-blue-400 border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.1)]' : 'text-slate-500 hover:bg-slate-800/40 hover:text-slate-300'}`}>
+                        <List size={20} /> <span className="font-bold text-sm">Applications</span>
                     </button>
-                    <button onClick={() => setActiveTab('protection')} className={`flex items-center gap-3 w-full px-4 py-3 rounded-lg transition-colors ${activeTab === 'protection' ? (isDark ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-900') : 'text-slate-400 hover:bg-slate-800/50'}`}>
-                        <AlertTriangle size={20} /> Protection
+                    <button onClick={() => setActiveTab('protection')} className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-all duration-300 ${activeTab === 'protection' ? 'bg-purple-600/10 text-purple-400 border border-purple-500/30 shadow-[0_0_15_rgba(168,85,247,0.1)]' : 'text-slate-500 hover:bg-slate-800/40 hover:text-slate-300'}`}>
+                        <AlertTriangle size={20} /> <span className="font-bold text-sm">Protection</span>
                     </button>
-                    <button onClick={() => setActiveTab('settings')} className={`flex items-center gap-3 w-full px-4 py-3 rounded-lg transition-colors ${activeTab === 'settings' ? (isDark ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-900') : 'text-slate-400 hover:bg-slate-800/50'}`}>
-                        <Settings size={20} /> Settings
+                    <button onClick={() => setActiveTab('settings')} className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-all duration-300 ${activeTab === 'settings' ? 'bg-slate-700/30 text-slate-200 border border-slate-600/50 shadow-[0_0_15_rgba(148,163,184,0.1)]' : 'text-slate-500 hover:bg-slate-800/40 hover:text-slate-300'}`}>
+                        <Settings size={20} /> <span className="font-bold text-sm">Settings</span>
                     </button>
-                    <div className="pt-4 mt-4 border-t border-slate-800">
-                        <button onClick={() => setActiveTab('shadow')} className={`flex items-center gap-3 w-full px-4 py-3 rounded-lg transition-all border-2 ${activeTab === 'shadow' ? 'bg-purple-900/20 border-purple-500 text-purple-400' : 'bg-transparent border-transparent text-slate-500 hover:bg-slate-800/50'}`}>
-                            <Shield size={20} className={activeTab === 'shadow' ? 'text-purple-400' : 'text-slate-500'} /> Shadow Monitor
+                    <div className="pt-6 mt-6 border-t border-slate-800/50">
+                        <button onClick={() => setActiveTab('shadow')} className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-all duration-300 border ${activeTab === 'shadow' ? 'bg-purple-900/30 border-purple-500 text-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.2)]' : 'bg-transparent border-transparent text-slate-500 hover:bg-slate-800/40 hover:text-purple-400'}`}>
+                            <Shield size={20} /> <span className="font-bold text-sm uppercase tracking-widest">Shadow Monitor</span>
                         </button>
                     </div>
                 </nav>
