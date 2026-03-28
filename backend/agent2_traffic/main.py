@@ -129,6 +129,11 @@ async def broadcast_redis_events():
                     # Increment Shadow Total
                     await redis_client.redis.incr("stats.shadow_total")
                     
+                    # Increment Global Total ONLY for direct Agent 3 hits (Telemetried redirects are already counted)
+                    # Agent 3 messages have "Trapped" in notes or lack specific telemetry notes
+                    if "telemetry" not in data.get("notes", "").lower():
+                        await redis_client.redis.incr("stats.total_requests")
+                    
                     # Track Unique Shadow IPs
                     attacker_ip = data.get('attacker_ip')
                     if attacker_ip:
@@ -223,7 +228,20 @@ async def receive_telemetry(data: dict, request: Request):
     # Increment Total Statistics (Redis)
     await redis_client.redis.incr("stats.total_requests")
     if is_shadow:
-        await redis_client.redis.incr("stats.shadow_total")
+        # Publish to shadow.activity so it shows up in the Shadow Monitor and gets counted by the singleton broadcast listener
+        shadow_log = {
+            "attacker_ip": data.get("attacker_ip", "unknown"),
+            "timestamp": data.get("timestamp", datetime.utcnow().isoformat() + "Z"),
+            "path": data.get("path", "unknown"),
+            "method": data.get("method", "GET"),
+            "payload": data.get("payload", ""),
+            "user_agent": data.get("user_agent", "unknown"),
+            "notes": "Trap triggered via telemetry redirection"
+        }
+        await redis_client.redis.publish("shadow.activity", json.dumps(shadow_log))
+        
+        # We DON'T increment stats.shadow_total here because the broadcast listener hears the publish and does it for us!
+        return {"status": "hit recorded as shadow activity"}
 
     # 2. Shadow Bypasser (Still ignore for Scoring, but NOT for Counting)
     if is_shadow:
@@ -442,18 +460,20 @@ async def add_app(config: AppConfig):
 @app.get("/api/v1/logs/{agent_id}")
 async def download_log(agent_id: str):
     """Serve log files for different agents."""
-    # Base directory is backend/agent2_traffic
+    # Base directory is the project root (up two levels from backend/agent2_traffic)
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
     log_paths = {
-        "agent1": "../agent1_risk/logs/agent1/service.log",
-        "agent2": "logs/agent2/service.log",
-        "agent3": "../agent3_shadow/logs/agent3/service.log"
+        "agent1": os.path.join(base_dir, "backend", "agent1_risk", "service.log"),
+        "agent2": os.path.join(base_dir, "backend", "agent2_traffic", "service.log"),
+        "agent3": os.path.join(base_dir, "backend", "agent3_shadow", "service.log"),
+        "agent4": os.path.join(base_dir, "backend", "agent4_learning", "service.log"),
     }
     
     path = log_paths.get(agent_id.lower())
     if not path:
         return JSONResponse(status_code=400, content={"error": "Invalid agent ID"})
         
-    abs_path = os.path.abspath(os.path.join(os.path.dirname(__file__), path))
+    abs_path = path
     
     if os.path.exists(abs_path):
         logger.info(f"Serving log download for {agent_id}: {abs_path}")

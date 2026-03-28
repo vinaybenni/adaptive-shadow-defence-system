@@ -386,7 +386,7 @@ function dvwaHtmlEcho( $pPage ) {
 	Header( 'Content-Type: text/html;charset=utf-8' );     // TODO- proper XHTML headers...
 	Header( 'Expires: Tue, 23 Jun 2009 12:00:00 GMT' );    // Date in the past
 	$telemetry_host = explode(':', $_SERVER['HTTP_HOST'])[0];
-	// Removed hardcoded localhost -> 127.0.0.1 translation to support cross-device routing
+	# Removed hardcoded localhost -> 127.0.0.1 translation to support CSP consistency
 	Header( "Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://" . $telemetry_host . ":8010; connect-src 'self' http://" . $telemetry_host . ":8010; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:;" );
 
 	echo "<!DOCTYPE html>

@@ -34,6 +34,9 @@ async def catch_all(request: Request, path: str):
     except:
         body_str = "<binary>"
 
+    import uuid
+    request_id = str(uuid.uuid4())
+    
     log_entry = AttackerLog(
         timestamp=datetime.utcnow().isoformat() + "Z",
         attacker_ip=request.client.host,
@@ -42,7 +45,8 @@ async def catch_all(request: Request, path: str):
         method=request.method,
         payload=body_str[:1000],  # Truncate
         user_agent=request.headers.get("user-agent", "unknown"),
-        notes="Trapped in shadow environment"
+        notes="Trapped in shadow environment",
+        request_id=request_id
     )
     
     # Async publish

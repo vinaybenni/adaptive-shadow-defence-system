@@ -28,7 +28,7 @@ const Dashboard = ({ stats, logs, connected }) => {
                 Security Dashboard
                 {connected && <span className="ml-4 text-xs bg-emerald-900 text-emerald-300 px-2 py-1 rounded-full align-middle">LIVE</span>}
             </h1>
-            <div className="grid grid-cols-4 gap-6 mb-10">
+            <div className="grid grid-cols-5 gap-6 mb-10">
                 <div
                     onClick={() => setActiveFilter(activeFilter === 'risk-split' ? 'all' : 'risk-split')}
                     className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer hover:scale-[1.03] hover:shadow-xl hover:shadow-indigo-500/10 backdrop-blur-md ${activeFilter === 'risk-split' ? 'bg-indigo-900/40 border-indigo-500 ring-4 ring-indigo-500/10' : 'bg-slate-900/60 border-slate-800'}`}
@@ -57,12 +57,21 @@ const Dashboard = ({ stats, logs, connected }) => {
                 </div>
                 
                 <div
-                    onClick={() => setActiveFilter(activeFilter === 'blocked-only' ? 'all' : 'blocked-only')}
-                    className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer hover:scale-[1.03] hover:shadow-xl hover:shadow-red-500/10 backdrop-blur-md ${activeFilter === 'blocked-only' ? 'bg-red-900/40 border-red-500 ring-4 ring-red-500/10' : 'bg-slate-900/60 border-slate-800'}`}
+                    onClick={() => setActiveFilter(activeFilter === 'blocked_only' ? 'all' : 'blocked_only')}
+                    className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer hover:scale-[1.03] hover:shadow-xl hover:shadow-red-500/10 backdrop-blur-md ${activeFilter === 'blocked_only' ? 'bg-red-900/40 border-red-500 ring-4 ring-red-500/10' : 'bg-slate-900/60 border-slate-800'}`}
                 >
                     <div className="text-slate-400 text-xs uppercase tracking-widest font-bold mb-1">Attack Type</div>
                     <div className="text-3xl font-black text-red-500">{stats.uniqueAttackTypes || 0}</div>
-                    <div className="text-[10px] text-red-400 mt-2 font-black italic">{activeFilter === 'blocked-only' ? 'VIEWING THREATS' : 'CLICK TO ANALYZE'}</div>
+                    <div className="text-[10px] text-red-400 mt-2 font-black italic">{activeFilter === 'blocked_only' ? 'VIEWING THREATS' : 'CLICK TO ANALYZE'}</div>
+                </div>
+
+                <div
+                    onClick={() => setActiveTab('shadow')}
+                    className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer hover:scale-[1.03] hover:shadow-xl hover:shadow-purple-500/10 backdrop-blur-md bg-slate-900/60 border-slate-800`}
+                >
+                    <div className="text-slate-400 text-xs uppercase tracking-widest font-bold mb-1">Shadow Hits</div>
+                    <div className="text-3xl font-black text-purple-400">{stats.shadowStats?.totalRequests || 0}</div>
+                    <div className="text-[10px] text-purple-400 mt-2 font-black italic uppercase">View Intelligence</div>
                 </div>
             </div>
 
@@ -554,7 +563,7 @@ const AppSettings = ({ isDark, toggleTheme, onReset }) => (
                 </div>
             </div>
 
-            <div className="bg-slate-900/40 backdrop-blur-md p-6 rounded-3xl border border-slate-800 shadow-2xl">
+            <div className="bg-slate-900/40 backdrop-blur-md p-6 rounded-3xl border border-slate-800 shadow-2xl relative z-10">
                 <h3 className="font-black mb-6 text-slate-300 uppercase tracking-widest text-xs flex items-center gap-2">
                     <div className="bg-emerald-500/10 p-1.5 rounded-lg border border-emerald-500/20"><Activity size={16} className="text-emerald-500" /></div> Diagnostics & Logs
                 </h3>
@@ -564,8 +573,8 @@ const AppSettings = ({ isDark, toggleTheme, onReset }) => (
                         <button className="flex items-center gap-3 bg-emerald-600 hover:bg-emerald-500 px-6 py-2.5 rounded-xl text-white font-bold transition-all duration-300 shadow-[0_10px_20px_rgba(16,185,129,0.2)] hover:shadow-[0_10px_25px_rgba(16,185,129,0.3)] hover:scale-[1.05]">
                             <List size={18} /> Download Logs
                         </button>
-                        <div className="absolute right-0 mt-3 w-56 bg-slate-900/95 backdrop-blur-xl border border-slate-700 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 overflow-hidden ring-1 ring-white/5">
-                            {['Agent 1', 'Agent 2', 'Agent 3'].map(agent => (
+                        <div className="absolute right-0 mt-3 w-56 bg-slate-900/95 backdrop-blur-xl border border-slate-700 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[100] overflow-hidden ring-1 ring-white/5">
+                            {['Agent 1', 'Agent 2', 'Agent 3', 'Agent 4'].map(agent => (
                                 <button
                                     key={agent}
                                     onClick={() => {

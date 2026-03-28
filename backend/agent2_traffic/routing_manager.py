@@ -69,8 +69,8 @@ class RoutingManager:
             
         full_url_lower = full_url.lower()
         
-        # Check defaults
-        if "localhost:8003" in full_url_lower:
+        # Check defaults (Agent 3 host or Shadow path)
+        if "localhost:8003" in full_url_lower or "/dvwa-rnaster/" in full_url_lower:
             return True
             
         for config in self.routes.values():
