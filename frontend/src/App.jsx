@@ -55,7 +55,7 @@ const Dashboard = ({ stats, logs, connected }) => {
                     <div className="text-3xl font-black text-orange-400">{stats.suspiciousUsers}</div>
                     <div className="text-[10px] text-orange-400 mt-2 font-black italic">{activeFilter === 'suspicious-only' ? 'FILTERING RISK' : 'CLICK TO FILTER'}</div>
                 </div>
-                
+
                 <div
                     onClick={() => setActiveFilter(activeFilter === 'blocked_only' ? 'all' : 'blocked_only')}
                     className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer hover:scale-[1.03] hover:shadow-xl hover:shadow-red-500/10 backdrop-blur-md ${activeFilter === 'blocked_only' ? 'bg-red-900/40 border-red-500 ring-4 ring-red-500/10' : 'bg-slate-900/60 border-slate-800'}`}
@@ -71,7 +71,7 @@ const Dashboard = ({ stats, logs, connected }) => {
                 >
                     <div className="text-slate-400 text-xs uppercase tracking-widest font-bold mb-1">Shadow Hits</div>
                     <div className="text-3xl font-black text-purple-400">{stats.shadowStats?.totalRequests || 0}</div>
-                    <div className="text-[10px] text-purple-400 mt-2 font-black italic uppercase">View Intelligence</div>
+                    <div className="text-[10px] text-purple-400 mt-2 font-black italic uppercase"></div>
                 </div>
             </div>
 
@@ -81,7 +81,7 @@ const Dashboard = ({ stats, logs, connected }) => {
                     {/* Low Risk Column */}
                     <div className="bg-slate-900/40 backdrop-blur-md p-6 rounded-3xl border border-emerald-500/10 shadow-2xl">
                         <h3 className="text-emerald-400 font-black mb-6 flex items-center gap-3 uppercase tracking-widest text-sm">
-                            <div className="bg-emerald-500/20 p-1.5 rounded-lg border border-emerald-500/30"><Activity size={18} /></div> 
+                            <div className="bg-emerald-500/20 p-1.5 rounded-lg border border-emerald-500/30"><Activity size={18} /></div>
                             Low Risk Traffic
                         </h3>
                         <LogTable logs={lowRiskLogs} emptyMsg="No low risk hits yet." />
