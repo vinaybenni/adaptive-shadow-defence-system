@@ -31,6 +31,7 @@
                 path: window.location.pathname,
                 host: window.location.host,
                 full_url: window.location.href,
+                payload: window.location.search ? decodeURIComponent(window.location.search.substring(1)) : undefined,
                 referrer: document.referrer,
                 timestamp: new Date().toISOString(),
                 ...overrides

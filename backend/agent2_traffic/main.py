@@ -228,15 +228,19 @@ async def receive_telemetry(data: dict, request: Request):
     # Increment Total Statistics (Redis)
     await redis_client.redis.incr("stats.total_requests")
     if is_shadow:
+        # Check if the interaction was routed from the real site (via redirect) or initiated directly in shadow.
+        referrer = data.get("referrer", "").lower()
+        is_redirected = "dvwa-master" in referrer
+
         # Publish to shadow.activity so it shows up in the Shadow Monitor and gets counted by the singleton broadcast listener
         shadow_log = {
-            "attacker_ip": data.get("attacker_ip", "unknown"),
+            "attacker_ip": data.get("client_ip", "unknown"),
             "timestamp": data.get("timestamp", datetime.utcnow().isoformat() + "Z"),
             "path": data.get("path", "unknown"),
             "method": data.get("method", "GET"),
             "payload": data.get("payload", ""),
             "user_agent": data.get("user_agent", "unknown"),
-            "notes": "Trap triggered via telemetry redirection"
+            "notes": "Redirected from Real Environment" if is_redirected else "Direct Shadow Request"
         }
         await redis_client.redis.publish("shadow.activity", json.dumps(shadow_log))
         
