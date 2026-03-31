@@ -133,7 +133,13 @@
                     form.submit();
                 }
             } else {
-                console.warn("Risk System: Blocked form submission due to high risk.");
+                console.warn("Risk System: Action required on form submission: " + result.action);
+                if (result.action === 'redirect' && result.url) {
+                    console.warn("Risk System: HIGH RISK DETECTED in Form. Redirecting to shadow.");
+                    window.location.href = result.url;
+                }
+                // For 'block' action, the main telemetry loader handles the UI block on next page load/reload, 
+                // but we can also execute block UI here if needed.
             }
         });
     }, true);
