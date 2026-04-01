@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, Activity, List, Settings, AlertTriangle, Trash2, Sun, Moon, CheckCircle } from 'lucide-react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, CartesianGrid } from 'recharts';
+import { BarChart, Bar, PieChart, Pie, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, CartesianGrid, Legend } from 'recharts';
 
 const Dashboard = ({ stats, logs, connected }) => {
     const [activeFilter, setActiveFilter] = useState('all'); // 'all', 'risk-split', 'normal-only', 'suspicious-only', 'blocked-only'
@@ -57,12 +57,12 @@ const Dashboard = ({ stats, logs, connected }) => {
                 </div>
 
                 <div
-                    onClick={() => setActiveFilter(activeFilter === 'blocked_only' ? 'all' : 'blocked_only')}
-                    className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer hover:scale-[1.03] hover:shadow-xl hover:shadow-red-500/10 backdrop-blur-md ${activeFilter === 'blocked_only' ? 'bg-red-900/40 border-red-500 ring-4 ring-red-500/10' : 'bg-slate-900/60 border-slate-800'}`}
+                    onClick={() => setActiveFilter(activeFilter === 'blocked-only' ? 'all' : 'blocked-only')}
+                    className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer hover:scale-[1.03] hover:shadow-xl hover:shadow-red-500/10 backdrop-blur-md ${activeFilter === 'blocked-only' ? 'bg-red-900/40 border-red-500 ring-4 ring-red-500/10' : 'bg-slate-900/60 border-slate-800'}`}
                 >
                     <div className="text-slate-400 text-xs uppercase tracking-widest font-bold mb-1">Attack Type</div>
                     <div className="text-3xl font-black text-red-500">{stats.uniqueAttackTypes || 0}</div>
-                    <div className="text-[10px] text-red-400 mt-2 font-black italic">{activeFilter === 'blocked_only' ? 'VIEWING THREATS' : 'CLICK TO ANALYZE'}</div>
+                    <div className="text-[10px] text-red-400 mt-2 font-black italic">{activeFilter === 'blocked-only' ? 'VIEWING THREATS' : 'CLICK TO ANALYZE'}</div>
                 </div>
 
                 <div
@@ -125,32 +125,31 @@ const Dashboard = ({ stats, logs, connected }) => {
                     ) : (
                         <div className="flex-1 w-full relative">
                             <ResponsiveContainer width="100%" height="100%">
-                                <BarChart
-                                    data={attackTypeData}
-                                    layout="vertical"
-                                    margin={{ top: 0, right: 30, left: 60, bottom: 0 }}
-                                >
-                                    <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" horizontal={false} />
-                                    <XAxis type="number" hide />
-                                    <YAxis
-                                        dataKey="name"
-                                        type="category"
-                                        axisLine={false}
-                                        tickLine={false}
-                                        tick={{ fill: '#64748b', fontSize: 10, fontWeight: '900' }}
-                                        width={80}
-                                    />
+                                <PieChart>
+                                    <Pie
+                                        data={attackTypeData}
+                                        cx="50%"
+                                        cy="50%"
+                                        innerRadius={90}
+                                        outerRadius={130}
+                                        paddingAngle={5}
+                                        dataKey="count"
+                                        nameKey="name"
+                                        stroke="none"
+                                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                                        labelLine={{ stroke: '#475569', strokeWidth: 1 }}
+                                    >
+                                        {attackTypeData.map((entry, index) => (
+                                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} fillOpacity={0.9} />
+                                        ))}
+                                    </Pie>
                                     <Tooltip
                                         cursor={{ fill: '#1e293b', opacity: 0.4 }}
-                                        contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '12px', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}
+                                        contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '12px', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.4)' }}
                                         itemStyle={{ color: '#f87171', fontWeight: 'bold' }}
                                     />
-                                    <Bar dataKey="count" radius={[0, 8, 8, 0]} barSize={32}>
-                                        {attackTypeData.map((entry, index) => (
-                                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} fillOpacity={0.8} />
-                                        ))}
-                                    </Bar>
-                                </BarChart>
+                                    <Legend verticalAlign="bottom" height={36} wrapperStyle={{ fontSize: '11px', fontWeight: 'bold', color: '#94a3b8', paddingTop: '20px' }}/>
+                                </PieChart>
                             </ResponsiveContainer>
                         </div>
                     )}
