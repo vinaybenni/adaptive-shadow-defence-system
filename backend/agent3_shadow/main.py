@@ -9,7 +9,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
 
 from shared.messaging import RedisClient
 from shared.logger import setup_logger
-from shared.schemas import AttackerLog
+from shared.schemas import ShadowLog
 
 logger = setup_logger("agent3.shadow", "logs/agent3/service.log")
 redis_client = RedisClient()
@@ -33,20 +33,15 @@ async def catch_all(request: Request, path: str):
         body_str = body.decode('utf-8')
     except:
         body_str = "<binary>"
-
-    import uuid
-    request_id = str(uuid.uuid4())
     
-    log_entry = AttackerLog(
+    log_entry = ShadowLog(
         timestamp=datetime.utcnow().isoformat() + "Z",
         attacker_ip=request.client.host,
         shadow_host=request.headers.get("host", "unknown"),
         path=path,
-        method=request.method,
-        payload=body_str[:1000],  # Truncate
+        payload=body_str[:1000] if body_str else None,
         user_agent=request.headers.get("user-agent", "unknown"),
-        notes="Trapped in shadow environment",
-        request_id=request_id
+        source="agent3"
     )
     
     # Async publish

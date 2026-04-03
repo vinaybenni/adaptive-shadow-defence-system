@@ -69,16 +69,29 @@ class RoutingManager:
             
         full_url_lower = full_url.lower()
         
-        # Check defaults (Agent 3 host or Shadow path)
-        if "localhost:8003" in full_url_lower or "/dvwa-rnaster/" in full_url_lower:
-            return True
+        # Check for shadow environment indicators
+        shadow_indicators = [
+            "localhost:8003",           # Direct to agent3 shadow
+            "/dvwa-rnaster/",          # Shadow DB path
+            "dvwa-rnaster",            # Shadow DB keyword
+            ":8003"                     # Port indicator
+        ]
+        
+        for indicator in shadow_indicators:
+            if indicator in full_url_lower:
+                logger.info(f"is_shadow_url: TRUE - matched '{indicator}' in '{full_url_lower}'")
+                return True
             
+        # Check registered shadow upstreams
         for config in self.routes.values():
             if not config.shadow_upstream:
                 continue
             
             if full_url_lower.startswith(config.shadow_upstream.lower()):
+                logger.info(f"is_shadow_url: TRUE - matched config upstream '{config.shadow_upstream}'")
                 return True
+        
+        logger.debug(f"is_shadow_url: FALSE - '{full_url_lower}'")
         return False
 
     def get_route(self, host: str) -> Optional[AppConfig]:

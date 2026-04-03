@@ -49,6 +49,16 @@ class AttackerLog(BaseModel):
     session: Optional[str] = None
     notes: Optional[str] = None
 
+class ShadowLog(BaseModel):
+    """Schema for shadow environment logs sent to frontend"""
+    timestamp: str
+    attacker_ip: str
+    shadow_host: str
+    path: str
+    payload: Optional[str] = None
+    user_agent: str
+    source: Optional[str] = None  # "agent3" for direct hits, "telemetry" for redirected hits
+
 # --- Agent 4: Rule Updates ---
 
 class RuleUpdateProposal(BaseModel):

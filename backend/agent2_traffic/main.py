@@ -17,7 +17,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
 
 from shared.logger import setup_logger, log_error
 from shared.messaging import RedisClient
-from shared.schemas import RequestMetadata, RiskAssessment, AppConfig
+from shared.schemas import RequestMetadata, RiskAssessment, AppConfig, ShadowLog
 from routing_manager import RoutingManager
 
 logger = setup_logger("agent2.main", "logs/agent2/service.log")
@@ -129,9 +129,9 @@ async def broadcast_redis_events():
                     # Increment Shadow Total
                     await redis_client.redis.incr("stats.shadow_total")
                     
-                    # Increment Global Total ONLY for direct Agent 3 hits (Telemetried redirects are already counted)
-                    # Agent 3 messages have "Trapped" in notes or lack specific telemetry notes
-                    if "telemetry" not in data.get("notes", "").lower():
+                    # Increment Global Total ONLY for direct Agent 3 hits
+                    # (Telemetry-routed hits were already counted when they hit agent2)
+                    if data.get("source") == "agent3":
                         await redis_client.redis.incr("stats.total_requests")
                     
                     # Track Unique Shadow IPs
@@ -221,47 +221,46 @@ async def receive_telemetry(data: dict, request: Request):
     payload_str = data.get('payload', '')
     payload_size = len(payload_str.encode()) if payload_str else 0
 
-    # 1. Authoritative Counting: Track EVERY hit before any filters
+    # 1. Check if request is to shadow environment
     is_shadow = routing_manager.is_shadow_url(data.get('full_url', ''))
     host_registered = routing_manager.get_route(data.get('host', ''))
     
-    # Increment Total Statistics (Redis)
+    # DEBUG: Log the URL being checked
+    logger.info(f"Telemetry [{request_id}]: full_url='{data.get('full_url', '')}' is_shadow={is_shadow}")
+    
+    # CRITICAL: Shadow requests should NEVER count in main dashboard totalRequests
+    # They are counted separately in shadowStats
+    if is_shadow:
+        # Publish to shadow.activity for Shadow Monitor only
+        shadow_log = ShadowLog(
+            attacker_ip=data.get("client_ip", "unknown"),
+            timestamp=data.get("timestamp", datetime.utcnow().isoformat() + "Z"),
+            shadow_host=data.get("host", "unknown"),
+            path=data.get("path", "unknown"),
+            payload=data.get("payload", ""),
+            user_agent=data.get("user_agent", "unknown"),
+            source="telemetry"
+        )
+        await redis_client.publish("shadow.activity", json.dumps(shadow_log.dict()))
+        logger.info(f"Telemetry [{request_id}]: Shadow URL detected - NOT counting in main dashboard")
+        return {"status": "shadow activity recorded"}
+    
+    # 2. DE-DUPLICATE: Prevent counting same request twice from rapid submissions
+    # Use client_ip + path + event as dedup key with 2 second window
+    dedup_key = f"telemetry:dedup:{data.get('client_ip')}:{data.get('path')}:{data.get('event')}"
+    is_duplicate = await redis_client.redis.get(dedup_key)
+    
+    if is_duplicate:
+        logger.info(f"Telemetry [{request_id}]: Duplicate request ignored (dedup_key={dedup_key})")
+        return {"status": "duplicate"}
+    
+    # Mark this request as seen for 2 seconds
+    await redis_client.redis.set(dedup_key, "1", ex=2)
+    
+    # 3. Only REAL domain requests count toward totalRequests
     await redis_client.redis.incr("stats.total_requests")
-    if is_shadow:
-        # Check if the interaction was routed from the real site (via redirect) or initiated directly in shadow.
-        referrer = data.get("referrer", "").lower()
-        is_redirected = "dvwa-master" in referrer
+    logger.info(f"Telemetry [{request_id}]: Incremented totalRequests from {data.get('client_ip')}")
 
-        # Publish to shadow.activity so it shows up in the Shadow Monitor and gets counted by the singleton broadcast listener
-        shadow_log = {
-            "attacker_ip": data.get("client_ip", "unknown"),
-            "timestamp": data.get("timestamp", datetime.utcnow().isoformat() + "Z"),
-            "path": data.get("path", "unknown"),
-            "method": data.get("method", "GET"),
-            "payload": data.get("payload", ""),
-            "user_agent": data.get("user_agent", "unknown"),
-            "notes": "Redirected from Real Environment" if is_redirected else "Direct Shadow Request"
-        }
-        await redis_client.redis.publish("shadow.activity", json.dumps(shadow_log))
-        
-        # We DON'T increment stats.shadow_total here because the broadcast listener hears the publish and does it for us!
-        return {"status": "hit recorded as shadow activity"}
-
-    # 2. Shadow Bypasser (Still ignore for Scoring, but NOT for Counting)
-    if is_shadow:
-        logger.info(f"Shadow Telemetry [{request_id}]: Counting hit but skipping scoring.")
-        # We publish to shadow channel so the Shadow Monitor picks it up
-        shadow_log = {
-            "channel": "shadow.activity",
-            "attacker_ip": client_ip,
-            "timestamp": datetime.utcnow().isoformat() + "Z",
-            "path": data.get('path'),
-            "method": data.get('method', 'GET'),
-            "payload": payload_str[:500],
-            "user_agent": request.headers.get("user-agent", "unknown"),
-        }
-        await redis_client.publish("shadow.activity", shadow_log)
-        return {"status": "received", "action": "none"}
 
     if data.get('event') == 'hit':
         meta = RequestMetadata(

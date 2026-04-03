@@ -91,7 +91,8 @@
 
         const currentPath = window.location.pathname.toLowerCase();
         if (currentPath.includes('login.php') || currentPath.includes('login/') || currentPath.endsWith('login')) {
-            console.log("Risk System: Login page detected. Verifying and allowing non-blocking flow.");
+            console.log("Risk System: Login page detected. Verifying before submission.");
+            e.preventDefault(); // Prevent double form submission and double telemetry counting
             sendTelemetry('hit', {
                 method: (form.getAttribute('method') || 'GET').toUpperCase(),
                 path: form.getAttribute('action') || window.location.pathname,
@@ -101,9 +102,14 @@
                 if (result.action === 'redirect' && result.url) {
                     console.warn("Risk System: Critical risk on login. Moving to shadow.");
                     window.location.href = result.url;
+                } else {
+                    // Safe to submit - submit form now
+                    console.log("Risk System: Login verified. Submitting form.");
+                    form.dataset.telemetryVerified = "true";
+                    form.submit();
                 }
             });
-            return; // Still return to allow original form handler if no redirect occurs within timeout
+            return; // Prevent further event handling
         }
 
         e.preventDefault();

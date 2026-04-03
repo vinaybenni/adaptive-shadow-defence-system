@@ -28,7 +28,7 @@ const Dashboard = ({ stats, logs, connected }) => {
                 Security Dashboard
                 {connected && <span className="ml-4 text-xs bg-emerald-900 text-emerald-300 px-2 py-1 rounded-full align-middle">LIVE</span>}
             </h1>
-            <div className="grid grid-cols-5 gap-6 mb-10">
+            <div className="grid grid-cols-4 gap-6 mb-10">
                 <div
                     onClick={() => setActiveFilter(activeFilter === 'risk-split' ? 'all' : 'risk-split')}
                     className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer hover:scale-[1.03] hover:shadow-xl hover:shadow-indigo-500/10 backdrop-blur-md ${activeFilter === 'risk-split' ? 'bg-indigo-900/40 border-indigo-500 ring-4 ring-indigo-500/10' : 'bg-slate-900/60 border-slate-800'}`}
@@ -63,15 +63,6 @@ const Dashboard = ({ stats, logs, connected }) => {
                     <div className="text-slate-400 text-xs uppercase tracking-widest font-bold mb-1">Attack Type</div>
                     <div className="text-3xl font-black text-red-500">{stats.uniqueAttackTypes || 0}</div>
                     <div className="text-[10px] text-red-400 mt-2 font-black italic">{activeFilter === 'blocked-only' ? 'VIEWING THREATS' : 'CLICK TO ANALYZE'}</div>
-                </div>
-
-                <div
-                    onClick={() => setActiveTab('shadow')}
-                    className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer hover:scale-[1.03] hover:shadow-xl hover:shadow-purple-500/10 backdrop-blur-md bg-slate-900/60 border-slate-800`}
-                >
-                    <div className="text-slate-400 text-xs uppercase tracking-widest font-bold mb-1">Shadow Hits</div>
-                    <div className="text-3xl font-black text-purple-400">{stats.shadowStats?.totalRequests || 0}</div>
-                    <div className="text-[10px] text-purple-400 mt-2 font-black italic uppercase"></div>
                 </div>
             </div>
 
@@ -263,9 +254,9 @@ const ShadowMonitor = ({ stats, logs }) => {
                     <table className="w-full text-left text-sm border-spacing-y-2">
                         <thead className="bg-slate-950/40 text-slate-500">
                             <tr>
-                                <th className="p-6 font-black uppercase text-[10px] tracking-widest">Timestamp</th>
-                                <th className="p-6 font-black uppercase text-[10px] tracking-widest">Origin IP</th>
-                                <th className="p-6 font-black uppercase text-[10px] tracking-widest">Vector Path</th>
+                                <th className="p-6 font-black uppercase text-[10px] tracking-widest">Time</th>
+                                <th className="p-6 font-black uppercase text-[10px] tracking-widest">	Client IP</th>
+                                <th className="p-6 font-black uppercase text-[10px] tracking-widest">Path</th>
                                 <th className="p-6 font-black uppercase text-[10px] tracking-widest">Payload Data</th>
                                 <th className="p-6 font-black uppercase text-[10px] tracking-widest">Client Sign</th>
                             </tr>
