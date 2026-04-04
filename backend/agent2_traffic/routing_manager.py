@@ -72,8 +72,8 @@ class RoutingManager:
         # Check for shadow environment indicators
         shadow_indicators = [
             "localhost:8003",           # Direct to agent3 shadow
-            "/dvwa-rnaster/",          # Shadow DB path
-            "dvwa-rnaster",            # Shadow DB keyword
+            "/dvwa-master/",           # Shadow DB path (Fixed from rnaster)
+            "dvwa-master",             # Shadow DB keyword (Fixed from rnaster)
             ":8003"                     # Port indicator
         ]
         
@@ -126,8 +126,8 @@ class RoutingManager:
         if target_type == "shadow":
             # HARD OVERRIDE: Forcing localhost tests to your new shadow environment
             if "localhost" in config.real_upstream:
-                logger.warning(f"Forcing Shadow Target Override for localhost: http://localhost/DVWA-rnaster/")
-                return "http://localhost/DVWA-rnaster/"
+                logger.warning(f"Forcing Shadow Target Override for localhost: http://localhost/DVWA-master/")
+                return "http://localhost:8003/DVWA-master/"
             return config.shadow_upstream or "http://localhost:8003"
         elif target_type == "hardened":
             return config.hardened_upstream

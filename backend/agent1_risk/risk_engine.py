@@ -12,12 +12,12 @@ class RiskEngine:
         # 2. Attack Patterns (Regex)
         self.patterns = {
             "sql_injection": re.compile(
-                r"(\'\s*(OR|AND)\b\s*[\'\"\d\)\(]|\bUNION\b.{0,20}\bSELECT\b|\bSELECT\b.{0,50}\bFROM\b|\bINSERT\b.{0,20}\bINTO\b|\bDROP\b.{0,20}\bTABLE\b|--|\bOR\b\s+['\"]?1['\"]?\s*=\s*['\"]?1|xp_cmdshell|WAITFOR\s+DELAY|SLEEP\s*\(|;|pg_sleep|benchmark|request_uri\s*\()", 
+                r"(\'\s*(OR|AND)\b\s*[\'\"\d\)\(]|\bUNION\b.{0,20}\bSELECT\b|\bSELECT\b.{0,50}\bFROM\b|\bINSERT\b.{0,20}\bINTO\b|\bDROP\b.{0,20}\bTABLE\b|--|\bOR\b\s+['\"]?1['\"]?\s*=\s*['\"]?1|xp_cmdshell|WAITFOR\s+DELAY|SLEEP\s*\(|pg_sleep|benchmark|request_uri\s*\()", 
                 re.IGNORECASE
             ),
             "xss": re.compile(r"(<script|alert\(|onerror|onload|javascript:|<iframe|document\.cookie|eval\(|unescape\()", re.IGNORECASE),
             "path_traversal": re.compile(r"(\.\.\/|\.\.\\|/etc/passwd|/windows/win\.ini|/boot\.ini)", re.IGNORECASE),
-            "os_command": re.compile(r"(&&|\|\||;|`|\$\(|ping|netstat|whoami|cat|type)\b", re.IGNORECASE)
+            "os_command": re.compile(r"(&&|\|\||`|\$\(|ping|netstat|whoami|cat|type)\b", re.IGNORECASE)
         }
 
         # 3. Suspicious Headers
@@ -25,8 +25,8 @@ class RiskEngine:
 
         # 4. Rate Limit Tracking
         self.request_history = defaultdict(list)
-        self.rate_limit_threshold = 5  # requests per window
-        self.rate_limit_window = 5     # seconds
+        self.rate_limit_threshold = 30  # requests per window (increased from 5)
+        self.rate_limit_window = 10     # seconds (increased from 5)
 
     def evaluate(self, meta: RequestMetadata) -> RiskAssessment:
         score = 0

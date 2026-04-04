@@ -198,8 +198,13 @@ async def broadcast_redis_events():
 # --- Telemetry Handler ---
 
 @app.post("/api/v1/telemetry")
-async def receive_telemetry(data: dict, request: Request):
+async def receive_telemetry(request: Request):
     import uuid
+    try:
+        data = await request.json()
+    except:
+        return {"error": "Invalid JSON"}
+    
     # Capture real client IP from the request
     client_ip = request.client.host
     data['client_ip'] = client_ip
@@ -246,20 +251,27 @@ async def receive_telemetry(data: dict, request: Request):
         return {"status": "shadow activity recorded"}
     
     # 2. DE-DUPLICATE: Prevent counting same request twice from rapid submissions
-    # Use client_ip + path + event as dedup key with 2 second window
-    dedup_key = f"telemetry:dedup:{data.get('client_ip')}:{data.get('path')}:{data.get('event')}"
+    # Normalize path for better dedup (remove leading slashes, trailing slashes, get last segment)
+    raw_path = data.get('path', '/')
+    # Remove trailing slash, split by /, get last non-empty part
+    clean_path = raw_path.rstrip('/').split('/')[-1]
+    path_for_dedup = clean_path if clean_path else 'root'  # Get last path segment
+    event = data.get('event', 'hit')
+    timestamp_sec = int(datetime.utcnow().timestamp())  # Same second = duplicate
+    
+    dedup_key = f"telemetry:dedup:{data.get('client_ip')}:{path_for_dedup}:{event}:{timestamp_sec}"
     is_duplicate = await redis_client.redis.get(dedup_key)
     
     if is_duplicate:
-        logger.info(f"Telemetry [{request_id}]: Duplicate request ignored (dedup_key={dedup_key})")
+        logger.warning(f"Telemetry [{request_id}]: DUPLICATE IGNORED - {data.get('client_ip')} to {path_for_dedup}")
         return {"status": "duplicate"}
     
-    # Mark this request as seen for 2 seconds
-    await redis_client.redis.set(dedup_key, "1", ex=2)
+    # Mark this request as seen for this second
+    await redis_client.redis.set(dedup_key, "1", ex=1)
     
     # 3. Only REAL domain requests count toward totalRequests
     await redis_client.redis.incr("stats.total_requests")
-    logger.info(f"Telemetry [{request_id}]: Incremented totalRequests from {data.get('client_ip')}")
+    logger.info(f"Telemetry [{request_id}]: ✓ COUNTED - totalRequests incremented for {data.get('client_ip')} → {path_for_dedup}")
 
 
     if data.get('event') == 'hit':
@@ -312,9 +324,9 @@ async def receive_telemetry(data: dict, request: Request):
                                         current_host = meta.host
                                         # Path Preservation: Dynamically swap from Real to Shadow path
                                         if "/DVWA-master/" in meta.full_url:
-                                            url = meta.full_url.replace("/DVWA-master/", "/DVWA-rnaster/")
+                                            url = meta.full_url.replace("/DVWA-master/", "/DVWA-master/")
                                         else:
-                                            url = f"http://{current_host}/DVWA-rnaster/login.php"
+                                            url = f"http://{current_host}:8003/DVWA-master/login.php"
                                             if "?" in meta.full_url:
                                                 url += "?" + meta.full_url.split("?", 1)[1]
                                             

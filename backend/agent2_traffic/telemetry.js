@@ -7,7 +7,7 @@
     const AGENT_URL = "http://" + currentHost + ":8010/api/v1/telemetry";
 
     // Immediate Breach Prevention: Hide content if URL looks suspicious
-    const attackPatterns = /('\s*(OR|AND)\b\s*[\'\"\d\)\(]|--|union|select|insert|delete|update|drop|truncate|alter|xp_cmdshell|WAITFOR\s+DELAY|SLEEP\s*\(|;|pg_sleep|benchmark|request_uri\s*\()|' OR '1'='1|' OR 1=1/i;
+    const attackPatterns = /('\s*(OR|AND)\b\s*[\'\"\d\)\(]|--|union|select|insert|delete|update|drop|truncate|alter|xp_cmdshell|WAITFOR\s+DELAY|SLEEP\s*\(|pg_sleep|benchmark|request_uri\s*\()|' OR '1'='1|' OR 1=1/i;
     
     function isSuspiciousContent(text) {
         if (!text) return false;
@@ -80,6 +80,18 @@
         });
     }
 
+    function submitFormReliably(form) {
+        form.dataset.telemetryVerified = "true";
+        const submitBtn = form.querySelector('[type="submit"]');
+        if (submitBtn && typeof submitBtn.click === 'function') {
+            console.log("Risk System: Submitting via button click.");
+            submitBtn.click();
+        } else {
+            console.log("Risk System: Submitting via form.submit().");
+            form.submit();
+        }
+    }
+
     // Capture Page Load
     sendTelemetry('hit');
 
@@ -105,8 +117,7 @@
                 } else {
                     // Safe to submit - submit form now
                     console.log("Risk System: Login verified. Submitting form.");
-                    form.dataset.telemetryVerified = "true";
-                    form.submit();
+                    submitFormReliably(form);
                 }
             });
             return; // Prevent further event handling
@@ -130,14 +141,7 @@
         }).then(result => {
             if (result.action !== 'redirect' && result.action !== 'block') {
                 console.log("Risk System: Request verified. Proceeding.");
-                form.dataset.telemetryVerified = "true";
-                // More reliable form submission 
-                const submitBtn = form.querySelector('[type="submit"]');
-                if (submitBtn && typeof submitBtn.click === 'function') {
-                    submitBtn.click();
-                } else {
-                    form.submit();
-                }
+                submitFormReliably(form);
             } else {
                 console.warn("Risk System: Action required on form submission: " + result.action);
                 if (result.action === 'redirect' && result.url) {
