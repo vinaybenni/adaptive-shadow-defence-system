@@ -72,8 +72,8 @@ class RoutingManager:
         # Check for shadow environment indicators
         shadow_indicators = [
             "localhost:8003",           # Direct to agent3 shadow
-            "/dvwa-master/",           # Shadow DB path (Fixed from rnaster)
-            "dvwa-master",             # Shadow DB keyword (Fixed from rnaster)
+            "/dvwa-rnaster/",           # Shadow DB path (Reverting back from master)
+            "dvwa-rnaster",             # Shadow DB keyword (Reverting back from master)
             ":8003"                     # Port indicator
         ]
         

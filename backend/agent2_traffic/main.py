@@ -236,9 +236,16 @@ async def receive_telemetry(request: Request):
     # CRITICAL: Shadow requests should NEVER count in main dashboard totalRequests
     # They are counted separately in shadowStats
     if is_shadow:
-        # Publish to shadow.activity for Shadow Monitor only
+        # 1. Increment Counters IMMEDIATELY
+        await redis_client.redis.incr("stats.shadow_total")
+        
+        attacker_ip = data.get("client_ip", "unknown")
+        if attacker_ip != "unknown":
+            await redis_client.redis.sadd("stats.shadow_unique_ips", attacker_ip)
+
+        # 2. Publish to shadow.activity for Live Stream
         shadow_log = ShadowLog(
-            attacker_ip=data.get("client_ip", "unknown"),
+            attacker_ip=attacker_ip,
             timestamp=data.get("timestamp", datetime.utcnow().isoformat() + "Z"),
             shadow_host=data.get("host", "unknown"),
             path=data.get("path", "unknown"),
@@ -247,7 +254,8 @@ async def receive_telemetry(request: Request):
             source="telemetry"
         )
         await redis_client.publish("shadow.activity", json.dumps(shadow_log.dict()))
-        logger.info(f"Telemetry [{request_id}]: Shadow URL detected - NOT counting in main dashboard")
+        
+        logger.info(f"Telemetry [{request_id}]: Shadow Hit recorded directly in Redis. stats.shadow_total incremented.")
         return {"status": "shadow activity recorded"}
     
     # 2. DE-DUPLICATE: Prevent counting same request twice from rapid submissions
@@ -324,9 +332,9 @@ async def receive_telemetry(request: Request):
                                         current_host = meta.host
                                         # Path Preservation: Dynamically swap from Real to Shadow path
                                         if "/DVWA-master/" in meta.full_url:
-                                            url = meta.full_url.replace("/DVWA-master/", "/DVWA-master/")
+                                            url = meta.full_url.replace("/DVWA-master/", "/DVWA-rnaster/")
                                         else:
-                                            url = f"http://{current_host}:8003/DVWA-master/login.php"
+                                            url = f"http://{current_host}/DVWA-rnaster/login.php"
                                             if "?" in meta.full_url:
                                                 url += "?" + meta.full_url.split("?", 1)[1]
                                             
