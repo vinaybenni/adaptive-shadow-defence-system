@@ -25,8 +25,8 @@ class RiskEngine:
 
         # 4. Rate Limit Tracking
         self.request_history = defaultdict(list)
-        self.rate_limit_threshold = 30  # requests per window (increased from 5)
-        self.rate_limit_window = 10     # seconds (increased from 5)
+        self.rate_limit_threshold = 5  # requests per window (set to 5 for redirection)
+        self.rate_limit_window = 7     # seconds (set to 7 for robustness)
 
     def evaluate(self, meta: RequestMetadata) -> RiskAssessment:
         score = 0
@@ -69,8 +69,10 @@ class RiskEngine:
         
         # Add current request
         self.request_history[history_key].append(now)
+        count = len(self.request_history[history_key])
+        print(f"DEBUG: Rate limit check for {history_key} - Count: {count}/{self.rate_limit_threshold}")
         
-        if len(self.request_history[history_key]) >= self.rate_limit_threshold:
+        if count >= self.rate_limit_threshold:
             score += 95 # Increased from 90 to ensure it is "more than 90"
             tags.append("high_frequency")
             explanation_parts.append(f"High frequency requests detected ({len(self.request_history[history_key])} in {self.rate_limit_window}s)")

@@ -270,16 +270,44 @@ async def receive_telemetry(request: Request):
     dedup_key = f"telemetry:dedup:{data.get('client_ip')}:{path_for_dedup}:{event}:{timestamp_sec}"
     is_duplicate = await redis_client.redis.get(dedup_key)
     
-    if is_duplicate:
+    if is_duplicate and event != 'hit':
         logger.warning(f"Telemetry [{request_id}]: DUPLICATE IGNORED - {data.get('client_ip')} to {path_for_dedup}")
         return {"status": "duplicate"}
     
     # Mark this request as seen for this second
     await redis_client.redis.set(dedup_key, "1", ex=1)
     
-    # 3. Only REAL domain requests count toward totalRequests
+    # 3. HIGH-SPEED PROTECTION (Sliding Window): 5 hits in 10 seconds = Redirect
+    # Use a Sorted Set to track hit history for each IP
+    if event == 'hit':
+        now = time.time()
+        rate_key = f"stats:rate_limit_set:{data.get('client_ip')}"
+        
+        # Add current hit with unique timestamp (id)
+        # Using string(now) as the member to keep it unique, score = now
+        await redis_client.redis.zadd(rate_key, {str(now): now})
+        # Remove hits older than 10 seconds
+        await redis_client.redis.zremrangebyscore(rate_key, 0, now - 10)
+        # Count remaining hits in the window
+        current_hits = await redis_client.redis.zcard(rate_key)
+        # Extend expiry
+        await redis_client.redis.expire(rate_key, 15)
+        
+        if current_hits >= 5:
+            # Force Redirect to Shadow
+            app_config = routing_manager.get_route(data.get('host', 'localhost'))
+            if app_config and app_config.protection_enabled:
+                shadow_url = routing_manager.resolve_upstream(app_config, "shadow")
+                logger.warning(f"RATE LIMIT TRIPPED (SLIDING WINDOW): {data.get('client_ip')} sent {current_hits} hits in last 10s. Redirecting to {shadow_url}")
+                return {
+                    "status": "rate_limited",
+                    "action": "redirect",
+                    "url": shadow_url
+                }
+
+    # 4. Only REAL domain requests count toward totalRequests
     await redis_client.redis.incr("stats.total_requests")
-    logger.info(f"Telemetry [{request_id}]: ✓ COUNTED - totalRequests incremented for {data.get('client_ip')} → {path_for_dedup}")
+    logger.info(f"Telemetry [{request_id}]: ✓ COUNTED - totalRequests={await redis_client.redis.get('stats.total_requests')} for {data.get('client_ip')} → {path_for_dedup}")
 
 
     if data.get('event') == 'hit':
