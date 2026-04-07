@@ -126,13 +126,22 @@ async def broadcast_redis_events():
                     await redis_client.redis.lpush("shadow.logs", json.dumps(log_entry))
                     await redis_client.redis.ltrim("shadow.logs", 0, 99) 
                     
-                    # Increment Shadow Total
-                    await redis_client.redis.incr("stats.shadow_total")
                     
-                    # Increment Global Total ONLY for direct Agent 3 hits
-                    # (Telemetry-routed hits were already counted when they hit agent2)
-                    if data.get("source") == "agent3":
+                    # 1. Deduplicate shadow counts: only count once per request per second
+                    # We use IP + Path + Second to ensure Telemetry and Agent 3 hits collapse into 1 count
+                    attacker_ip = data.get('attacker_ip') or data.get('client_ip')
+                    path = data.get('path', 'root')
+                    timestamp_sec = int(datetime.utcnow().timestamp())
+                    
+                    dedup_id = f"s:{attacker_ip}:{path}:{timestamp_sec}"
+                    dedup_key = f"shadow_counted:{dedup_id}"
+                    
+                    is_new_shadow = await redis_client.redis.set(dedup_key, "1", ex=5, nx=True)
+                    
+                    if is_new_shadow:
+                        await redis_client.redis.incr("stats.shadow_total")
                         await redis_client.redis.incr("stats.total_requests")
+                        logger.info(f"Shadow Monitor: Unique hit counted for {attacker_ip} -> {path}")
                     
                     # Track Unique Shadow IPs
                     attacker_ip = data.get('attacker_ip')
@@ -155,6 +164,7 @@ async def broadcast_redis_events():
                         if re.search(pattern, content, re.IGNORECASE):
                              await redis_client.redis.hincrby("stats.shadow_attack_types", atk_name, 1)
 
+                # 3. Authoritative Stats Broadcast (For ALL channels)
                 # Fetch latest stats to send with the message (authoritative)
                 total = await redis_client.redis.get("stats.total_requests")
                 normal = await redis_client.redis.get("stats.normal_users")
@@ -237,23 +247,21 @@ async def receive_telemetry(request: Request):
     # They are counted separately in shadowStats
     if is_shadow:
         # 1. Increment Counters IMMEDIATELY
-        await redis_client.redis.incr("stats.shadow_total")
-        
         attacker_ip = data.get("client_ip", "unknown")
         if attacker_ip != "unknown":
             await redis_client.redis.sadd("stats.shadow_unique_ips", attacker_ip)
 
         # 2. Publish to shadow.activity for Live Stream
-        shadow_log = ShadowLog(
-            attacker_ip=attacker_ip,
-            timestamp=data.get("timestamp", datetime.utcnow().isoformat() + "Z"),
-            shadow_host=data.get("host", "unknown"),
-            path=data.get("path", "unknown"),
-            payload=data.get("payload", ""),
-            user_agent=data.get("user_agent", "unknown"),
-            source="telemetry"
-        )
-        await redis_client.publish("shadow.activity", json.dumps(shadow_log.dict()))
+        shadow_log = {
+            "attacker_ip": attacker_ip,
+            "timestamp": data.get("timestamp", datetime.utcnow().isoformat() + "Z"),
+            "shadow_host": data.get("host", "unknown"),
+            "path": data.get("path", "unknown"),
+            "payload": data.get("payload", ""),
+            "user_agent": data.get("user_agent", "unknown"),
+            "source": "telemetry"
+        }
+        await redis_client.publish("shadow.activity", shadow_log)
         
         logger.info(f"Telemetry [{request_id}]: Shadow Hit recorded directly in Redis. stats.shadow_total incremented.")
         return {"status": "shadow activity recorded"}
@@ -270,44 +278,36 @@ async def receive_telemetry(request: Request):
     dedup_key = f"telemetry:dedup:{data.get('client_ip')}:{path_for_dedup}:{event}:{timestamp_sec}"
     is_duplicate = await redis_client.redis.get(dedup_key)
     
-    if is_duplicate and event != 'hit':
+    if is_duplicate:
         logger.warning(f"Telemetry [{request_id}]: DUPLICATE IGNORED - {data.get('client_ip')} to {path_for_dedup}")
         return {"status": "duplicate"}
     
-    # Mark this request as seen for this second
+    # Mark this request as seen for this second (reduce window to 500ms if possible, using sub-second precision)
+    # Since we use timestamp_sec, it's exactly 1 second. Let's keep it but make it more specific.
     await redis_client.redis.set(dedup_key, "1", ex=1)
     
-    # 3. HIGH-SPEED PROTECTION (Sliding Window): 5 hits in 10 seconds = Redirect
-    # Use a Sorted Set to track hit history for each IP
-    if event == 'hit':
-        now = time.time()
-        rate_key = f"stats:rate_limit_set:{data.get('client_ip')}"
-        
-        # Add current hit with unique timestamp (id)
-        # Using string(now) as the member to keep it unique, score = now
-        await redis_client.redis.zadd(rate_key, {str(now): now})
-        # Remove hits older than 10 seconds
-        await redis_client.redis.zremrangebyscore(rate_key, 0, now - 10)
-        # Count remaining hits in the window
-        current_hits = await redis_client.redis.zcard(rate_key)
-        # Extend expiry
-        await redis_client.redis.expire(rate_key, 15)
-        
-        if current_hits >= 5:
-            # Force Redirect to Shadow
-            app_config = routing_manager.get_route(data.get('host', 'localhost'))
-            if app_config and app_config.protection_enabled:
-                shadow_url = routing_manager.resolve_upstream(app_config, "shadow")
-                logger.warning(f"RATE LIMIT TRIPPED (SLIDING WINDOW): {data.get('client_ip')} sent {current_hits} hits in last 10s. Redirecting to {shadow_url}")
-                return {
-                    "status": "rate_limited",
-                    "action": "redirect",
-                    "url": shadow_url
-                }
-
-    # 4. Only REAL domain requests count toward totalRequests
+    # 3. Only REAL domain requests count toward totalRequests
+    # We now publish a 'baseline' event if unregistered, so the dashboard updates.
     await redis_client.redis.incr("stats.total_requests")
-    logger.info(f"Telemetry [{request_id}]: ✓ COUNTED - totalRequests={await redis_client.redis.get('stats.total_requests')} for {data.get('client_ip')} → {path_for_dedup}")
+    logger.info(f"Telemetry [{request_id}]: ✓ COUNTED - totalRequests incremented for {data.get('client_ip')} → {path_for_dedup}")
+
+    # BROADCAST UPDATE (Crucial for live dashboard if unregistered)
+    if not routing_manager.get_route(data.get('host', '')):
+        baseline_event = {
+            "client_ip": data.get('client_ip'),
+            "timestamp": datetime.utcnow().isoformat() + "Z",
+            "path": data.get('path', '/'),
+            "risk": "LOW",
+            "score": 0,
+            "tags": ["unregistered_host"],
+            "explanation": f"Baseline traffic from unregistered host: {data.get('host')}",
+            "method": data.get('method', 'GET'),
+            "payload": data.get('payload', '')[:200],
+            "host": data.get('host', 'unknown'),
+            "action": "none",
+            "msg_id": request_id
+        }
+        await redis_client.publish("risk.events", baseline_event)
 
 
     if data.get('event') == 'hit':
@@ -413,9 +413,8 @@ async def receive_telemetry(request: Request):
         # Process Scoring Result (if scored)
         # (This block was not changed, just indicating placement)
 
-        # The total_requests increment is now centralized at the top of the function.
-        if not routing_manager.get_route(meta.host):
-            logger.info(f"Telemetry [{request_id}]: Host {meta.host} unregistered. Scoring skipped, but hit was counted.")
+        # Baseline logs for unregistered hosts are now handled at the top of the function
+        pass
 
     elif data.get('event') == 'login_success':
         # DE-DUPLICATION CHECK: Only count login_success once per visit
@@ -423,24 +422,23 @@ async def receive_telemetry(request: Request):
         dedup_key = f"seen_login:{client_ip}"
         is_new = await redis_client.redis.set(dedup_key, "1", ex=60, nx=True)
         if is_new:
-            # ONLY COUNT IF REGISTERED
+            # COUNT IF REGISTERED OR BASELINE
             host = data.get('host')
-            if host and routing_manager.get_route(host):
-                login_event = {
-                    "client_ip": data.get('client_ip'),
-                    "timestamp": datetime.utcnow().isoformat() + "Z",
-                    "path": data.get('path'),
-                    "event": "Successful Login", # Explicitly set for UI filtering
-                    "msg_id": request_id,
-                    "status_code": 200,
-                    "channel": "login.success"
-                }
-                # PERSISTENCE: Track success
-                await redis_client.redis.incr("stats.normal_users")
-                # Note: lpush is now centralized in the broadcast listener to avoid duplicates
-                await redis_client.publish("login.success", login_event)
-            else:
-                logger.info(f"Telemetry [{request_id}]: Host {host} not registered. Skipping login stats.")
+            login_event = {
+                "client_ip": data.get('client_ip'),
+                "timestamp": datetime.utcnow().isoformat() + "Z",
+                "path": data.get('path'),
+                "event": "Successful Login", # Explicitly set for UI filtering
+                "msg_id": request_id,
+                "status_code": 200,
+                "channel": "login.success"
+            }
+            # PERSISTENCE: Track success
+            await redis_client.redis.incr("stats.normal_users")
+            await redis_client.publish("login.success", login_event)
+            
+            if not routing_manager.get_route(host):
+                 logger.info(f"Telemetry [{request_id}]: Host {host} not registered. Login counted as baseline.")
         else:
             logger.info(f"Telemetry [{request_id}]: Duplicate login_success ignored.")
 
