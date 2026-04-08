@@ -25,8 +25,8 @@ class RiskEngine:
 
         # 4. Rate Limit Tracking
         self.request_history = defaultdict(list)
-        self.rate_limit_threshold = 30  # requests per window (increased from 5)
-        self.rate_limit_window = 10     # seconds (increased from 5)
+        self.rate_limit_threshold = 5   # requests per window
+        self.rate_limit_window = 5      # seconds
 
     def evaluate(self, meta: RequestMetadata) -> RiskAssessment:
         score = 0

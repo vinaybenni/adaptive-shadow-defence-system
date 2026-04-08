@@ -140,7 +140,6 @@ async def broadcast_redis_events():
                     
                     if is_new_shadow:
                         await redis_client.redis.incr("stats.shadow_total")
-                        await redis_client.redis.incr("stats.total_requests")
                         logger.info(f"Shadow Monitor: Unique hit counted for {attacker_ip} -> {path}")
                     
                     # Track Unique Shadow IPs
@@ -215,17 +214,15 @@ async def receive_telemetry(request: Request):
     except:
         return {"error": "Invalid JSON"}
     
-    # Capture real client IP from the request
+    # Capture real client IP
     client_ip = request.client.host
     data['client_ip'] = client_ip
     
-    # Use UUID to ensure rapid requests aren't counted as duplicates
     request_id = str(uuid.uuid4())
     data['request_id'] = request_id
     logger.info(f"Telemetry [{request_id}]: {data.get('event')} from {client_ip}")
     
     action = "none"
-    url = ""
 
     # Check Blocklist
     is_blocked = await redis_client.redis.sismember("security.blocklist", data.get('client_ip', '').strip())
@@ -236,22 +233,13 @@ async def receive_telemetry(request: Request):
     payload_str = data.get('payload', '')
     payload_size = len(payload_str.encode()) if payload_str else 0
 
-    # 1. Check if request is to shadow environment
+    # 1. SHADOW INGRESS (Existing hits on shadow URLs)
     is_shadow = routing_manager.is_shadow_url(data.get('full_url', ''))
-    host_registered = routing_manager.get_route(data.get('host', ''))
-    
-    # DEBUG: Log the URL being checked
-    logger.info(f"Telemetry [{request_id}]: full_url='{data.get('full_url', '')}' is_shadow={is_shadow}")
-    
-    # CRITICAL: Shadow requests should NEVER count in main dashboard totalRequests
-    # They are counted separately in shadowStats
     if is_shadow:
-        # 1. Increment Counters IMMEDIATELY
         attacker_ip = data.get("client_ip", "unknown")
         if attacker_ip != "unknown":
             await redis_client.redis.sadd("stats.shadow_unique_ips", attacker_ip)
 
-        # 2. Publish to shadow.activity for Live Stream
         shadow_log = {
             "attacker_ip": attacker_ip,
             "timestamp": data.get("timestamp", datetime.utcnow().isoformat() + "Z"),
@@ -262,37 +250,72 @@ async def receive_telemetry(request: Request):
             "source": "telemetry"
         }
         await redis_client.publish("shadow.activity", shadow_log)
-        
-        logger.info(f"Telemetry [{request_id}]: Shadow Hit recorded directly in Redis. stats.shadow_total incremented.")
+        logger.info(f"Telemetry [{request_id}]: Shadow Hit recorded directly in Redis.")
         return {"status": "shadow activity recorded"}
-    
-    # 2. DE-DUPLICATE: Prevent counting same request twice from rapid submissions
-    # Normalize path for better dedup (remove leading slashes, trailing slashes, get last segment)
+
+    # 2. RISK SCORING (Before De-duplication to allow burst detection)
+    meta = RequestMetadata(
+        timestamp=datetime.utcnow().isoformat() + "Z",
+        client_ip=data.get('client_ip'),
+        request_id=str(request_id),
+        method=data.get('method', 'GET'),
+        path=data.get('path', '/'),
+        host=data.get('host', 'localhost'),
+        full_url=data.get('full_url', ''),
+        payload=payload_str,
+        headers=data.get('headers', {}),
+        payload_size=payload_size
+    )
+
+    try:
+        app_config = routing_manager.get_route(meta.host)
+        if app_config:
+            async with httpx.AsyncClient(timeout=10.0) as client:
+                logger.info(f"Calling Agent 1 at {AGENT1_URL} for scoring...")
+                resp = await client.post(AGENT1_URL, json=meta.dict())
+                if resp.status_code == 200:
+                    assessment_data = resp.json()
+                    assessment = RiskAssessment(**assessment_data)
+                    
+                    # Log high risk immediately
+                    if assessment.score > 20: 
+                        logger.info(f"Telemetry [{request_id}]: Scored {assessment.score} ({assessment.risk})")
+
+                    if assessment.score > 90:
+                        target_type = routing_manager.decide_target(app_config, assessment.score, assessment.risk)
+                        if app_config.protection_enabled:
+                            url = routing_manager.resolve_upstream(app_config, target_type)
+                            if "/DVWA-master/" in meta.full_url:
+                                url = meta.full_url.replace("/DVWA-master/", "/DVWA-rnaster/")
+                            
+                            logger.warning(f"HIGH RISK Detected. Action: redirect to {url}")
+                            action = "redirect"
+                            # Fast return for immediate redirection
+                            return {"status": "received", "action": action, "url": url}
+    except Exception as e:
+        logger.error(f"Scoring error: {e}")
+
+    # 3. DE-DUPLICATION (For Statistics and Baseline logs)
     raw_path = data.get('path', '/')
-    # Remove trailing slash, split by /, get last non-empty part
     clean_path = raw_path.rstrip('/').split('/')[-1]
-    path_for_dedup = clean_path if clean_path else 'root'  # Get last path segment
+    path_for_dedup = clean_path if clean_path else 'root'
     event = data.get('event', 'hit')
-    timestamp_sec = int(datetime.utcnow().timestamp())  # Same second = duplicate
+    timestamp_sec = int(datetime.utcnow().timestamp())
     
     dedup_key = f"telemetry:dedup:{data.get('client_ip')}:{path_for_dedup}:{event}:{timestamp_sec}"
     is_duplicate = await redis_client.redis.get(dedup_key)
     
     if is_duplicate:
-        logger.warning(f"Telemetry [{request_id}]: DUPLICATE IGNORED - {data.get('client_ip')} to {path_for_dedup}")
-        return {"status": "duplicate"}
+        logger.warning(f"Telemetry [{request_id}]: DUPLICATE IGNORED for stats - {data.get('client_ip')}")
+        return {"status": "received", "action": "none"}
     
-    # Mark this request as seen for this second (reduce window to 500ms if possible, using sub-second precision)
-    # Since we use timestamp_sec, it's exactly 1 second. Let's keep it but make it more specific.
     await redis_client.redis.set(dedup_key, "1", ex=1)
     
-    # 3. Only REAL domain requests count toward totalRequests
-    # We now publish a 'baseline' event if unregistered, so the dashboard updates.
+    # 4. STATS INCREMENT
     await redis_client.redis.incr("stats.total_requests")
-    logger.info(f"Telemetry [{request_id}]: ✓ COUNTED - totalRequests incremented for {data.get('client_ip')} → {path_for_dedup}")
-
-    # BROADCAST UPDATE (Crucial for live dashboard if unregistered)
-    if not routing_manager.get_route(data.get('host', '')):
+    
+    # Baseline publication if unregistered
+    if not routing_manager.get_route(meta.host):
         baseline_event = {
             "client_ip": data.get('client_ip'),
             "timestamp": datetime.utcnow().isoformat() + "Z",
@@ -309,138 +332,21 @@ async def receive_telemetry(request: Request):
         }
         await redis_client.publish("risk.events", baseline_event)
 
-
-    if data.get('event') == 'hit':
-        meta = RequestMetadata(
-            timestamp=datetime.utcnow().isoformat() + "Z",
-            client_ip=data.get('client_ip'),
-            request_id=str(request_id),
-            method=data.get('method', 'GET'),
-            path=data.get('path', '/'),
-            host=data.get('host', 'localhost'),
-            full_url=data.get('full_url', ''),
-            payload=payload_str,
-            headers=data.get('headers', {}),
-            payload_size=data.get('payload_size', payload_size)
-        )
-        
-        # Try to score synchronously for immediate redirect
-        try:
-            # ONLY SCORE AND PUBLISH IF REGISTERED
-            app_config = routing_manager.get_route(meta.host)
-            logger.info(f"App config for {meta.host}: {'Found' if app_config else 'Not Found'}")
-            if app_config:
-                async with httpx.AsyncClient(timeout=10.0) as client:
-                    logger.info(f"Calling Agent 1 at {AGENT1_URL} for scoring...")
-                    resp = await client.post(AGENT1_URL, json=meta.dict())
-                    logger.info(f"Agent 1 response: {resp.status_code}")
-                    if resp.status_code == 200:
-                        assessment = RiskAssessment(**resp.json())
-                        if assessment.risk == "HIGH":
-                            # Decide target and resolve URL
-                            target_type = routing_manager.decide_target(app_config, assessment.score, assessment.risk)
-                            
-                            # CRITICAL: If protection is OFF, force action to none regardless of risk
-                            if not app_config.protection_enabled:
-                                logger.info(f"Protection is OFF for {meta.host}. Skipping block/redirect.")
-                                action = "none"
-                            else:
-                                url = routing_manager.resolve_upstream(app_config, target_type)
-                                
-                                # BREAK REDIRECT LOOP
-                                current_full_url = data.get('full_url', '').lower()
-                                target_url_lower = url.lower() if url else ''
-                                
-                                if target_type != 'real' and target_url_lower and current_full_url.startswith(target_url_lower):
-                                    logger.info(f"User is already on {target_type} environment ({url}). Skipping redirect loop.")
-                                    action = "none"
-                                else:
-                                    # Forced Dynamic Shadow Redirect
-                                    if target_type == 'shadow':
-                                        current_host = meta.host
-                                        # Path Preservation: Dynamically swap from Real to Shadow path
-                                        if "/DVWA-master/" in meta.full_url:
-                                            url = meta.full_url.replace("/DVWA-master/", "/DVWA-rnaster/")
-                                        else:
-                                            url = f"http://{current_host}/DVWA-rnaster/login.php"
-                                            if "?" in meta.full_url:
-                                                url += "?" + meta.full_url.split("?", 1)[1]
-                                            
-                                        logger.warning(f"HIGH RISK Detected. Routing to Dynamic Shadow: {url}")
-                                    
-                                    action = "redirect"
-                                    
-                                    # Dynamic Host Swap for Cross-Device Support
-                                    from urllib.parse import urlparse, urlunparse
-                                    try:
-                                        parsed_url = urlparse(url)
-                                        client_host = meta.host
-                                        
-                                        if parsed_url.hostname == 'localhost' and client_host != 'localhost':
-                                            new_netloc = client_host
-                                            if parsed_url.port:
-                                                new_netloc += f":{parsed_url.port}"
-                                            url = urlunparse(parsed_url._replace(netloc=new_netloc))
-                                    except Exception as e:
-                                        logger.error(f"Host swap error: {e}")
-
-                                logger.warning(f"HIGH RISK detected for {meta.client_ip} on {meta.host}. Redirecting to {target_type} at {url}")
-                                
-                                # 3. Publish Risk Event for Dashboard & Stats
-                                risk_event = {
-                                    "client_ip": meta.client_ip,
-                                    "timestamp": datetime.utcnow().isoformat() + "Z",
-                                    "path": meta.path,
-                                    "risk": assessment.risk,
-                                    "score": assessment.score,
-                                    "tags": assessment.tags,
-                                    "explanation": assessment.explain,
-                                    "method": meta.method,
-                                    "payload": meta.payload[:500],
-                                    "host": meta.host,
-                                    "action": action,
-                                    "target": target_type,
-                                    "msg_id": request_id
-                                }
-                                await redis_client.publish("risk.events", risk_event)
-                                # FAST RETURN FOR IMMEDIATE REDIRECT
-                                return {"status": "received", "action": action, "url": url}
-            else:
-                logger.info(f"Host {meta.host} unregistered. Skipping scoring and risk publication.")
-        except Exception as e:
-            logger.error(f"Scoring error in telemetry: ({type(e).__name__}) {str(e)}")
-
-        # Process Scoring Result (if scored)
-        # (This block was not changed, just indicating placement)
-
-        # Baseline logs for unregistered hosts are now handled at the top of the function
-        pass
-
-    elif data.get('event') == 'login_success':
-        # DE-DUPLICATION CHECK: Only count login_success once per visit
-        # We use client_ip and path to prevent multiple rapid login pulses from inflating user count
-        dedup_key = f"seen_login:{client_ip}"
-        is_new = await redis_client.redis.set(dedup_key, "1", ex=60, nx=True)
-        if is_new:
-            # COUNT IF REGISTERED OR BASELINE
-            host = data.get('host')
+    # Specific Event Handling
+    if data.get('event') == 'login_success':
+        dedup_login = f"seen_login:{client_ip}"
+        if await redis_client.redis.set(dedup_login, "1", ex=60, nx=True):
+            await redis_client.redis.incr("stats.normal_users")
             login_event = {
                 "client_ip": data.get('client_ip'),
                 "timestamp": datetime.utcnow().isoformat() + "Z",
                 "path": data.get('path'),
-                "event": "Successful Login", # Explicitly set for UI filtering
+                "event": "Successful Login",
                 "msg_id": request_id,
                 "status_code": 200,
                 "channel": "login.success"
             }
-            # PERSISTENCE: Track success
-            await redis_client.redis.incr("stats.normal_users")
             await redis_client.publish("login.success", login_event)
-            
-            if not routing_manager.get_route(host):
-                 logger.info(f"Telemetry [{request_id}]: Host {host} not registered. Login counted as baseline.")
-        else:
-            logger.info(f"Telemetry [{request_id}]: Duplicate login_success ignored.")
 
     return {"status": "received", "action": action, "url": url}
 

@@ -37,7 +37,6 @@ async def score_request(meta: RequestMetadata, background_tasks: BackgroundTasks
         assessment = risk_engine.evaluate(meta)
         
         # Publish Event
-        # Publish Event
         event_data = {
             "client_ip": meta.client_ip,
             "request_id": meta.request_id,
