@@ -414,28 +414,40 @@ async def add_app(config: AppConfig):
 
 @app.get("/api/v1/logs/{agent_id}")
 async def download_log(agent_id: str):
-    """Serve log files for different agents."""
-    # Base directory is the project root (up two levels from backend/agent2_traffic)
+    """Serve log files for different agents with robust path resolution."""
+    # Base directory is the project root
     base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
-    log_paths = {
-        "agent1": os.path.join(base_dir, "backend", "agent1_risk", "service.log"),
-        "agent2": os.path.join(base_dir, "backend", "agent2_traffic", "service.log"),
-        "agent3": os.path.join(base_dir, "backend", "agent3_shadow", "service.log"),
-        "agent4": os.path.join(base_dir, "backend", "agent4_learning", "service.log"),
+    
+    agent_map = {
+        "agent1": "agent1_risk",
+        "agent2": "agent2_traffic",
+        "agent3": "agent3_shadow",
+        "agent4": "agent4_learning",
     }
     
-    path = log_paths.get(agent_id.lower())
-    if not path:
+    internal_id = agent_id.lower()
+    if internal_id not in agent_map:
         return JSONResponse(status_code=400, content={"error": "Invalid agent ID"})
-        
-    abs_path = path
     
-    if os.path.exists(abs_path):
-        logger.info(f"Serving log download for {agent_id}: {abs_path}")
-        return FileResponse(abs_path, filename=f"{agent_id}_service.log")
+    agent_subdir = agent_map[internal_id]
+    
+    # Check multiple possible locations for the log file
+    possible_paths = [
+        # 1. Local logs directory within agent folder (most common if run via run.bat)
+        os.path.join(base_dir, "backend", agent_subdir, "logs", internal_id, "service.log"),
+        # 2. Project root logs directory
+        os.path.join(base_dir, "logs", internal_id, "service.log"),
+        # 3. Direct agent folder service.log (old fallback)
+        os.path.join(base_dir, "backend", agent_subdir, "service.log")
+    ]
+    
+    for abs_path in possible_paths:
+        if os.path.exists(abs_path):
+            logger.info(f"Serving log download for {agent_id}: {abs_path}")
+            return FileResponse(abs_path, filename=f"{internal_id}_service.log")
         
-    logger.error(f"Log file NOT FOUND for {agent_id} at {abs_path}")
-    return JSONResponse(status_code=404, content={"error": f"Log file for {agent_id} not found at expected path"})
+    logger.error(f"Log file NOT FOUND for {agent_id} in any searched location: {possible_paths}")
+    return JSONResponse(status_code=404, content={"error": f"Log file for {agent_id} not found on server"})
 
 @app.delete("/api/v1/apps/{domain}")
 async def delete_app(domain: str):
