@@ -6,10 +6,10 @@ const Dashboard = ({ stats, logs, connected }) => {
     const [activeFilter, setActiveFilter] = useState('all'); // 'all', 'risk-split', 'normal-only', 'suspicious-only', 'blocked-only'
 
     // Filter Logic
-    const normalLogs = logs.filter(l => l.event === "Successful Login");
-    const lowRiskLogs = logs.filter(l => l.risk === "LOW" && l.event !== "Successful Login");
+    const normalLogs = logs.filter(l => l.event === "Successful Login" || l.event === "login_success");
+    const lowRiskLogs = logs.filter(l => (l.risk === "LOW" || l.risk === "MEDIUM") && l.event !== "Successful Login" && l.event !== "login_success");
     const highRiskLogs = logs.filter(l => l.risk === "HIGH");
-    const suspiciousLogs = logs.filter(l => l.score > 20);
+    const suspiciousLogs = logs.filter(l => l.score >= 90);
     const blockedLogs = logs.filter(l => l.risk === "HIGH");
 
     // Format attack type stats for Recharts
@@ -73,7 +73,7 @@ const Dashboard = ({ stats, logs, connected }) => {
                     <div className="bg-slate-900/40 backdrop-blur-md p-6 rounded-3xl border border-emerald-500/10 shadow-2xl">
                         <h3 className="text-emerald-400 font-black mb-6 flex items-center gap-3 uppercase tracking-widest text-sm">
                             <div className="bg-emerald-500/20 p-1.5 rounded-lg border border-emerald-500/30"><Activity size={18} /></div>
-                            Low Risk Traffic
+                            Low / Medium Risk Traffic
                         </h3>
                         <LogTable logs={lowRiskLogs} emptyMsg="No low risk hits yet." />
                     </div>
