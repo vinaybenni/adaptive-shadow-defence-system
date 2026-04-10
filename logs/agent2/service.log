@@ -1,0 +1,976 @@
+{"timestamp": "2026-02-03T06:57:26.858593Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting..."}
+{"timestamp": "2026-02-03T06:57:30.930359Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-02-03T06:58:21.333343Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting..."}
+{"timestamp": "2026-02-03T06:58:25.403134Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-02-03T06:58:55.374740Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting..."}
+{"timestamp": "2026-02-03T06:58:58.211787Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry: login_success from 1.2.3.4"}
+{"timestamp": "2026-02-03T06:58:59.449080Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-02-03T06:58:59.988217Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry: hit from 5.6.7.8"}
+{"timestamp": "2026-02-03T06:59:31.721649Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting..."}
+{"timestamp": "2026-02-03T06:59:35.779411Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-02-03T07:00:06.129671Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting..."}
+{"timestamp": "2026-02-03T07:00:06.129945Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-02-03T07:00:06.694425Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry: hit from 6.6.6.6"}
+{"timestamp": "2026-02-03T07:00:34.364458Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry: hit from 10.0.0.1"}
+{"timestamp": "2026-02-03T07:00:35.152334Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry: login_success from 10.0.0.1"}
+{"timestamp": "2026-02-03T07:00:37.450468Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry: hit from 10.0.0.2"}
+{"timestamp": "2026-02-03T07:00:38.218874Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry: login_success from 10.0.0.2"}
+{"timestamp": "2026-02-03T07:02:10.386096Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting..."}
+{"timestamp": "2026-02-03T07:02:10.386375Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-02-03T07:02:11.115858Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry: hit from 7.7.7.7"}
+{"timestamp": "2026-02-03T07:02:11.928333Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry: hit from 7.7.7.7"}
+{"timestamp": "2026-02-03T07:02:12.461155Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 7.7.7.7. Redirecting."}
+{"timestamp": "2026-02-03T07:02:12.693911Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry: hit from 7.7.7.7"}
+{"timestamp": "2026-02-03T07:03:12.101673Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting..."}
+{"timestamp": "2026-02-03T07:03:12.101881Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-02-03T07:03:19.702105Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry: hit from 8.8.8.8"}
+{"timestamp": "2026-02-03T07:03:20.507619Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry: hit from 8.8.8.8"}
+{"timestamp": "2026-02-03T07:03:21.272102Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry: hit from 8.8.8.8"}
+{"timestamp": "2026-02-11T06:16:06.664935Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting..."}
+{"timestamp": "2026-02-11T06:16:06.667193Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-02-11T06:16:55.024152Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry: hit from 127.0.0.1"}
+{"timestamp": "2026-02-11T06:16:56.184266Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry: login_success from 127.0.0.1"}
+{"timestamp": "2026-02-11T06:18:43.886340Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry: hit from 127.0.0.1"}
+{"timestamp": "2026-02-11T06:18:44.415189Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry: login_success from 127.0.0.1"}
+{"timestamp": "2026-02-11T06:24:27.830865Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting..."}
+{"timestamp": "2026-02-11T06:24:27.831084Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-02-11T06:24:36.791651Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry: hit from 127.0.0.1"}
+{"timestamp": "2026-02-11T06:24:37.348246Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry: login_success from 127.0.0.1"}
+{"timestamp": "2026-02-11T06:31:26.155199Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting..."}
+{"timestamp": "2026-02-11T06:31:26.155409Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-02-11T06:33:55.352513Z", "level": "INFO", "logger": "agent2.main", "message": "Adding/Updating app: localhost"}
+{"timestamp": "2026-02-11T06:41:46.277602Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry: hit from 127.0.0.1"}
+{"timestamp": "2026-02-16T04:33:49.742164Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting..."}
+{"timestamp": "2026-02-16T04:33:49.748598Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-02-16T04:59:23.730223Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting..."}
+{"timestamp": "2026-02-16T04:59:23.736839Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-01T04:40:17.299158Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-01T04:40:17.305502Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-01T04:41:23.516740Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-01T04:41:23.517055Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-01T04:41:31.072890Z", "level": "INFO", "logger": "agent2.main", "message": "Adding/Updating app: test.com"}
+{"timestamp": "2026-03-01T04:41:31.564566Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772320291.564439]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T04:41:32.572874Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772320292.572672]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T04:41:33.072441Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772320292.572672]: Host unknown.com not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T04:52:24.682166Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772320944.68199]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T04:52:24.966082Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772320944.965871]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T04:52:25.276611Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772320944.68199]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T04:52:25.534869Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772320944.965871]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T04:52:34.205204Z", "level": "INFO", "logger": "agent2.main", "message": "Deleting app: test.com"}
+{"timestamp": "2026-03-01T04:52:36.878637Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772320956.87848]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T04:52:37.134843Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772320957.134705]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T04:52:39.419963Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772320956.87848]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T04:52:41.449481Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772320957.134705]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T04:52:45.304665Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772320965.304529]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T04:52:45.558611Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772320965.558481]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T04:52:45.823673Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772320965.304529]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T04:52:46.069053Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772320965.558481]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T04:53:05.180482Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772320985.180362]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T04:53:05.438642Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772320985.438474]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T04:53:05.702915Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772320985.180362]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T04:53:05.948919Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772320985.438474]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T04:58:04.531591Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-01T04:58:04.531940Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-01T04:58:23.015414Z", "level": "INFO", "logger": "agent2.main", "message": "Adding/Updating app: test.com"}
+{"timestamp": "2026-03-01T04:58:23.549536Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321303.549387]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T04:58:24.555939Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321304.555826]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T04:58:24.556376Z", "level": "INFO", "logger": "agent2.main", "message": "Host unknown.com unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T04:58:24.556712Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321304.555826]: Host unknown.com not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T04:59:54.205833Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321394.205733]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T04:59:55.200567Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321395.200466]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T04:59:55.201003Z", "level": "INFO", "logger": "agent2.main", "message": "Host unknown.com unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T04:59:55.201287Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321395.200466]: Host unknown.com not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T05:00:14.918554Z", "level": "INFO", "logger": "agent2.main", "message": "Deleting app: test.com"}
+{"timestamp": "2026-03-01T05:00:24.950741Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321424.950607]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:00:24.951369Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T05:00:24.951660Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321424.950607]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T05:00:25.031304Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321425.031193]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:00:25.031824Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T05:00:25.032173Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321425.031193]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T05:00:38.505013Z", "level": "INFO", "logger": "agent2.main", "message": "Adding/Updating app: localhost"}
+{"timestamp": "2026-03-01T05:00:44.968045Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321444.967926]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:00:44.968452Z", "level": "INFO", "logger": "agent2.main", "message": "Shadow Bypasser: Ignoring telemetry from shadow host localhost"}
+{"timestamp": "2026-03-01T05:00:45.055731Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321445.055569]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:00:45.056169Z", "level": "INFO", "logger": "agent2.main", "message": "Shadow Bypasser: Ignoring telemetry from shadow host localhost"}
+{"timestamp": "2026-03-01T05:01:19.430994Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321479.430852]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:01:19.431409Z", "level": "INFO", "logger": "agent2.main", "message": "Shadow Bypasser: Ignoring telemetry from shadow host localhost"}
+{"timestamp": "2026-03-01T05:01:19.509997Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321479.509867]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:01:19.510431Z", "level": "INFO", "logger": "agent2.main", "message": "Shadow Bypasser: Ignoring telemetry from shadow host localhost"}
+{"timestamp": "2026-03-01T05:03:02.761539Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-01T05:03:02.761921Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-01T05:03:06.387765Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321586.387639]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:03:06.388198Z", "level": "INFO", "logger": "agent2.main", "message": "Host test.com unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T05:03:06.388452Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321586.387639]: Host test.com not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T05:03:06.871618Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321586.871508]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:03:06.872033Z", "level": "INFO", "logger": "agent2.main", "message": "Host unknown.com unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T05:03:06.872395Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321586.871508]: Host unknown.com not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T05:04:55.179596Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-01T05:04:55.179911Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-01T05:04:58.737175Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321698.737018]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:04:58.737751Z", "level": "INFO", "logger": "agent2.main", "message": "Host test.com unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T05:04:58.738135Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321698.737018]: Host test.com not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T05:04:59.226018Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321699.225805]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:04:59.226536Z", "level": "INFO", "logger": "agent2.main", "message": "Host unknown.com unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T05:04:59.226905Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321699.225805]: Host unknown.com not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T05:05:54.634798Z", "level": "INFO", "logger": "agent2.main", "message": "Deleting app: localhost"}
+{"timestamp": "2026-03-01T05:06:30.333173Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321790.332954]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:06:30.333984Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T05:06:30.334471Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321790.332954]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T05:06:31.108544Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321791.108386]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:06:31.109149Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T05:06:31.109522Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321791.108386]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T05:06:31.920544Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321791.920423]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:06:31.921684Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T05:06:31.922137Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321791.920423]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T05:06:32.697541Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321792.697404]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:06:32.698123Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T05:06:32.698537Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321792.697404]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T05:06:33.266973Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321793.266807]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:06:33.267653Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T05:06:33.268157Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321793.266807]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T05:06:33.478376Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321793.478211]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:06:33.479370Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T05:06:33.479798Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321793.478211]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T05:06:33.867287Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321793.867145]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:06:33.867888Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T05:06:33.868270Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321793.867145]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T05:06:34.119219Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321794.119021]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:06:34.119880Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T05:06:34.120260Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321794.119021]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T05:06:34.309488Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321794.309361]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:06:34.309952Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T05:06:34.316660Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321794.309361]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T05:06:34.516937Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321794.516803]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:06:34.517522Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T05:06:34.517957Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321794.516803]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T05:06:34.760391Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321794.760205]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:06:34.760969Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T05:06:34.761306Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321794.760205]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T05:06:35.464644Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321795.46453]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:06:35.465063Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T05:06:35.472690Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321795.46453]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T05:06:50.667935Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-01T05:06:50.668319Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-01T05:06:54.274986Z", "level": "INFO", "logger": "agent2.main", "message": "Adding/Updating app: test.com"}
+{"timestamp": "2026-03-01T05:06:54.766964Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321814.766842]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:06:57.798557Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321817.798445]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:06:57.799047Z", "level": "INFO", "logger": "agent2.main", "message": "Host unknown.com unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T05:06:57.799419Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772321817.798445]: Host unknown.com not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T05:09:50.143309Z", "level": "INFO", "logger": "agent2.main", "message": "Deleting app: test.com"}
+{"timestamp": "2026-03-01T05:11:05.211040Z", "level": "INFO", "logger": "agent2.main", "message": "Adding/Updating app: localhost"}
+{"timestamp": "2026-03-01T05:11:11.658490Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772322071.658373]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:11:11.926091Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772322071.925939]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:11:26.637718Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772322086.637583]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:11:26.911459Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772322086.911338]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:11:26.912122Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772322086.912047]: login_success from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:12:06.765458Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772322126.76532]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:12:10.121627Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772322130.121408]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:12:10.387973Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772322130.387837]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:12:11.547696Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772322131.547544]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:12:11.812903Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772322131.812752]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:12:12.325303Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T05:12:18.499942Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772322138.499822]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:12:18.768805Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772322138.768676]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:12:19.979316Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772322139.979194]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:12:20.283180Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772322140.283045]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:12:22.108662Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772322142.108515]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:12:22.366575Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772322142.366434]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:12:22.640815Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T05:12:22.881015Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T05:23:53.374735Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772322833.374634]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:23:53.692570Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772322833.692428]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:27:56.469939Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-01T05:27:56.470245Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-01T05:28:00.126743Z", "level": "INFO", "logger": "agent2.main", "message": "Adding/Updating app: test.com"}
+{"timestamp": "2026-03-01T05:28:00.612271Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323080.612167]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:28:04.190516Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323084.190387]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:28:05.685289Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323085.685175]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:29:27.388859Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323167.388727]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:29:27.649944Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323167.64978]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:29:28.968750Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323168.968594]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:29:29.250175Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323169.250032]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:29:30.541049Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323170.540926]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:29:30.799951Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323170.799807]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:29:31.064036Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T05:29:31.319408Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T05:29:40.786324Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323180.786204]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:29:41.053930Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323181.053802]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:29:42.352759Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323182.352624]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:29:42.614102Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323182.613957]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:29:44.304948Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323184.304811]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:29:44.564790Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323184.564644]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:29:44.835096Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T05:29:45.066553Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T05:33:06.744542Z", "level": "INFO", "logger": "agent2.main", "message": "Deleting app: test.com"}
+{"timestamp": "2026-03-01T05:37:01.726881Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323621.726761]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:42:09.927478Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323929.92732]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:42:10.195079Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323930.194926]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:42:12.464698Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323932.464562]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:42:12.733178Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323932.732994]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:42:28.952518Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323948.95236]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:42:29.231942Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323949.231817]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:42:31.806912Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323951.806799]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:42:32.083370Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323952.083232]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:42:33.357879Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323953.357667]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:42:33.631672Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772323953.631568]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:42:33.889275Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T05:42:34.144333Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T05:47:54.596259Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-01T05:47:54.596623Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-01T05:48:03.366566Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324283.36645]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:48:06.550704Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324286.55059]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:48:07.640332Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324287.640207]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:48:08.729953Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324288.729851]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:48:09.814289Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324289.81418]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:48:10.896536Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324290.896403]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:48:11.383788Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T05:49:23.140858Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324363.140746]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:49:23.380143Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324363.380009]: login_success from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:49:59.976345Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324399.976223]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:50:00.240204Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324400.240049]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:50:07.822731Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324407.822584]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:50:08.080387Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324408.080266]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:50:08.081076Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324408.080998]: login_success from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:50:27.031962Z", "level": "WARNING", "logger": "agent2.main", "message": "IP Blocked by Admin: 127.0.0.1"}
+{"timestamp": "2026-03-01T05:50:29.929962Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324429.929848]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:50:29.930410Z", "level": "WARNING", "logger": "agent2.main", "message": "BLOCKED IP attempt: 127.0.0.1"}
+{"timestamp": "2026-03-01T05:50:40.506389Z", "level": "INFO", "logger": "agent2.main", "message": "IP Unblocked: 127.0.0.1"}
+{"timestamp": "2026-03-01T05:50:43.197170Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324443.197023]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:50:56.273259Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324456.273131]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:50:56.526167Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324456.526044]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:50:57.845372Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324457.845219]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:50:58.099415Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324458.09927]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:50:59.186233Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324459.186097]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:50:59.441254Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324459.441084]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:50:59.707947Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T05:50:59.944744Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T05:58:07.657870Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324887.657744]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:58:07.908544Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324887.908389]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:58:14.690923Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324894.690803]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:58:14.944525Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324894.944391]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:58:14.945119Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324894.945032]: login_success from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:58:17.785268Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324897.785141]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:58:21.542152Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324901.542013]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:58:29.942909Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324909.942721]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:58:43.422267Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324923.422123]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:58:45.417572Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324925.417412]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:58:46.707747Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324926.707585]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:58:50.045052Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324930.044939]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:58:51.649856Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324931.649739]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:58:59.725770Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324939.725649]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:59:03.121558Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324943.121439]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:59:09.918781Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324949.918649]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:59:18.427056Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324958.426925]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T05:59:21.448417Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772324961.448302]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:00:11.764019Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772325011.763888]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:00:12.377847Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772325012.377727]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:00:12.996555Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772325012.996427]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:00:13.629699Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772325013.629583]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:00:14.252566Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772325014.252447]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:00:14.753584Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T06:00:14.863488Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772325014.863368]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:00:15.370195Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T06:09:18.610908Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772325558.610795]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:09:22.500577Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772325562.500446]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:10:59.459297Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772325659.459177]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:15:59.456109Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-01T06:15:59.456432Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-01T06:16:24.566020Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772325984.565893]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:17:06.086759Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326026.086607]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:17:10.184325Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326030.184209]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:17:41.080586Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-01T06:17:41.080906Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-01T06:17:58.793083Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326078.792912]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:18:49.390617Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-01T06:18:49.391227Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-01T06:18:57.626261Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326137.626077]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:18:58.215187Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T06:22:12.525448Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326332.525292]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:22:13.037949Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T06:22:19.608172Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326339.60803]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:22:20.795720Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326340.795592]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:22:24.318914Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326344.318803]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:22:24.826168Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T06:22:27.374654Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326347.374534]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:22:33.117496Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326353.117373]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:22:43.132732Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326363.132575]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:22:48.458170Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326368.458025]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:22:48.732035Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326368.731939]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:22:48.732684Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326368.732617]: login_success from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:22:52.354571Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326372.354294]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:23:03.183175Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326383.183031]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:23:03.702607Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T06:25:35.912639Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326535.912467]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:25:36.422329Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T06:28:02.387551Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-01T06:28:02.387840Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-01T06:28:22.233590Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326702.233453]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:28:22.749674Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T06:28:24.989954Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326704.989823]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:28:25.479610Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T06:28:25.691007Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326705.690897]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:28:26.181436Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T06:29:08.801217Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326748.80109]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:29:09.335049Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T06:29:14.807207Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326754.807096]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:29:22.342490Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326762.342305]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:29:22.616107Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326762.616013]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:29:22.616709Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326762.616652]: login_success from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:29:24.484746Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326764.484608]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:29:27.548115Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326767.548001]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:29:28.046111Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T06:30:14.270995Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326814.27089]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:30:18.041771Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326818.041633]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:30:24.531055Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326824.530925]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:30:25.038199Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T06:31:28.663783Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326888.663634]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:32:11.997805Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772326931.997701]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:32:12.501739Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow target: http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T06:35:50.587150Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-01T06:35:50.587466Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-01T06:36:06.419363Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327166.419217]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:36:06.935961Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow at http://localhost/DVWA-rnaster/login.php/DVWA-master/vulnerabilities/sqli/?id=' OR '1'='1&Submit=Submit"}
+{"timestamp": "2026-03-01T06:37:48.829800Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-01T06:37:48.830142Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-01T06:37:55.910673Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327275.910523]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:37:56.423671Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow at http://localhost/DVWA-rnaster/vulnerabilities/sqli/?id=' OR '1'='1&Submit=Submit"}
+{"timestamp": "2026-03-01T06:39:01.347567Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327341.347453]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:39:01.858843Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow at http://localhost/DVWA-rnaster/vulnerabilities/sqli/?id=%27+OR%27+1%3D1+&Submit=Submit#"}
+{"timestamp": "2026-03-01T06:39:01.919869Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327341.919717]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:39:02.450901Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow at http://localhost/DVWA-rnaster/login.php?id=%27+OR%27+1%3D1+&Submit=Submit#"}
+{"timestamp": "2026-03-01T06:39:08.242242Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327348.242063]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:39:08.489470Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327348.489328]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:39:14.166271Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327354.166156]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:39:14.724654Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327354.724517]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:39:19.711103Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327359.71093]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:39:20.279104Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327360.278985]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:39:26.160799Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327366.160682]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:39:26.721816Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327366.721701]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:39:30.754351Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327370.754216]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:39:35.958809Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327375.958625]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:39:42.449147Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327382.449032]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:39:43.002598Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327383.002439]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:40:43.159031Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327443.158919]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:40:43.736248Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327443.736137]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:40:53.526898Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327453.526751]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:42:18.845004Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327538.84485]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:42:19.411603Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327539.411454]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:42:25.777990Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327545.77786]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:42:26.334929Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327546.334775]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:42:34.249838Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-01T06:42:34.250278Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-01T06:43:48.678068Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327628.677888]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:43:53.173220Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327633.172965]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:43:53.757891Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327633.757646]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:45:26.642894Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327726.642654]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:45:27.285610Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327727.285318]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:45:30.345784Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327730.345556]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:45:30.914016Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327730.913663]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:45:31.925114Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327731.924856]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:45:32.500267Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327732.500056]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:45:33.717763Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327733.717497]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:45:34.294839Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327734.294596]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:45:35.537703Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327735.537464]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:45:36.184933Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327736.184531]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:45:36.999629Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327736.999344]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:45:37.614831Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327737.614582]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:45:41.660974Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327741.660718]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:45:42.237160Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327742.236922]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:46:08.666481Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327768.666228]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:47:20.248779Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327840.248523]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:47:20.891216Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327840.890977]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:47:21.149103Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327841.148883]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:47:21.402436Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327841.402205]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:47:21.747413Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327841.747182]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:47:21.892857Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327841.892642]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:47:22.045342Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327842.045124]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:47:22.198641Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772327842.19845]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T06:47:27.905473Z", "level": "ERROR", "logger": "agent2.main", "message": "Scoring error in telemetry: (ReadError) "}
+{"timestamp": "2026-03-01T06:47:27.907860Z", "level": "ERROR", "logger": "agent2.main", "message": "Scoring error in telemetry: (ReadError) "}
+{"timestamp": "2026-03-01T08:16:09.935639Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-01T08:16:09.937857Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-01T08:16:35.320049Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333195.319851]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:16:35.320874Z", "level": "INFO", "logger": "agent2.main", "message": "Host 10.82.58.45 unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T08:16:35.321460Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333195.319851]: Host 10.82.58.45 not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T08:16:42.565060Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333202.56484]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:16:42.565650Z", "level": "INFO", "logger": "agent2.main", "message": "Host 10.82.58.45 unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T08:16:42.566026Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333202.56484]: Host 10.82.58.45 not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T08:16:56.516375Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333216.516191]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:16:56.516911Z", "level": "INFO", "logger": "agent2.main", "message": "Host 10.82.58.45 unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T08:16:56.517342Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333216.516191]: Host 10.82.58.45 not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T08:16:59.539022Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333219.538629]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:16:59.539817Z", "level": "INFO", "logger": "agent2.main", "message": "Host 10.82.58.45 unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T08:16:59.540277Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333219.538629]: Host 10.82.58.45 not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T08:21:23.241105Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333483.240899]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:21:23.241773Z", "level": "INFO", "logger": "agent2.main", "message": "Host 10.82.58.45 unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T08:21:23.242098Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333483.240899]: Host 10.82.58.45 not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T08:21:31.867616Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333491.86742]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:21:31.868206Z", "level": "INFO", "logger": "agent2.main", "message": "Host 10.82.58.45 unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T08:21:31.868583Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333491.86742]: Host 10.82.58.45 not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T08:21:47.681602Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333507.681412]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:21:47.682209Z", "level": "INFO", "logger": "agent2.main", "message": "Host 10.82.58.45 unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T08:21:47.682712Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333507.681412]: Host 10.82.58.45 not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T08:21:53.974452Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333513.97425]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:21:53.975040Z", "level": "INFO", "logger": "agent2.main", "message": "Host 10.82.58.45 unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T08:21:53.975412Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333513.97425]: Host 10.82.58.45 not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T08:23:10.126963Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333590.126789]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:26:16.035848Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333776.035639]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:26:16.036426Z", "level": "INFO", "logger": "agent2.main", "message": "Host 10.82.58.45 unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T08:26:16.036776Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333776.035639]: Host 10.82.58.45 not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T08:26:28.111174Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333788.110989]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:26:28.111914Z", "level": "INFO", "logger": "agent2.main", "message": "Host 10.82.58.45 unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T08:26:28.112349Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333788.110989]: Host 10.82.58.45 not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T08:26:33.503091Z", "level": "INFO", "logger": "agent2.main", "message": "Deleting app: localhost"}
+{"timestamp": "2026-03-01T08:26:34.526103Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333794.525876]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:26:34.526729Z", "level": "INFO", "logger": "agent2.main", "message": "Host 10.82.58.45 unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T08:26:34.527165Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333794.525876]: Host 10.82.58.45 not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T08:26:36.010308Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333796.010048]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:26:36.010908Z", "level": "INFO", "logger": "agent2.main", "message": "Host 10.82.58.45 unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T08:26:36.011370Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333796.010048]: Host 10.82.58.45 not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T08:26:36.844903Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333796.844685]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:26:36.845446Z", "level": "INFO", "logger": "agent2.main", "message": "Host 10.82.58.45 unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T08:26:36.845783Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772333796.844685]: Host 10.82.58.45 not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T08:30:40.435344Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-01T08:30:40.435820Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-01T08:31:30.543991Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334090.543576]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:31:30.545436Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T08:31:30.546035Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334090.543576]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T08:31:41.034073Z", "level": "INFO", "logger": "agent2.main", "message": "Adding/Updating app: localhost"}
+{"timestamp": "2026-03-01T08:32:34.058581Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334154.058394]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:32:34.059050Z", "level": "INFO", "logger": "agent2.main", "message": "Host 10.82.58.45 unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T08:32:34.059435Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334154.058394]: Host 10.82.58.45 not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T08:32:36.311892Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334156.311689]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:32:36.312479Z", "level": "INFO", "logger": "agent2.main", "message": "Host 10.82.58.45 unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T08:32:36.312874Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334156.311689]: Host 10.82.58.45 not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T08:32:40.020741Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334160.020555]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:32:40.021276Z", "level": "INFO", "logger": "agent2.main", "message": "Host 10.82.58.45 unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T08:32:40.021642Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334160.020555]: Host 10.82.58.45 not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T08:32:41.397397Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334161.397216]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:34:21.163842Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334261.163638]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:34:21.164645Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334261.164515]: login_success from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:34:30.279502Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334270.27932]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:34:44.067378Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334284.067157]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:34:44.068114Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334284.067992]: login_success from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:37:22.469509Z", "level": "WARNING", "logger": "agent2.main", "message": "IP Blocked by Admin: 127.0.0.1"}
+{"timestamp": "2026-03-01T08:37:25.148792Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334445.148587]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:37:25.149282Z", "level": "WARNING", "logger": "agent2.main", "message": "BLOCKED IP attempt: 127.0.0.1"}
+{"timestamp": "2026-03-01T08:37:34.800362Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334454.80015]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:37:34.800940Z", "level": "WARNING", "logger": "agent2.main", "message": "BLOCKED IP attempt: 127.0.0.1"}
+{"timestamp": "2026-03-01T08:37:38.049684Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334458.049462]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:37:38.050263Z", "level": "WARNING", "logger": "agent2.main", "message": "BLOCKED IP attempt: 127.0.0.1"}
+{"timestamp": "2026-03-01T08:37:40.244814Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334460.244625]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:37:40.245360Z", "level": "WARNING", "logger": "agent2.main", "message": "BLOCKED IP attempt: 127.0.0.1"}
+{"timestamp": "2026-03-01T08:37:40.821176Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334460.820979]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:37:40.821739Z", "level": "WARNING", "logger": "agent2.main", "message": "BLOCKED IP attempt: 127.0.0.1"}
+{"timestamp": "2026-03-01T08:37:41.781764Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334461.78148]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:37:41.782448Z", "level": "WARNING", "logger": "agent2.main", "message": "BLOCKED IP attempt: 127.0.0.1"}
+{"timestamp": "2026-03-01T08:37:46.155444Z", "level": "INFO", "logger": "agent2.main", "message": "IP Unblocked: 127.0.0.1"}
+{"timestamp": "2026-03-01T08:37:48.616996Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334468.616811]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:44:44.456930Z", "level": "INFO", "logger": "agent2.main", "message": "Adding/Updating app: 10.82.58.45"}
+{"timestamp": "2026-03-01T08:45:01.979000Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334901.978683]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:45:03.376249Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334903.376053]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:45:04.938900Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334904.938701]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:45:23.638721Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334923.638505]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:45:23.888066Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334923.887896]: login_success from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:45:43.820528Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772334943.820322]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:47:12.369033Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335032.368815]: login_success from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:47:12.369902Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335032.36977]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T08:47:14.585001Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335034.584784]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:47:17.819927Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335037.819657]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:47:20.440084Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335040.439821]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:47:22.286322Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335042.28611]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:47:24.495135Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335044.494747]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:47:26.599204Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335046.598932]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:47:28.845308Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335048.845002]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:47:30.847708Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335050.847439]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:47:32.851224Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335052.850966]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:47:34.758376Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335054.758016]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:48:13.564835Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335093.564592]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:51:54.406023Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335314.40581]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:52:01.288318Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335321.287836]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:52:01.973213Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335321.972967]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:52:03.190923Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335323.190683]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:52:03.610418Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335323.610207]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:52:05.241897Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335325.24168]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:52:05.660473Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335325.660291]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:52:07.178745Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335327.178506]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:52:07.877172Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335327.876862]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:52:08.737257Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335328.73704]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:52:09.165459Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335329.165197]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:52:10.180853Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335330.180639]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:52:10.606593Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335330.606373]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:54:46.881924Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335486.88172]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:54:47.947388Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335487.947187]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:54:48.346627Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335488.34639]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:54:49.291153Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335489.2909]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:54:49.723366Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335489.72317]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:55:08.803263Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335508.803015]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:55:09.213644Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335509.213409]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:55:09.772337Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335509.772051]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:55:10.200488Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335510.200151]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:55:12.221998Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335512.221736]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:55:12.687785Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335512.687589]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:55:13.604426Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335513.604178]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:55:14.064919Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1772335514.064607]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:55:53.243719Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-01T08:55:53.244236Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-01T08:56:06.490149Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [be334d41-71b7-4b49-bac5-33feb0787fa6]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:07.131612Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [57ebfc44-cdac-41ac-8b22-b32aca738f7d]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:16.486438Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [37b3d524-1232-4286-9d44-61e3681f4f6d]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:16.940004Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d7b3914d-3d99-4619-85be-5aa5942f0bab]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:25.236868Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [0f57a692-b8a7-4351-b5a5-a36c3be733ef]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:25.634226Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [c87816df-f54a-40f0-a1f1-ac86aba06600]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:27.126228Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [64244e7a-5474-400f-8838-96173fca8df7]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:27.576131Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [540f2609-10a0-4333-8472-26ea86df8fa9]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:28.629936Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [a3fe6d4d-dde3-4fd7-af98-5ebffb72d42d]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:29.072324Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [c59c091a-14b3-4137-9d54-339edcae97c2]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:30.638032Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [0fc8ef2c-3d6a-4b66-a0b6-486a624319e9]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:31.089891Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d8651b7c-9cda-490e-894c-9dcb2e596a0d]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:32.951288Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [a7cae7fe-4cad-4df4-8982-f0a6229420ff]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:33.463678Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [eaa4549d-9343-4ba7-ad25-68bc92367f62]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:49.221286Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [29088646-c872-49b7-9fc8-261317204282]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:49.925036Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [3a7b9998-6baa-408a-b779-dfd373cec51c]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:50.823020Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [c5370be1-002d-4d13-9d82-5c345210bc2c]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:51.142014Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [9e8095bb-46e1-4fa5-a64d-9172d4f56401]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:53.078610Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1efc556f-8e5f-49c9-904f-21b955458ad4]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:53.479969Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [9d336a26-3c36-47a9-b75a-0382be2393a6]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:54.766664Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [9c119cdb-87c0-4134-aeb8-3ab6d37eeda8]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:55.201837Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [9f963428-f5ac-467c-9a7f-ad111dae0b16]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:56.366554Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [5cd3f7c8-cc86-47a3-b511-c8a8d0b320e9]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:56.754705Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [9fcd9bd3-32f4-477d-984a-a0e70e7fdae7]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:57.942776Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [e528b229-1ef9-4ca3-9b55-4560fa0c86a9]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:58.381427Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [ec01b6cd-384b-4c4a-8bc7-c8a360d4791e]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:59.286847Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [247afeef-d9f2-49bd-a92d-21a18e0cf88d]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:56:59.724712Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [caa297c5-575e-44ce-ba92-5956fcf37a29]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:58:56.026040Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [f7a89058-0b87-421d-b141-db975bef2bde]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:58:56.495726Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [05d29e44-edde-47e8-8fb9-57180294ce71]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:59:03.130706Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [7c1bdf0f-4ebe-4a4b-b53d-57811f2bf45e]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:59:03.531208Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [a92b49a6-8d96-403b-8d6d-a9be3d0f3114]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:59:04.514054Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [fd06c2cc-489f-4ab9-904c-bb74e804f740]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:59:04.934521Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [367a7dc8-2363-4d3f-9a46-91e7269a5728]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:59:05.913981Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [daef6d8f-fcf4-4040-b61f-630e73e2bac4]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:59:06.320716Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [0503e27f-2841-4272-9016-d3316272ff3a]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:59:08.106157Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [92166260-f26d-4234-936f-73317cd9d916]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T08:59:08.551640Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [455d352d-68c4-4d7d-9035-963b0fdb21a0]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:00:40.493781Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-01T09:00:40.494125Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-01T09:02:41.330143Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [9d06997c-e09b-4661-a597-a0311b1a6ade]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:02:51.780760Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [ba18ad9e-9b60-42ad-ad26-8a6f27c7b3c4]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:02:52.032338Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [f6a70a1d-596f-46e3-a865-777f35c19afa]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:02:56.388999Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [f3fe223c-78f8-4d51-8aa6-0ae10559e2e4]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:02:56.642014Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [0c39c9c1-3121-44ae-9224-aeaba918caf5]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:03:24.596792Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [dbb86ad3-8526-48a4-846c-163ad8951752]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:03:24.843263Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [63d9eb8a-186e-44eb-ad59-0398ac51fb77]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:03:25.561030Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [f06763ab-e7f6-4676-ba6d-ab4346beedc4]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:03:25.801817Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [38662e25-8efb-4e64-8cbc-6109d89b7649]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:03:27.392535Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [099fba99-54ab-4662-9aba-53bd7f9240a1]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:03:27.636167Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [177123d8-be84-4724-b329-1b46076a1241]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:03:27.903196Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow at http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T09:03:28.133419Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow at http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T09:04:45.684384Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d570b829-763b-4545-ac3c-d53df9d74106]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:04:45.931730Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [00c34b7c-f27e-4361-bb44-adfcc8c617f1]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:04:53.372120Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [43f034f9-ecbf-4d20-97ae-3efcc0d6b8be]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:04:53.876894Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [b82bcee3-01d7-4007-a1c9-2864965bd371]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:04:58.035664Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [95297280-34bc-48d1-af89-0c789885b9d0]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:04:58.275044Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [c8ca73d9-c8ad-46a0-8eb2-ab0dbbcfb4cd]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:05:16.127272Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [805c15fb-efc9-4e22-8f77-13facd6c656c]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:05:16.380176Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [c7febe87-7372-4c7c-bb02-995d8622a72d]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:05:16.380800Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [775df5f8-d341-4ba5-83fd-340dd58608b5]: login_success from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:05:18.271945Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [46674b1e-974e-4062-84a6-31d2e33a0c5b]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:05:20.724387Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [8990d228-6059-4de4-b0e1-39ed1ba08677]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:05:20.964144Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [65c7f89f-5751-463e-87aa-b53dafa5dc6a]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:05:21.462214Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow at http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T09:05:28.308255Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [6fc5da2c-7133-4ba1-9565-ad1e72c0eea8]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:05:28.684081Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [e40c78c0-1bf1-4f06-acda-f993fc44bb92]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:05:30.276289Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [7a78aba3-0cc8-4c82-9a6c-5a8dae0e7374]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:05:30.515512Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [06e9dfc1-a53e-4c95-86eb-89d76de9f77b]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:05:32.099485Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [44769644-36be-4501-a0ae-5084e30904a2]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:05:32.339937Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [a2c739e5-f3d4-45eb-912d-4cb59094c744]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:05:32.596326Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow at http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T09:05:32.837954Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow at http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T09:05:55.691037Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [5d6cbcae-6051-42ac-9a9a-ab240323e5b5]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:05:57.101149Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [fc4e1ff3-5240-4514-871b-89f1005ca8bf]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:09.855957Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d6ef10e9-66d1-4b79-a73f-a5f07e68e75f]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:12.142505Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [fee54f1d-4043-4256-b9a7-5aabea17cd1c]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:13.451341Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [e75548c4-7dcc-48ec-b199-e56069a615e1]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:15.101975Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [bc00de5e-c6d0-4974-8b44-74e7fa18f46c]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:16.330951Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d40418aa-19ce-46ae-bd3f-77b64466deee]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:20.183298Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [ca5efa1f-b89e-4566-b81a-25195f79acfb]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:21.214128Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [ca477672-9c36-4c74-aea6-a1984a25de60]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:23.495707Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [7b38a709-cac0-4097-bd11-f5d93f0c4651]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:23.730917Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [646a87ac-16ce-4aa1-a591-0cd8d8f7e664]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:26.089211Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [2f0f422f-d071-4752-af4c-150122c54b78]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:26.322731Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [96d43f59-1c3c-4f6a-869b-b1e8be229cde]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:29.127400Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [7eb06144-c196-45e9-a4d4-4215dca51bcd]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:29.360958Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [68660d7d-b021-4297-82da-5e570ec04e34]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:29.732937Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [6c0a68c6-4749-4b44-80c4-980ca0b8c146]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:30.231692Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 10.82.58.17 on 10.82.58.45. Redirecting to shadow at http://10.82.58.45/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T09:06:43.570321Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [88e0d7de-c72f-4c2e-bcb8-0f05fc9f4ea5]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:44.814313Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [8faac498-9639-474b-a603-82b09bbe9fdd]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:46.342709Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [6dbe5c9e-6b33-4388-9fc1-b69d8df89bbd]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:47.215905Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [ee6035c3-0cab-4c01-857b-9e3d51597e85]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:48.015539Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [b0b82db2-1e8b-405a-b625-bb1bc0913d3a]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:48.525742Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 10.82.58.17 on 10.82.58.45. Redirecting to shadow at http://10.82.58.45/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T09:06:49.989517Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [f544064c-1a0d-461f-a598-265766302895]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:50.730453Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [3def0ccd-6869-4513-9d63-cbb2573b242f]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:51.227554Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 10.82.58.17 on 10.82.58.45. Redirecting to shadow at http://10.82.58.45/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T09:06:51.238996Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [a735e27b-fb2e-4983-8dce-418c5d9104fb]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:51.740745Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 10.82.58.17 on 10.82.58.45. Redirecting to shadow at http://10.82.58.45/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T09:06:51.757990Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [47400f2a-678b-4ab6-8cb4-add88a64b4f5]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:52.232842Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [9e6cb8d7-421b-4add-906c-c614f1b199a1]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:52.473099Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 10.82.58.17 on 10.82.58.45. Redirecting to shadow at http://10.82.58.45/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T09:06:52.658476Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d1b514df-dc63-4b66-8c04-c17eed293bac]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:52.903478Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 10.82.58.17 on 10.82.58.45. Redirecting to shadow at http://10.82.58.45/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T09:06:53.009203Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [92330f59-4325-4461-aaa4-f42b8fcea2d3]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:53.248266Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 10.82.58.17 on 10.82.58.45. Redirecting to shadow at http://10.82.58.45/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T09:06:53.409787Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [2fff3c75-d962-4e4a-9f51-b46bad35ec65]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:53.650506Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 10.82.58.17 on 10.82.58.45. Redirecting to shadow at http://10.82.58.45/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T09:06:53.794688Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d445b7b0-be52-4017-9694-b48342f1e184]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:54.033304Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 10.82.58.17 on 10.82.58.45. Redirecting to shadow at http://10.82.58.45/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T09:06:54.240800Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [9a3d8a92-cd27-4dae-98f8-a07fc59389c3]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:54.479415Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 10.82.58.17 on 10.82.58.45. Redirecting to shadow at http://10.82.58.45/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T09:06:54.657076Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [4729bc43-5fb1-4f42-8047-41d8cafa4ac8]: hit from 10.82.58.17"}
+{"timestamp": "2026-03-01T09:06:54.901588Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 10.82.58.17 on 10.82.58.45. Redirecting to shadow at http://10.82.58.45/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T09:06:55.164081Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 10.82.58.17 on 10.82.58.45. Redirecting to shadow at http://10.82.58.45/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-01T09:18:50.942728Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [c7ce1fa8-3384-4fe9-be94-1a2cc929ec09]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:18:56.710329Z", "level": "INFO", "logger": "agent2.main", "message": "Deleting app: localhost"}
+{"timestamp": "2026-03-01T09:18:58.291880Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [05d1bc1a-ff54-4b0f-b0ce-fc6a9537223a]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:18:58.292614Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T09:18:58.292775Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [05d1bc1a-ff54-4b0f-b0ce-fc6a9537223a]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T09:18:58.461707Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [36a5f8dc-dd77-48d3-a524-a784e18b47d6]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:18:58.462314Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T09:18:58.462432Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [36a5f8dc-dd77-48d3-a524-a784e18b47d6]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T09:19:00.464840Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [00943df8-6725-4ef1-b349-3e511b0a38d8]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:19:00.465425Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T09:19:00.465575Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [00943df8-6725-4ef1-b349-3e511b0a38d8]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T09:19:00.564331Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [fbd742da-4f0a-456d-ae2a-179949a99532]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:19:00.564927Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T09:19:00.565062Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [fbd742da-4f0a-456d-ae2a-179949a99532]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T09:19:02.256836Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [bf4ae9d0-7737-4406-bae8-f11bf1b7ec72]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:19:02.257478Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T09:19:02.257641Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [bf4ae9d0-7737-4406-bae8-f11bf1b7ec72]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T09:19:02.308956Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [6ed2ea93-47e9-437d-b185-4e1a86fecd3b]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:19:02.309546Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T09:19:02.309734Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [6ed2ea93-47e9-437d-b185-4e1a86fecd3b]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T09:19:04.056765Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [6646f670-27df-4deb-9b8d-fb714b4c59ce]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:19:04.057436Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T09:19:04.057585Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [6646f670-27df-4deb-9b8d-fb714b4c59ce]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T09:19:04.108635Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [8977630e-9733-4132-b2c0-7d0c5a073ce4]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:19:04.109351Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T09:19:04.109480Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [8977630e-9733-4132-b2c0-7d0c5a073ce4]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T09:19:05.569146Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [199607e8-1517-4f22-9520-e9a41a6a1a8a]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:19:05.569825Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T09:19:05.569992Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [199607e8-1517-4f22-9520-e9a41a6a1a8a]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T09:19:05.641250Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [5f265296-1cfc-40ea-8e31-3e527b042dca]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:19:05.641820Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T09:19:05.641953Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [5f265296-1cfc-40ea-8e31-3e527b042dca]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T09:19:07.024631Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [5a0e77b5-6d44-4905-9fc9-3ebfd6d47cb1]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:19:07.025252Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T09:19:07.025395Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [5a0e77b5-6d44-4905-9fc9-3ebfd6d47cb1]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T09:19:07.112332Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [4d147220-8deb-4da2-9a95-22aecb3f64a8]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:19:07.112947Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T09:19:07.113080Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [4d147220-8deb-4da2-9a95-22aecb3f64a8]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T09:19:15.089506Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [b4185dff-fdc8-4b8d-b635-f88ff3b74407]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:19:15.090223Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T09:19:15.090386Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [b4185dff-fdc8-4b8d-b635-f88ff3b74407]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T09:19:15.133102Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [415210fc-dfe1-49d7-a952-511ee0ef80c1]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:19:15.133733Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T09:19:15.133888Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [415210fc-dfe1-49d7-a952-511ee0ef80c1]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T09:19:25.227365Z", "level": "INFO", "logger": "agent2.main", "message": "Deleting app: 10.82.58.45"}
+{"timestamp": "2026-03-01T09:19:35.614063Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [763dc688-ea23-47b4-ab91-8a46a20b4850]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:19:35.614674Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T09:19:35.614861Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [763dc688-ea23-47b4-ab91-8a46a20b4850]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T09:19:35.616339Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [b109111f-2d29-401d-80d7-6514eb17bd59]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:19:35.616733Z", "level": "INFO", "logger": "agent2.main", "message": "Host localhost unregistered. Skipping scoring and risk publication."}
+{"timestamp": "2026-03-01T09:19:35.616890Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [b109111f-2d29-401d-80d7-6514eb17bd59]: Host localhost not registered. Skipping stats increment."}
+{"timestamp": "2026-03-01T09:19:48.871318Z", "level": "INFO", "logger": "agent2.main", "message": "Adding/Updating app: localhost"}
+{"timestamp": "2026-03-01T09:20:06.427920Z", "level": "INFO", "logger": "agent2.main", "message": "Deleting app: localhost"}
+{"timestamp": "2026-03-01T09:20:36.417032Z", "level": "INFO", "logger": "agent2.main", "message": "Adding/Updating app: localhost"}
+{"timestamp": "2026-03-01T09:21:21.759706Z", "level": "INFO", "logger": "agent2.main", "message": "Adding/Updating app: 10.82.58.45"}
+{"timestamp": "2026-03-01T09:31:57.371748Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [a395fcd2-e1a3-40b7-b3ed-7462f2834a65]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:31:57.629888Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [68abc092-5003-4325-bbe6-7dbc66aaf887]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:34:50.508506Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [75a62ae3-2b02-401e-9fd2-974173a31423]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:34:50.754731Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [3fc9f63b-1ae1-463b-a799-4bb9e7198494]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:35:40.230060Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [50bfd6b8-1b9b-4816-964c-f636511d1710]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:35:40.607554Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [17ec731c-e5a7-4119-a7f1-b00d7a1fe493]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:35:40.608476Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d7642c0b-d116-4621-8901-f2721a0b3220]: login_success from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:35:44.964984Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [c8074480-1ecc-4e72-b33e-c60b398e8981]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:35:47.098312Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [c8ffb9c9-2acd-485f-b333-0f5423b193b4]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:35:47.676560Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [8cfd02b4-3e4c-4246-b96f-e5d29274028b]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:35:51.374134Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d633e2ca-53f4-4817-a5ea-f091535bd9a7]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:35:51.882649Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [ff112786-bd83-4e09-8545-48eec08270bd]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:39:59.476145Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [81180c46-f94b-4eb3-9935-b3c1f4291725]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:40:09.351212Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [2fc9c4a7-e31f-43d1-ace4-3b080a5f0639]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-01T09:48:05.083427Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-01T09:48:05.083882Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-08T14:29:42.736392Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-08T14:29:42.737718Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-08T14:39:15.276771Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [5911a906-b48c-4afa-8727-d313cec2bb62]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-08T14:39:16.270463Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [cb77497f-26d7-40ae-bbcc-211763b9deaf]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-08T14:39:16.426614Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [e0bcaf0c-cc55-4fbf-9bc8-02ea8016d383]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-08T14:39:18.113285Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [7292fb7b-779f-46c5-ba53-f8fe65590d8f]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-08T14:39:18.894093Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [0c9de030-98d9-4c3e-a9fa-7703415b4841]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-08T14:39:21.539773Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [0acca589-c455-4cb6-81e5-5f2ac8e9797d]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-08T14:39:21.542192Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [7a7b5cfb-535d-4fed-82a2-6c1d02ff4ed2]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-08T14:39:22.787385Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [5ab12f12-1c21-448b-a12d-832da48ac723]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-08T14:39:24.167722Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [e7cadd79-3fe9-4165-abaa-4a904b688bf3]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-08T14:39:24.939910Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1896ee2d-aa8b-4de4-9093-688eef1a8b0d]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-08T14:39:25.462088Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [7a8109bf-4b0a-40f3-ba6b-0179012c06d1]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-08T14:39:25.944941Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [7b25670d-d1d2-4e08-b349-e9ea97ea27f4]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-08T14:39:25.945908Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow at http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-08T14:39:25.948630Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow at http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-08T14:39:26.315936Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow at http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-08T14:39:26.319952Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1c7b1d94-a259-4f28-85ac-e0e7627b38ba]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-08T14:39:26.761183Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow at http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-08T14:39:26.764282Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow at http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-08T14:39:27.022671Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow at http://localhost/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-08T14:39:35.672187Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d2554efa-2c85-4e39-b218-2745abb160ce]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-08T14:47:17.025676Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [9e187ba1-263d-4224-8efc-cadd808fee64]: hit from 10.82.58.102"}
+{"timestamp": "2026-03-08T14:47:18.539294Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [8fd8037e-b02f-4ba0-8c07-29f9d52312b2]: hit from 10.82.58.102"}
+{"timestamp": "2026-03-08T14:47:19.878651Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [4dabfaef-ecd9-4e35-9a8e-b0bd1695e3f4]: hit from 10.82.58.102"}
+{"timestamp": "2026-03-08T14:47:21.099362Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [b45db4d1-0519-4962-8583-245c44f2918d]: hit from 10.82.58.102"}
+{"timestamp": "2026-03-08T14:47:22.123638Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [1e641248-8c79-426a-be35-96ac27d734b6]: hit from 10.82.58.102"}
+{"timestamp": "2026-03-08T14:47:23.045353Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [b226709d-3b5d-4d8f-bcda-5c52ecb25ccc]: hit from 10.82.58.102"}
+{"timestamp": "2026-03-08T14:47:23.594924Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 10.82.58.102 on 10.82.58.45. Redirecting to shadow at http://10.82.58.45/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-08T14:47:23.607482Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [4a252212-ed76-46cf-9515-87e980e0b159]: hit from 10.82.58.102"}
+{"timestamp": "2026-03-08T14:47:24.164119Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 10.82.58.102 on 10.82.58.45. Redirecting to shadow at http://10.82.58.45/DVWA-rnaster/login.php"}
+{"timestamp": "2026-03-08T14:57:39.280794Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-08T14:57:39.287861Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-08T15:01:29.508627Z", "level": "INFO", "logger": "agent2.main", "message": "Resetting dashboard statistics and logs..."}
+{"timestamp": "2026-03-09T04:29:59.843740Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-09T04:29:59.844860Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-09T04:30:48.053198Z", "level": "INFO", "logger": "agent2.main", "message": "Resetting dashboard statistics and logs..."}
+{"timestamp": "2026-03-09T04:30:50.104414Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [32b20f2a-cbae-44de-b753-667004476452]: None from 127.0.0.1"}
+{"timestamp": "2026-03-09T04:30:55.189224Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [ef792603-af4b-474a-82de-471d9949fce6]: None from 127.0.0.1"}
+{"timestamp": "2026-03-09T04:31:00.277854Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [cea6d6c3-c950-43db-b8bd-706967bae3e5]: None from 127.0.0.1"}
+{"timestamp": "2026-03-09T04:31:36.174111Z", "level": "INFO", "logger": "agent2.main", "message": "Resetting dashboard statistics and logs..."}
+{"timestamp": "2026-03-09T04:31:38.225055Z", "level": "INFO", "logger": "agent2.main", "message": "Adding/Updating app: localhost"}
+{"timestamp": "2026-03-09T04:31:40.273798Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [9163e03e-e872-433e-a637-5a9506b9ad48]: None from 127.0.0.1"}
+{"timestamp": "2026-03-09T04:31:45.340936Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [6d57eb63-4836-4171-aac1-48e2059196ee]: None from 127.0.0.1"}
+{"timestamp": "2026-03-09T04:31:50.416653Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [7b61ee76-e809-40c6-ad74-9e9ff76c75dc]: None from 127.0.0.1"}
+{"timestamp": "2026-03-09T04:33:08.448173Z", "level": "INFO", "logger": "agent2.main", "message": "Resetting dashboard statistics and logs..."}
+{"timestamp": "2026-03-09T04:33:10.494528Z", "level": "INFO", "logger": "agent2.main", "message": "Adding/Updating app: localhost"}
+{"timestamp": "2026-03-09T04:33:12.533037Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [fbb8d080-faa3-4cd2-b0ac-970ec1ad5189]: None from 127.0.0.1"}
+{"timestamp": "2026-03-09T04:33:17.596088Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [70f06555-067d-4759-bbfb-d89f9e93f183]: None from 127.0.0.1"}
+{"timestamp": "2026-03-09T04:33:22.652426Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [623da607-f4f9-49f5-a9f9-97da76f97a6c]: None from 127.0.0.1"}
+{"timestamp": "2026-03-09T04:35:20.117937Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-09T04:35:20.119802Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-09T04:35:24.351030Z", "level": "INFO", "logger": "agent2.main", "message": "Resetting dashboard statistics and logs..."}
+{"timestamp": "2026-03-09T04:35:26.403663Z", "level": "INFO", "logger": "agent2.main", "message": "Adding/Updating app: localhost"}
+{"timestamp": "2026-03-09T04:35:28.446073Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [939945a8-c180-44ff-ae21-4b2c7feb1997]: None from 127.0.0.1"}
+{"timestamp": "2026-03-09T04:35:33.520818Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d06ca24a-74b0-4550-baeb-a7d8d6600cc8]: None from 127.0.0.1"}
+{"timestamp": "2026-03-09T04:35:38.621816Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [448c0900-cafa-4c60-bd9f-d1f898fc4b95]: None from 127.0.0.1"}
+{"timestamp": "2026-03-27T14:33:38.369082Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-27T14:33:38.369957Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-27T14:33:53.769218Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-27T14:33:53.769913Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-28T10:20:17.376918Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-28T10:20:17.377430Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-28T10:28:02.349724Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-28T10:28:02.356869Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-31T08:20:36.583689Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-03-31T08:20:36.584701Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-03-31T08:32:30.460552Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d67c1dc4-e8c1-4b31-838f-c26419f668c4]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-31T08:32:30.465982Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-03-31T08:32:31.033040Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-03-31T08:32:31.307058Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-03-31T08:32:31.307832Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK Detected. Routing to Dynamic Shadow: http://localhost/DVWA-rnaster/login.php?username=' OR 1=1"}
+{"timestamp": "2026-03-31T08:32:31.308178Z", "level": "WARNING", "logger": "agent2.main", "message": "HIGH RISK detected for 127.0.0.1 on localhost. Redirecting to shadow at http://localhost/DVWA-rnaster/login.php?username=' OR 1=1"}
+{"timestamp": "2026-03-31T08:32:36.385837Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [77010c94-948e-4964-82c0-978c7bc2a888]: hit from 127.0.0.1"}
+{"timestamp": "2026-03-31T08:32:38.423329Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [64b63234-9989-462c-88af-4752561d67e9]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:07:18.814130Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-04-06T06:07:18.816327Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-04-06T06:07:23.964601Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d9aace79-37c6-4fbd-a5b8-7baf962406c4]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:07:23.965195Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d9aace79-37c6-4fbd-a5b8-7baf962406c4]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:07:23.966077Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d9aace79-37c6-4fbd-a5b8-7baf962406c4]: \u2713 COUNTED - totalRequests incremented for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:07:23.966327Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:07:24.305150Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:07:24.573939Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:07:27.737007Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [e0d14c7e-2c23-4bde-bbc2-4e49989d0e16]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:07:27.737566Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [e0d14c7e-2c23-4bde-bbc2-4e49989d0e16]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:07:27.738329Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [e0d14c7e-2c23-4bde-bbc2-4e49989d0e16]: \u2713 COUNTED - totalRequests incremented for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:07:27.738512Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:07:27.996993Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:07:28.256645Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:07:31.419752Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [cf39373f-e691-41a8-86b2-af879459cebd]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:07:31.420259Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [cf39373f-e691-41a8-86b2-af879459cebd]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:07:31.420918Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [cf39373f-e691-41a8-86b2-af879459cebd]: \u2713 COUNTED - totalRequests incremented for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:07:31.421163Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:07:31.689176Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:07:31.953607Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:07:35.112273Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [8b6b3bb9-4dd9-4392-8931-6f5697ec820a]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:07:35.112849Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [8b6b3bb9-4dd9-4392-8931-6f5697ec820a]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:07:35.113581Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [8b6b3bb9-4dd9-4392-8931-6f5697ec820a]: \u2713 COUNTED - totalRequests incremented for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:07:35.113754Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:07:35.353858Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:07:35.613639Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:07:38.769753Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [96897dd9-7632-4a26-ab37-a72ef8a0c07d]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:07:38.770329Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [96897dd9-7632-4a26-ab37-a72ef8a0c07d]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:07:38.771126Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [96897dd9-7632-4a26-ab37-a72ef8a0c07d]: \u2713 COUNTED - totalRequests incremented for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:07:38.771308Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:07:39.034277Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:07:39.304028Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:07:42.467995Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [8c8721a1-84bc-4990-b96c-2a8686c97e56]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:07:42.468540Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [8c8721a1-84bc-4990-b96c-2a8686c97e56]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:07:42.469300Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [8c8721a1-84bc-4990-b96c-2a8686c97e56]: \u2713 COUNTED - totalRequests incremented for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:07:42.469466Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:07:42.734500Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:07:43.004594Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:20:14.345915Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-04-06T06:20:14.346236Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-04-06T06:20:30.258236Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [573b1ab0-cb4c-4353-b5b5-8e155fa7ac68]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:20:30.258757Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [573b1ab0-cb4c-4353-b5b5-8e155fa7ac68]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:20:30.259493Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [573b1ab0-cb4c-4353-b5b5-8e155fa7ac68]: \u2713 COUNTED - totalRequests incremented for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:20:30.259682Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:20:30.530940Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:20:30.797550Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:20:32.834991Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [55a86170-8f47-4820-b067-f1e0561a3355]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:20:32.835471Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [55a86170-8f47-4820-b067-f1e0561a3355]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:20:32.836139Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [55a86170-8f47-4820-b067-f1e0561a3355]: \u2713 COUNTED - totalRequests incremented for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:20:32.836280Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:20:33.072118Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:20:33.343456Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:20:35.379945Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [8369771d-706b-4c69-be9d-7b7cf33d3541]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:20:35.380335Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [8369771d-706b-4c69-be9d-7b7cf33d3541]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:20:35.380825Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [8369771d-706b-4c69-be9d-7b7cf33d3541]: \u2713 COUNTED - totalRequests incremented for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:20:35.380947Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:20:35.618716Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:20:35.886167Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:20:37.927759Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [80637293-ece0-4e21-8058-164f88faf0fb]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:20:37.928212Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [80637293-ece0-4e21-8058-164f88faf0fb]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:20:37.928763Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [80637293-ece0-4e21-8058-164f88faf0fb]: \u2713 COUNTED - totalRequests incremented for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:20:37.928898Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:20:38.157179Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:20:38.428885Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:20:40.471222Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [64f47806-26fb-41cb-a43e-16b9e33e44ee]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:20:40.471683Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [64f47806-26fb-41cb-a43e-16b9e33e44ee]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:20:40.472360Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [64f47806-26fb-41cb-a43e-16b9e33e44ee]: \u2713 COUNTED - totalRequests incremented for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:20:40.472515Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:20:40.704418Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:20:40.964631Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:20:43.015139Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d3747a89-dc42-4470-a523-cc49ad0ff7dd]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:20:43.015669Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d3747a89-dc42-4470-a523-cc49ad0ff7dd]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:20:43.016306Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d3747a89-dc42-4470-a523-cc49ad0ff7dd]: \u2713 COUNTED - totalRequests incremented for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:20:43.016433Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:20:43.254675Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:20:43.514685Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:21:54.693300Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [ba3e3d64-3dad-484d-bd98-45aa99ef8f8a]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:21:54.693793Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [ba3e3d64-3dad-484d-bd98-45aa99ef8f8a]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:21:54.694589Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [ba3e3d64-3dad-484d-bd98-45aa99ef8f8a]: \u2713 COUNTED - totalRequests incremented for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:21:54.694750Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:21:54.923441Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:21:55.190994Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:21:57.216106Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [56192e24-d203-4b1d-811f-3b29147be954]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:21:57.216549Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [56192e24-d203-4b1d-811f-3b29147be954]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:21:57.217138Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [56192e24-d203-4b1d-811f-3b29147be954]: \u2713 COUNTED - totalRequests incremented for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:21:57.217287Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:21:57.446262Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:21:57.707880Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:21:59.761566Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [6c6f9fa6-5185-4340-af05-3d565a0717c7]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:21:59.762058Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [6c6f9fa6-5185-4340-af05-3d565a0717c7]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:21:59.762774Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [6c6f9fa6-5185-4340-af05-3d565a0717c7]: \u2713 COUNTED - totalRequests incremented for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:21:59.762924Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:22:00.057341Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:22:00.330172Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:22:02.381268Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [5825ada1-b06d-461d-8fd6-f99b9fb446ea]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:22:02.381863Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [5825ada1-b06d-461d-8fd6-f99b9fb446ea]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:22:02.382663Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [5825ada1-b06d-461d-8fd6-f99b9fb446ea]: \u2713 COUNTED - totalRequests incremented for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:22:02.382806Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:22:02.612073Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:22:02.881920Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:22:04.951455Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [61ef694b-ff20-4342-904d-08ebf0cf57a5]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:22:04.952055Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [61ef694b-ff20-4342-904d-08ebf0cf57a5]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:22:04.952723Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [61ef694b-ff20-4342-904d-08ebf0cf57a5]: \u2713 COUNTED - totalRequests incremented for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:22:04.952864Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:22:05.186565Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:22:05.444908Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:22:07.494524Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [4ac9adec-814c-4a2b-86d1-d485d4826f5a]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:22:07.494955Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [4ac9adec-814c-4a2b-86d1-d485d4826f5a]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:22:07.495724Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [4ac9adec-814c-4a2b-86d1-d485d4826f5a]: \u2713 COUNTED - totalRequests incremented for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:22:07.495882Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:22:07.722802Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:22:07.986494Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:29:21.344182Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-04-06T06:29:21.344600Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-04-06T06:31:08.476536Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [a412f4a8-3500-4c6a-bea5-a40c36591ee8]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:31:08.477704Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [a412f4a8-3500-4c6a-bea5-a40c36591ee8]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:31:08.478972Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [a412f4a8-3500-4c6a-bea5-a40c36591ee8]: \u2713 COUNTED - totalRequests=43 for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:31:08.479242Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:31:08.800644Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:31:09.080324Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:31:11.126848Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [a68115c0-bcda-4075-a365-2e6ea3ae28ed]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:31:11.127504Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [a68115c0-bcda-4075-a365-2e6ea3ae28ed]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:31:11.128605Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [a68115c0-bcda-4075-a365-2e6ea3ae28ed]: \u2713 COUNTED - totalRequests=44 for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:31:11.128784Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:31:11.429994Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:31:11.694080Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:31:13.751968Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [f88147d6-460f-4295-8e6c-b02e8374580a]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:31:13.752683Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [f88147d6-460f-4295-8e6c-b02e8374580a]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:31:13.753936Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [f88147d6-460f-4295-8e6c-b02e8374580a]: \u2713 COUNTED - totalRequests=45 for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:31:13.754109Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:31:14.089466Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:31:14.357376Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:31:16.398618Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [994b181a-8651-4319-9fd3-89c0db638bbb]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:31:16.399139Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [994b181a-8651-4319-9fd3-89c0db638bbb]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:31:16.400009Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [994b181a-8651-4319-9fd3-89c0db638bbb]: \u2713 COUNTED - totalRequests=46 for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:31:16.400254Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:31:16.759641Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:31:17.019775Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:31:19.039493Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [bf638d79-42f3-4dd4-8c94-988cf3b10d21]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:31:19.040006Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [bf638d79-42f3-4dd4-8c94-988cf3b10d21]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:31:19.041264Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [bf638d79-42f3-4dd4-8c94-988cf3b10d21]: \u2713 COUNTED - totalRequests=47 for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:31:19.041428Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:31:19.429882Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:31:19.702028Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:31:21.738664Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [0ce3e8fd-0292-4e77-b652-a0016a3eab00]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:31:21.739162Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [0ce3e8fd-0292-4e77-b652-a0016a3eab00]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:31:21.740441Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [0ce3e8fd-0292-4e77-b652-a0016a3eab00]: \u2713 COUNTED - totalRequests=48 for 127.0.0.1 \u2192 login.php"}
+{"timestamp": "2026-04-06T06:31:21.740631Z", "level": "INFO", "logger": "agent2.main", "message": "App config for localhost: Found"}
+{"timestamp": "2026-04-06T06:31:22.077325Z", "level": "INFO", "logger": "agent2.main", "message": "Calling Agent 1 at http://localhost:8001/api/v1/score for scoring..."}
+{"timestamp": "2026-04-06T06:31:22.342052Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 1 response: 200"}
+{"timestamp": "2026-04-06T06:45:40.347437Z", "level": "INFO", "logger": "agent2.main", "message": "Agent 2 (Telemetry) Starting Singleton Broadcast Listener..."}
+{"timestamp": "2026-04-06T06:45:40.347783Z", "level": "INFO", "logger": "agent2.main", "message": "Started WebSocket Broadcast Listener"}
+{"timestamp": "2026-04-06T06:51:50.118508Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [00f23ccd-e6d5-40b9-bb62-6df6bca8cc58]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:51:50.119429Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [00f23ccd-e6d5-40b9-bb62-6df6bca8cc58]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:51:52.809602Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [09e9510a-bb34-414d-a283-0539a44b463e]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:51:52.810098Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [09e9510a-bb34-414d-a283-0539a44b463e]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:51:53.066807Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [912ff1ae-d83b-4e4e-b093-d7f87aab2be1]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:51:53.067830Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [912ff1ae-d83b-4e4e-b093-d7f87aab2be1]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:51:54.570993Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [926fd084-3f3c-44c6-98db-07575ec525b6]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:51:54.571472Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [926fd084-3f3c-44c6-98db-07575ec525b6]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:51:54.951096Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [ac404665-6672-4a5f-a358-ab8562c9df5d]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:51:54.951607Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [ac404665-6672-4a5f-a358-ab8562c9df5d]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:51:56.556397Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d44a9aca-b53f-4124-aa8e-c38cd961da47]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:51:56.556870Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d44a9aca-b53f-4124-aa8e-c38cd961da47]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:51:56.939896Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [e938f138-a0d5-4135-a9c9-21c658ddfb75]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:51:56.940359Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [e938f138-a0d5-4135-a9c9-21c658ddfb75]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:51:58.258685Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d0ad1294-97e9-4157-b175-807a2487d66e]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:51:58.259205Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d0ad1294-97e9-4157-b175-807a2487d66e]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:51:58.635684Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d5dec970-db19-45df-92d0-186ecd7ad17b]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:51:58.636214Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [d5dec970-db19-45df-92d0-186ecd7ad17b]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:52:00.187410Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [ab4b2dc3-6980-46f0-b69a-55d41b6f2e77]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:52:00.187854Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [ab4b2dc3-6980-46f0-b69a-55d41b6f2e77]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:52:00.584339Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [6c3c73e8-ca7e-41a4-b5a0-0b8535287d22]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:52:00.584853Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [6c3c73e8-ca7e-41a4-b5a0-0b8535287d22]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:52:02.475530Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [2026a404-2d81-486a-a99c-f76a1e45644d]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:52:02.476071Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [2026a404-2d81-486a-a99c-f76a1e45644d]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:52:02.862166Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [f82c1dc1-b5e0-4632-b3ac-faf8eabd9ace]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:52:02.862657Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [f82c1dc1-b5e0-4632-b3ac-faf8eabd9ace]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:52:15.044179Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [4f22d8ad-bb49-41f7-9369-ecefd9f18a21]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:52:15.044726Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [4f22d8ad-bb49-41f7-9369-ecefd9f18a21]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:52:15.451150Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [310446a5-ae55-4a15-8aaa-fd49efe7dd45]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:52:15.451594Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [310446a5-ae55-4a15-8aaa-fd49efe7dd45]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:52:21.553352Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [abf8afb7-6bbb-4da4-926e-d2c17db2ba4b]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:52:21.554250Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [abf8afb7-6bbb-4da4-926e-d2c17db2ba4b]: full_url='http://localhost/DVWA-master/login.php' is_shadow=False"}
+{"timestamp": "2026-04-06T06:52:29.130151Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [8fc99945-24ac-49b5-aa60-825d848278ac]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:52:29.130615Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [8fc99945-24ac-49b5-aa60-825d848278ac]: full_url='http://localhost/DVWA-rnaster/login.php' is_shadow=True"}
+{"timestamp": "2026-04-06T06:52:29.134984Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [8fc99945-24ac-49b5-aa60-825d848278ac]: Shadow Hit recorded directly in Redis. stats.shadow_total incremented."}
+{"timestamp": "2026-04-06T06:52:29.135772Z", "level": "ERROR", "logger": "agent2.main", "message": "Broadcast error on shadow.activity: 'str' object is not a mapping"}
+{"timestamp": "2026-04-06T06:52:31.820343Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [0f8a1c34-28de-4d3d-8705-9208cc2bd9e7]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:52:31.820848Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [0f8a1c34-28de-4d3d-8705-9208cc2bd9e7]: full_url='http://localhost/DVWA-rnaster/login.php' is_shadow=True"}
+{"timestamp": "2026-04-06T06:52:31.821636Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [0f8a1c34-28de-4d3d-8705-9208cc2bd9e7]: Shadow Hit recorded directly in Redis. stats.shadow_total incremented."}
+{"timestamp": "2026-04-06T06:52:31.822348Z", "level": "ERROR", "logger": "agent2.main", "message": "Broadcast error on shadow.activity: 'str' object is not a mapping"}
+{"timestamp": "2026-04-06T06:52:31.924355Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [bb456afa-8a0c-484f-8144-670af6a7b60a]: hit from 127.0.0.1"}
+{"timestamp": "2026-04-06T06:52:31.924896Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [bb456afa-8a0c-484f-8144-670af6a7b60a]: full_url='http://localhost/DVWA-rnaster/login.php' is_shadow=True"}
+{"timestamp": "2026-04-06T06:52:31.925676Z", "level": "INFO", "logger": "agent2.main", "message": "Telemetry [bb456afa-8a0c-484f-8144-670af6a7b60a]: Shadow Hit recorded directly in Redis. stats.shadow_total incremented."}
+{"timestamp": "2026-04-06T06:52:31.926532Z", "level": "ERROR", "logger": "agent2.main", "message": "Broadcast error on shadow.activity: 'str' object is not a mapping"}
