@@ -1,9 +1,9 @@
 <?php
 // Enforce uppercase URL casing
-if (strpos($_SERVER['REQUEST_URI'], 'dvwa-master') !== false) {
-    header('Location: ' . str_replace('dvwa-master', 'DVWA-master', $_SERVER['REQUEST_URI']), true, 301);
-    exit;
-}
+// if (strpos($_SERVER['REQUEST_URI'], 'dvwa-master') !== false) {
+//     header('Location: ' . str_replace('dvwa-master', 'DVWA-master', $_SERVER['REQUEST_URI']), true, 301);
+//     exit;
+// }
 
 
 define( 'DVWA_WEB_PAGE_TO_ROOT', '' );
@@ -21,7 +21,7 @@ if( isset( $_POST[ 'Login' ] ) ) {
 		$session_token = "";
 	}
 
-	checkToken( $_REQUEST[ 'user_token' ], $session_token, 'login.php' );
+	// checkToken( $_REQUEST[ 'user_token' ], $session_token, 'login.php' );
 
 	$user = $_POST[ 'username' ];
 	$user = stripslashes( $user );
@@ -65,7 +65,7 @@ Header( 'Expires: Tue, 23 Jun 2009 12:00:00 GMT' );     // Date in the past
 	Header( "Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://" . $telemetry_host . ":8010; connect-src 'self' http://" . $telemetry_host . ":8010; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:;" );
 
 // Anti-CSRF
-generateSessionToken();
+// generateSessionToken();
 
 echo "<!DOCTYPE html>
 
@@ -112,7 +112,6 @@ echo "<!DOCTYPE html>
 
 	</fieldset>
 
-	" . tokenField() . "
 
 	</form>
 
