@@ -8,9 +8,19 @@ const Dashboard = ({ stats, logs, connected }) => {
     // Filter Logic
     const normalLogs = logs.filter(l => l.event === "Successful Login" || l.event === "login_success");
     const lowRiskLogs = logs.filter(l => (l.risk === "LOW" || l.risk === "MEDIUM") && l.event !== "Successful Login" && l.event !== "login_success");
-    const highRiskLogs = logs.filter(l => l.risk === "HIGH");
-    const suspiciousLogs = logs.filter(l => l.score >= 90);
-    const blockedLogs = logs.filter(l => l.risk === "HIGH");
+    const highRiskLogs = logs.filter(l => l.risk === "HIGH" || l.risk === "BLOCKED");
+
+    // Suspicious Filter: Score > 90 and De-duplicate identical attacks from same IP
+    const seenSuspicious = new Set();
+    const suspiciousLogs = logs.filter(l => {
+        if (l.score <= 90) return false;
+        const key = `${l.ip}-${l.event}`;
+        if (seenSuspicious.has(key)) return false;
+        seenSuspicious.add(key);
+        return true;
+    });
+
+    const blockedLogs = logs.filter(l => l.risk === "BLOCKED" || (l.risk === "HIGH" && l.score >= 100));
 
     // Format attack type stats for Recharts
     const attackTypeData = Object.entries(stats.attackTypes || {})
@@ -139,7 +149,7 @@ const Dashboard = ({ stats, logs, connected }) => {
                                         contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '12px', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.4)' }}
                                         itemStyle={{ color: '#f87171', fontWeight: 'bold' }}
                                     />
-                                    <Legend verticalAlign="bottom" height={36} wrapperStyle={{ fontSize: '11px', fontWeight: 'bold', color: '#94a3b8', paddingTop: '20px' }}/>
+                                    <Legend verticalAlign="bottom" height={36} wrapperStyle={{ fontSize: '11px', fontWeight: 'bold', color: '#94a3b8', paddingTop: '20px' }} />
                                 </PieChart>
                             </ResponsiveContainer>
                         </div>
@@ -181,7 +191,7 @@ const LogTable = ({ logs, emptyMsg }) => (
                             <td className="py-2 font-mono text-slate-500 text-[11px]">{log.time}</td>
                             <td className="py-2 font-medium text-[12px]">{log.ip}</td>
                             <td className="py-2">
-                                <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${log.risk === 'HIGH' ? 'bg-red-900/50 text-red-400' :
+                                <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${log.risk === 'HIGH' || log.risk === 'BLOCKED' ? 'bg-red-900/50 text-red-400' :
                                     log.risk === 'MEDIUM' ? 'bg-orange-900/50 text-orange-400' :
                                         'bg-emerald-900/50 text-emerald-400'
                                     }`}>
@@ -591,7 +601,7 @@ const AppSettings = ({ isDark, toggleTheme, onReset }) => (
                 <h3 className="font-black mb-2 text-red-500 uppercase tracking-widest text-xs">Danger Zone</h3>
                 <p className="text-xs text-slate-500 mb-6 font-medium">Permanent destruction of logs and telemetry data. This action is irreversible.</p>
                 <div className="flex items-center justify-between">
-                    <span className="text-slate-400 text-sm font-bold">Clear Core Intelligence</span>
+                    <span className="text-slate-400 text-sm font-bold">CLEAR ALL DATA</span>
                     <button
                         onClick={() => {
                             if (window.confirm("Are you sure you want to clear ALL dashboard statistics and logs? This cannot be undone.")) {

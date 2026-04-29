@@ -214,8 +214,12 @@ async def receive_telemetry(request: Request):
     except:
         return {"error": "Invalid JSON"}
     
-    # Capture real client IP
-    client_ip = request.client.host
+    # Capture real client IP (Prefer telemetry-provided IP over the loopback/proxy IP)
+    client_ip = data.get('client_ip') or request.client.host
+    
+    # Robust IP Normalization
+    if client_ip in ["::1", "[::1]", "::ffff:127.0.0.1"]:
+        client_ip = "127.0.0.1"
     data['client_ip'] = client_ip
     
     request_id = str(uuid.uuid4())
@@ -224,10 +228,42 @@ async def receive_telemetry(request: Request):
     
     action = "none"
 
+    # 0. SMART DE-DUPLICATION (Merge JS + PHP hits, but keep Hydra attempts)
+    path = data.get('path', '/')
+    method = data.get('method', 'GET').upper()
+    payload = data.get('payload', '')
+    timestamp_sec = int(datetime.utcnow().timestamp())
+    
+    import hashlib
+    fingerprint = hashlib.md5(f"{client_ip}:{path}:{method}:{payload}:{timestamp_sec}".encode()).hexdigest()
+    dedup_key = f"telemetry:smart_dedup:{fingerprint}"
+    
+    is_duplicate = await redis_client.redis.get(dedup_key)
+    if is_duplicate:
+        return {"status": "duplicate ignored"}
+    
+    await redis_client.redis.set(dedup_key, "1", ex=2)
+
+    # 1. AUTHORITATIVE STATS INCREMENT
+    if data.get('event') != 'login_success':
+        await redis_client.redis.incr("stats.total_requests")
+
     # Check Blocklist
     is_blocked = await redis_client.redis.sismember("security.blocklist", data.get('client_ip', '').strip())
     if is_blocked:
         logger.warning(f"BLOCKED IP attempt: {data.get('client_ip')}")
+        await redis_client.redis.incr("stats.attacks_blocked")
+        
+        # Publish a minimal event to trigger a dashboard stats update
+        blocked_event = {
+            "client_ip": data.get('client_ip'),
+            "risk": "BLOCKED",
+            "score": 100,
+            "explain": "Blocked IP attempted access",
+            "timestamp": datetime.utcnow().isoformat() + "Z",
+            "msg_id": request_id
+        }
+        await redis_client.publish("risk.events", blocked_event)
         return {"status": "blocked", "action": "block", "url": ""}
 
     payload_str = data.get('payload', '')
@@ -288,31 +324,21 @@ async def receive_telemetry(request: Request):
                             if "/DVWA-master/" in meta.full_url:
                                 url = meta.full_url.replace("/DVWA-master/", "/DVWA-rnaster/")
                             
+                            # AUTO-BLOCK LOGIC: Automatically block IP if risk is HIGH
+                            if assessment.risk == 'HIGH':
+                                await redis_client.redis.sadd("security.blocklist", client_ip)
+                                logger.warning(f"AUTO-BLOCKED IP due to HIGH risk detection: {client_ip}")
+                                action = "block"
+                                return {"status": "received", "action": action, "url": ""}
+                            
                             logger.warning(f"HIGH RISK Detected. Action: redirect to {url}")
                             action = "redirect"
-                            # Fast return for immediate redirection
                             return {"status": "received", "action": action, "url": url}
     except Exception as e:
         logger.error(f"Scoring error: {e}")
 
-    # 3. DE-DUPLICATION (For Statistics and Baseline logs)
-    raw_path = data.get('path', '/')
-    clean_path = raw_path.rstrip('/').split('/')[-1]
-    path_for_dedup = clean_path if clean_path else 'root'
-    event = data.get('event', 'hit')
-    timestamp_sec = int(datetime.utcnow().timestamp())
-    
-    dedup_key = f"telemetry:dedup:{data.get('client_ip')}:{path_for_dedup}:{event}:{timestamp_sec}"
-    is_duplicate = await redis_client.redis.get(dedup_key)
-    
-    if is_duplicate:
-        logger.warning(f"Telemetry [{request_id}]: DUPLICATE IGNORED for stats - {data.get('client_ip')}")
-        return {"status": "received", "action": "none"}
-    
-    await redis_client.redis.set(dedup_key, "1", ex=1)
-    
-    # 4. STATS INCREMENT
-    await redis_client.redis.incr("stats.total_requests")
+    # 4. LOG PROCESSING
+    # The duplicate check at the top handles the feed consistency.
     
     # Baseline publication if unregistered
     if not routing_manager.get_route(meta.host):
@@ -334,19 +360,18 @@ async def receive_telemetry(request: Request):
 
     # Specific Event Handling
     if data.get('event') == 'login_success':
-        dedup_login = f"seen_login:{client_ip}"
-        if await redis_client.redis.set(dedup_login, "1", ex=60, nx=True):
-            await redis_client.redis.incr("stats.normal_users")
-            login_event = {
-                "client_ip": data.get('client_ip'),
-                "timestamp": datetime.utcnow().isoformat() + "Z",
-                "path": data.get('path'),
-                "event": "Successful Login",
-                "msg_id": request_id,
-                "status_code": 200,
-                "channel": "login.success"
-            }
-            await redis_client.publish("login.success", login_event)
+        # Removed cooldown to ensure every login counts as +1
+        await redis_client.redis.incr("stats.normal_users")
+        login_event = {
+            "client_ip": data.get('client_ip'),
+            "timestamp": datetime.utcnow().isoformat() + "Z",
+            "path": data.get('path'),
+            "event": "Successful Login",
+            "msg_id": request_id,
+            "status_code": 200,
+            "channel": "login.success"
+        }
+        await redis_client.publish("login.success", login_event)
 
     return {"status": "received", "action": action, "url": url}
 
