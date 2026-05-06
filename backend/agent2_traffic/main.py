@@ -101,24 +101,39 @@ async def broadcast_redis_events():
                     if channel == "risk.events":
                         client_ip = data.get('client_ip')
                         if client_ip:
-                            # De-duplicate Suspicious Users
+                            # 1. Suspicious Users tally (Score > 20)
                             if data.get('score', 0) > 20:
                                 is_new_suspicious = await redis_client.redis.sadd("stats.unique_suspicious_ips", client_ip)
                                 if is_new_suspicious:
                                     await redis_client.redis.incr("stats.suspicious_users")
                             
-                            # Increment Attacks Blocked for EVERY hit (requested by user)
-                            if data.get('risk') == 'HIGH':
-                                await redis_client.redis.incr("stats.attacks_blocked")
-                                
-                                # Tally specific attack types
-                                tags = data.get('tags', [])
-                                if not tags and data.get('score', 0) >= 90:
-                                    tags = ["high_frequency"] # Fallback if no specific tag
+                            # 2. Authoritative Action Attribution
+                            tags = data.get('tags', [])
+                            risk = data.get('risk', 'LOW')
+                            
+                            if risk == 'HIGH':
+                                if 'high_frequency' in tags:
+                                    # This was a HARD BLOCK
+                                    await redis_client.redis.incr("stats.attacks_blocked")
+                                    data['action'] = 'block'
+                                else:
+                                    # This was a SHADOW REDIRECT
+                                    await redis_client.redis.incr("stats.attacks_shadowed")
+                                    data['action'] = 'shadow_redirect'
+                            else:
+                                data['action'] = 'allowed'
+
+                            # 3. Tally specific attack types
+                            if risk == 'HIGH':
+                                if not tags:
+                                    tags = ["high_frequency"] if data.get('score', 0) >= 90 else ["unknown"]
                                 
                                 for tag in tags:
-                                    # Use a Redis Hash to count attack types
                                     await redis_client.redis.hincrby("stats.attack_types", tag, 1)
+
+                    log_entry = {"channel": channel, **data}
+                    await redis_client.redis.lpush("dashboard.logs", json.dumps(log_entry))
+                    await redis_client.redis.ltrim("dashboard.logs", 0, 99)
 
                 # Handle Shadow Activity specifically
                 elif channel == "shadow.activity":
@@ -175,11 +190,19 @@ async def broadcast_redis_events():
                 s_unique_ips = await redis_client.redis.scard("stats.shadow_unique_ips")
                 s_attack_types = await redis_client.redis.hgetall("stats.shadow_attack_types")
                 
+                # Attributed Stats
+                total = await redis_client.redis.get("stats.total_requests")
+                normal = await redis_client.redis.get("stats.normal_users")
+                suspicious = await redis_client.redis.get("stats.suspicious_users")
+                blocked = await redis_client.redis.get("stats.attacks_blocked")
+                shadowed = await redis_client.redis.get("stats.attacks_shadowed")
+                
                 stats_payload = {
                     "totalRequests": int(total) if total else 0,
                     "normalUsers": int(normal) if normal else 0,
                     "suspiciousUsers": int(suspicious) if suspicious else 0,
                     "attacksBlocked": int(blocked) if blocked else 0,
+                    "attacksShadowed": int(shadowed) if shadowed else 0,
                     "shadowStats": {
                         "totalRequests": int(s_total) if s_total else 0,
                         "uniqueAttackers": int(s_unique_ips) if s_unique_ips else 0,
@@ -228,7 +251,7 @@ async def receive_telemetry(request: Request):
     
     action = "none"
 
-    # 0. SMART DE-DUPLICATION (Merge JS + PHP hits, but keep Hydra attempts)
+    # 0. SMART DE-DUPLICATION (Atomic check-and-set to prevent race conditions)
     path = data.get('path', '/')
     method = data.get('method', 'GET').upper()
     payload = data.get('payload', '')
@@ -238,38 +261,14 @@ async def receive_telemetry(request: Request):
     fingerprint = hashlib.md5(f"{client_ip}:{path}:{method}:{payload}:{timestamp_sec}".encode()).hexdigest()
     dedup_key = f"telemetry:smart_dedup:{fingerprint}"
     
-    is_duplicate = await redis_client.redis.get(dedup_key)
-    if is_duplicate:
+    # Use 'nx=True' for atomic check-and-set. Only the first request in this second will proceed.
+    is_new_request = await redis_client.redis.set(dedup_key, "1", ex=2, nx=True)
+    if not is_new_request:
         return {"status": "duplicate ignored"}
-    
-    await redis_client.redis.set(dedup_key, "1", ex=2)
-
-    # 1. AUTHORITATIVE STATS INCREMENT
-    if data.get('event') != 'login_success':
-        await redis_client.redis.incr("stats.total_requests")
-
-    # Check Blocklist
-    is_blocked = await redis_client.redis.sismember("security.blocklist", data.get('client_ip', '').strip())
-    if is_blocked:
-        logger.warning(f"BLOCKED IP attempt: {data.get('client_ip')}")
-        await redis_client.redis.incr("stats.attacks_blocked")
-        
-        # Publish a minimal event to trigger a dashboard stats update
-        blocked_event = {
-            "client_ip": data.get('client_ip'),
-            "risk": "BLOCKED",
-            "score": 100,
-            "explain": "Blocked IP attempted access",
-            "timestamp": datetime.utcnow().isoformat() + "Z",
-            "msg_id": request_id
-        }
-        await redis_client.publish("risk.events", blocked_event)
-        return {"status": "blocked", "action": "block", "url": ""}
-
-    payload_str = data.get('payload', '')
-    payload_size = len(payload_str.encode()) if payload_str else 0
 
     # 1. SHADOW INGRESS (Existing hits on shadow URLs)
+    # We check this FIRST so that even blocked IPs can still be monitored in the shadow environment.
+    # Shadow hits are EXCLUDED from main dashboard counters.
     is_shadow = routing_manager.is_shadow_url(data.get('full_url', ''))
     if is_shadow:
         attacker_ip = data.get("client_ip", "unknown")
@@ -289,7 +288,30 @@ async def receive_telemetry(request: Request):
         logger.info(f"Telemetry [{request_id}]: Shadow Hit recorded directly in Redis.")
         return {"status": "shadow activity recorded"}
 
-    # 2. RISK SCORING (Before De-duplication to allow burst detection)
+    # 2. AUTHORITATIVE STATS INCREMENT (Main Domain Only)
+    # This must happen for ALL hits that appear in the dashboard feed (including blocked and logins)
+    await redis_client.redis.incr("stats.total_requests")
+
+    # 3. BLOCKLIST CHECK (Main Domain Only)
+    is_blocked = await redis_client.redis.sismember("security.blocklist", data.get('client_ip', '').strip())
+    if is_blocked:
+        logger.warning(f"BLOCKED IP attempt on main domain: {data.get('client_ip')}")
+        
+        blocked_event = {
+            "client_ip": data.get('client_ip'),
+            "risk": "BLOCKED",
+            "score": 100,
+            "explain": "Blocked IP attempted access to main domain",
+            "timestamp": datetime.utcnow().isoformat() + "Z",
+            "msg_id": request_id
+        }
+        await redis_client.publish("risk.events", blocked_event)
+        return {"status": "blocked", "action": "block", "url": ""}
+
+    payload_str = data.get('payload', '')
+    payload_size = len(payload_str.encode()) if payload_str else 0
+
+    # 4. RISK SCORING (Before De-duplication to allow burst detection)
     meta = RequestMetadata(
         timestamp=datetime.utcnow().isoformat() + "Z",
         client_ip=data.get('client_ip'),
@@ -324,16 +346,16 @@ async def receive_telemetry(request: Request):
                             if "/DVWA-master/" in meta.full_url:
                                 url = meta.full_url.replace("/DVWA-master/", "/DVWA-rnaster/")
                             
-                            # AUTO-BLOCK LOGIC: Automatically block IP if risk is HIGH
-                            if assessment.risk == 'HIGH':
+                            # --- DEFENSIVE POLICY ---
+                            # 1. HARD BLOCK: Only for high-frequency (Brute force/DoS)
+                            if 'high_frequency' in assessment.tags:
                                 await redis_client.redis.sadd("security.blocklist", client_ip)
-                                logger.warning(f"AUTO-BLOCKED IP due to HIGH risk detection: {client_ip}")
-                                action = "block"
-                                return {"status": "received", "action": action, "url": ""}
+                                logger.warning(f"AUTO-BLOCKED IP due to HIGH FREQUENCY: {client_ip}")
+                                return {"status": "received", "action": "block", "url": ""}
                             
-                            logger.warning(f"HIGH RISK Detected. Action: redirect to {url}")
-                            action = "redirect"
-                            return {"status": "received", "action": action, "url": url}
+                            # 2. SHADOW REDIRECT: For SQL Injection and other exploits
+                            logger.warning(f"SUSPICIOUS ACTIVITY ({assessment.risk}). Redirecting to shadow: {url}")
+                            return {"status": "received", "action": "redirect", "url": url}
     except Exception as e:
         logger.error(f"Scoring error: {e}")
 
@@ -384,12 +406,14 @@ async def get_dashboard_stats():
     normal = await redis_client.redis.get("stats.normal_users")
     suspicious = await redis_client.redis.get("stats.suspicious_users")
     blocked = await redis_client.redis.get("stats.attacks_blocked")
+    shadowed = await redis_client.redis.get("stats.attacks_shadowed")
     
     stats = {
         "totalRequests": int(total) if total else 0,
         "normalUsers": int(normal) if normal else 0,
         "suspiciousUsers": int(suspicious) if suspicious else 0,
-        "attacksBlocked": int(blocked) if blocked else 0
+        "attacksBlocked": int(blocked) if blocked else 0,
+        "attacksShadowed": int(shadowed) if shadowed else 0
     }
     
     # Fetch attack types tally
@@ -490,6 +514,7 @@ async def reset_stats():
     await redis_client.redis.set("stats.normal_users", "0")
     await redis_client.redis.set("stats.suspicious_users", "0")
     await redis_client.redis.set("stats.attacks_blocked", "0")
+    await redis_client.redis.set("stats.attacks_shadowed", "0")
     
     # 2. Clear lists and sets
     await redis_client.redis.delete("dashboard.logs")
@@ -505,6 +530,7 @@ async def reset_stats():
             "normalUsers": 0,
             "suspiciousUsers": 0,
             "attacksBlocked": 0,
+            "attacksShadowed": 0,
             "attackTypes": {},
             "shadowStats": {
                 "totalRequests": 0,

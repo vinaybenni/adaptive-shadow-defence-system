@@ -159,7 +159,7 @@ const Dashboard = ({ stats, logs, connected }) => {
                 <div className="bg-slate-900/40 backdrop-blur-md p-6 rounded-3xl border border-slate-800 shadow-2xl">
                     <h3 className="text-slate-200 font-black mb-6 flex items-center gap-3 uppercase tracking-widest text-sm">
                         <div className="bg-indigo-500/10 p-1.5 rounded-lg border border-indigo-500/30"><Activity size={18} className="text-indigo-400" /></div>
-                        Live Intelligence Feed
+                        Live Request Feed
                     </h3>
                     <LogTable logs={logs} emptyMsg="System online. Awaiting telemetry..." />
                 </div>
@@ -208,7 +208,7 @@ const LogTable = ({ logs, emptyMsg }) => (
     </div>
 );
 
-const ShadowMonitor = ({ stats, logs }) => {
+const ShadowMonitor = ({ stats, logs, blocklist, onBlock, onUnblock }) => {
     const [activeFilter, setActiveFilter] = useState('all');
 
     const filteredLogs = logs.filter(log => {
@@ -246,7 +246,7 @@ const ShadowMonitor = ({ stats, logs }) => {
                 </div>
 
                 <div className="p-8 rounded-3xl border bg-slate-900/40 border-slate-800 backdrop-blur-md shadow-xl transition-all duration-500 hover:shadow-orange-500/5">
-                    <div className="text-slate-500 text-xs uppercase tracking-widest font-black mb-2">Unique Adversaries</div>
+                    <div className="text-slate-500 text-xs uppercase tracking-widest font-black mb-2">Unique ips</div>
                     <div className="text-4xl font-black text-orange-500">{stats.uniqueAttackers || 0}</div>
                     <div className="mt-3 text-[10px] text-orange-400 font-black uppercase italic tracking-widest">TRACEABLE ENTITIES</div>
                 </div>
@@ -265,10 +265,11 @@ const ShadowMonitor = ({ stats, logs }) => {
                         <thead className="bg-slate-950/40 text-slate-500">
                             <tr>
                                 <th className="p-6 font-black uppercase text-[10px] tracking-widest">Time</th>
-                                <th className="p-6 font-black uppercase text-[10px] tracking-widest">	Client IP</th>
+                                <th className="p-6 font-black uppercase text-[10px] tracking-widest">Client IP</th>
                                 <th className="p-6 font-black uppercase text-[10px] tracking-widest">Path</th>
                                 <th className="p-6 font-black uppercase text-[10px] tracking-widest">Payload Data</th>
                                 <th className="p-6 font-black uppercase text-[10px] tracking-widest">Client Sign</th>
+                                <th className="p-6 font-black uppercase text-[10px] tracking-widest">Action</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-800/30">
@@ -288,6 +289,23 @@ const ShadowMonitor = ({ stats, logs }) => {
                                         <td className="p-6 text-slate-300 font-mono text-[12px]"><span className="text-slate-600 block text-[9px] uppercase font-bold tracking-tighter opacity-50 mb-1">Host: {log.shadow_host}</span>/{log.path}</td>
                                         <td className="p-6 text-slate-500 italic max-w-xs truncate font-medium">{log.payload || "CLEAN INGRESS"}</td>
                                         <td className="p-6 text-slate-600 text-[10px] max-w-[150px] truncate uppercase font-bold">{log.user_agent}</td>
+                                        <td className="p-6">
+                                            {blocklist.includes(log.attacker_ip) ? (
+                                                <button 
+                                                    onClick={() => onUnblock(log.attacker_ip)}
+                                                    className="bg-emerald-600/20 text-emerald-500 hover:bg-emerald-600 hover:text-white px-3 py-1 rounded-md border border-emerald-500/30 text-[10px] font-black uppercase transition-all duration-300"
+                                                >
+                                                    Unblock
+                                                </button>
+                                            ) : (
+                                                <button 
+                                                    onClick={() => onBlock(log.attacker_ip)}
+                                                    className="bg-red-600/20 text-red-500 hover:bg-red-600 hover:text-white px-3 py-1 rounded-md border border-red-500/30 text-[10px] font-black uppercase transition-all duration-300"
+                                                >
+                                                    Block IP
+                                                </button>
+                                            )}
+                                        </td>
                                     </tr>
                                 ))
                             )}
@@ -426,35 +444,17 @@ const Applications = () => {
     );
 };
 
-const ProtectionRules = ({ proposals }) => {
-    const [blocklist, setBlocklist] = useState([]);
+const ProtectionRules = ({ proposals, blocklist, onBlock, onUnblock }) => {
     const [ipToBlock, setIpToBlock] = useState("");
 
-    useEffect(() => {
-        fetchBlocklist();
-    }, []);
-
-    const fetchBlocklist = async () => {
-        try {
-            const resp = await fetch("http://localhost:8010/api/v1/blocklist");
-            if (resp.ok) setBlocklist(await resp.json());
-        } catch (e) { console.error(e); }
-    };
-
-    const handleBlock = async () => {
-        const trimmedIp = ipToBlock.trim();
-        if (!trimmedIp) return;
-        try {
-            const resp = await fetch("http://localhost:8010/api/v1/block", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ip: trimmedIp })
-            });
-            if (resp.ok) {
-                setIpToBlock("");
-                fetchBlocklist();
-            }
-        } catch (e) { console.error(e); }
+    const handleManualBlock = () => {
+        if (!ipToBlock.trim()) return;
+        if (blocklist.includes(ipToBlock.trim())) {
+            alert("This IP is already blocked");
+            return;
+        }
+        onBlock(ipToBlock.trim());
+        setIpToBlock("");
     };
 
     const handleUnblock = async (ip) => {
@@ -498,7 +498,7 @@ const ProtectionRules = ({ proposals }) => {
                                 onChange={(e) => setIpToBlock(e.target.value)}
                                 className="bg-slate-900 border border-slate-600 p-2 rounded flex-1 text-slate-200 text-sm"
                             />
-                            <button onClick={handleBlock} className="bg-red-600 hover:bg-red-500 px-4 py-2 rounded font-bold text-white text-sm transition-colors">
+                            <button onClick={handleManualBlock} className="bg-red-600 hover:bg-red-500 px-4 py-2 rounded font-bold text-white text-sm transition-colors">
                                 Block IP
                             </button>
                         </div>
@@ -509,7 +509,7 @@ const ProtectionRules = ({ proposals }) => {
                                 blocklist.map(ip => (
                                     <div key={ip} className="p-2 bg-slate-900 rounded flex justify-between items-center border border-slate-800">
                                         <span className="text-slate-300 font-mono text-xs">{ip}</span>
-                                        <button onClick={() => handleUnblock(ip)} className="text-xs text-slate-500 hover:text-emerald-400 font-bold uppercase">Unblock</button>
+                                        <button onClick={() => onUnblock(ip)} className="text-xs text-slate-500 hover:text-emerald-400 font-bold uppercase">Unblock</button>
                                     </div>
                                 ))
                             )}
@@ -639,7 +639,41 @@ function App() {
         uniqueAttackTypes: 0
     });
     const [shadowLogs, setShadowLogs] = useState([]);
+    const [blocklist, setBlocklist] = useState([]);
     const [connected, setConnected] = useState(false);
+
+    const fetchBlocklist = async () => {
+        try {
+            const resp = await fetch("http://localhost:8010/api/v1/blocklist");
+            if (resp.ok) setBlocklist(await resp.json());
+        } catch (e) { console.error(e); }
+    };
+
+    const handleBlockIp = async (ip) => {
+        if (blocklist.includes(ip)) {
+            alert("This IP is already blocked");
+            return;
+        }
+        try {
+            const resp = await fetch("http://localhost:8010/api/v1/block", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ip: ip })
+            });
+            if (resp.ok) fetchBlocklist();
+        } catch (e) { console.error(e); }
+    };
+
+    const handleUnblockIp = async (ip) => {
+        try {
+            const resp = await fetch(`http://localhost:8010/api/v1/block/${ip}`, { method: "DELETE" });
+            if (resp.ok) fetchBlocklist();
+        } catch (e) { console.error(e); }
+    };
+
+    useEffect(() => {
+        fetchBlocklist();
+    }, []);
 
     useEffect(() => {
         const fetchHistory = async () => {
@@ -825,9 +859,9 @@ function App() {
             <div className="flex-1 overflow-auto">
                 {activeTab === 'dashboard' && <Dashboard stats={stats} logs={logs} connected={connected} />}
                 {activeTab === 'applications' && <Applications />}
-                {activeTab === 'protection' && <ProtectionRules proposals={proposals} />}
+                {activeTab === 'protection' && <ProtectionRules proposals={proposals} blocklist={blocklist} onBlock={handleBlockIp} onUnblock={handleUnblockIp} />}
                 {activeTab === 'settings' && <AppSettings isDark={isDark} toggleTheme={toggleTheme} onReset={handleResetStats} />}
-                {activeTab === 'shadow' && <ShadowMonitor stats={shadowStats} logs={shadowLogs} />}
+                {activeTab === 'shadow' && <ShadowMonitor stats={shadowStats} logs={shadowLogs} blocklist={blocklist} onBlock={handleBlockIp} onUnblock={handleUnblockIp} />}
             </div>
         </div>
     );
