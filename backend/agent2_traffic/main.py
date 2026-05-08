@@ -92,110 +92,33 @@ async def broadcast_redis_events():
             try:
                 data = json.loads(message['data']) if isinstance(message['data'], str) else message['data']
                 
-                # Persistence: Store events for dashboard history
                 if channel == "risk.events" or channel == "login.success":
-                    log_entry = {"channel": channel, **data}
-                    await redis_client.redis.lpush("dashboard.logs", json.dumps(log_entry))
-                    await redis_client.redis.ltrim("dashboard.logs", 0, 99) # Keep last 100
-                    
-                    if channel == "risk.events":
-                        client_ip = data.get('client_ip')
-                        if client_ip:
-                            # 1. Suspicious Users tally (Score > 20)
-                            if data.get('score', 0) > 20:
-                                is_new_suspicious = await redis_client.redis.sadd("stats.unique_suspicious_ips", client_ip)
-                                if is_new_suspicious:
-                                    await redis_client.redis.incr("stats.suspicious_users")
-                            
-                            # 2. Authoritative Action Attribution
-                            tags = data.get('tags', [])
-                            risk = data.get('risk', 'LOW')
-                            
-                            if risk == 'HIGH':
-                                if 'high_frequency' in tags:
-                                    # This was a HARD BLOCK
-                                    await redis_client.redis.incr("stats.attacks_blocked")
-                                    data['action'] = 'block'
-                                else:
-                                    # This was a SHADOW REDIRECT
-                                    await redis_client.redis.incr("stats.attacks_shadowed")
-                                    data['action'] = 'shadow_redirect'
-                            else:
-                                data['action'] = 'allowed'
-
-                            # 3. Tally specific attack types
-                            if risk == 'HIGH':
-                                if not tags:
-                                    tags = ["high_frequency"] if data.get('score', 0) >= 90 else ["unknown"]
-                                
-                                for tag in tags:
-                                    await redis_client.redis.hincrby("stats.attack_types", tag, 1)
-
-                    log_entry = {"channel": channel, **data}
-                    await redis_client.redis.lpush("dashboard.logs", json.dumps(log_entry))
-                    await redis_client.redis.ltrim("dashboard.logs", 0, 99)
-
-                # Handle Shadow Activity specifically
+                    pass
                 elif channel == "shadow.activity":
-                    log_entry = {"channel": channel, **data}
-                    await redis_client.redis.lpush("shadow.logs", json.dumps(log_entry))
-                    await redis_client.redis.ltrim("shadow.logs", 0, 99) 
-                    
-                    
-                    # 1. Deduplicate shadow counts: only count once per request per second
-                    # We use IP + Path + Second to ensure Telemetry and Agent 3 hits collapse into 1 count
-                    attacker_ip = data.get('attacker_ip') or data.get('client_ip')
-                    path = data.get('path', 'root')
-                    timestamp_sec = int(datetime.utcnow().timestamp())
-                    
-                    dedup_id = f"s:{attacker_ip}:{path}:{timestamp_sec}"
-                    dedup_key = f"shadow_counted:{dedup_id}"
-                    
-                    is_new_shadow = await redis_client.redis.set(dedup_key, "1", ex=5, nx=True)
-                    
-                    if is_new_shadow:
-                        await redis_client.redis.incr("stats.shadow_total")
-                        logger.info(f"Shadow Monitor: Unique hit counted for {attacker_ip} -> {path}")
-                    
                     # Track Unique Shadow IPs
-                    attacker_ip = data.get('attacker_ip')
+                    attacker_ip = data.get('attacker_ip') or data.get('client_ip')
                     if attacker_ip:
                          await redis_client.redis.sadd("stats.shadow_unique_ips", attacker_ip)
                     
-                    # Analyze for attack types (Local simple check to avoid cross-agent calls)
-                    payload = data.get('payload', '').lower()
-                    path = data.get('path', '').lower()
-                    content = f"{path} {payload}"
-                    
-                    patterns = {
-                        "sql_injection": r"(\'\s*(OR|AND)\s+[\'\"\d]|\bUNION\b|\bSELECT\b|--|\bOR\b\s+['\"]?1['\"]?\s*=\s*['\"]?1|SLEEP\s*\()",
-                        "xss": r"(<script|alert\(|onerror|onload|javascript:|<iframe)",
-                        "path_traversal": r"(\.\.\/|\.\.\\|/etc/passwd)",
-                        "os_command": r"(&&|\|\||;|`|\$\(|ping|netstat|whoami|cat)"
-                    }
-                    
-                    for atk_name, pattern in patterns.items():
-                        if re.search(pattern, content, re.IGNORECASE):
-                             await redis_client.redis.hincrby("stats.shadow_attack_types", atk_name, 1)
+                    # Track Total Shadow Hits (with 5s de-dup for noise reduction)
+                    path = data.get('path', 'root')
+                    timestamp_sec = int(datetime.utcnow().timestamp())
+                    dedup_key = f"shadow_counted:{attacker_ip}:{path}:{timestamp_sec}"
+                    if await redis_client.redis.set(dedup_key, "1", ex=5, nx=True):
+                        await redis_client.redis.incr("stats.shadow_total")
 
                 # 3. Authoritative Stats Broadcast (For ALL channels)
                 # Fetch latest stats to send with the message (authoritative)
                 total = await redis_client.redis.get("stats.total_requests")
                 normal = await redis_client.redis.get("stats.normal_users")
-                suspicious = await redis_client.redis.get("stats.suspicious_users")
+                suspicious = await redis_client.redis.scard("stats.unique_suspicious_ips")
                 blocked = await redis_client.redis.get("stats.attacks_blocked")
+                shadowed = await redis_client.redis.get("stats.attacks_shadowed")
                 
                 # SHADOW STATS
                 s_total = await redis_client.redis.get("stats.shadow_total")
                 s_unique_ips = await redis_client.redis.scard("stats.shadow_unique_ips")
                 s_attack_types = await redis_client.redis.hgetall("stats.shadow_attack_types")
-                
-                # Attributed Stats
-                total = await redis_client.redis.get("stats.total_requests")
-                normal = await redis_client.redis.get("stats.normal_users")
-                suspicious = await redis_client.redis.get("stats.suspicious_users")
-                blocked = await redis_client.redis.get("stats.attacks_blocked")
-                shadowed = await redis_client.redis.get("stats.attacks_shadowed")
                 
                 stats_payload = {
                     "totalRequests": int(total) if total else 0,
@@ -247,153 +170,161 @@ async def receive_telemetry(request: Request):
     
     request_id = str(uuid.uuid4())
     data['request_id'] = request_id
-    logger.info(f"Telemetry [{request_id}]: {data.get('event')} from {client_ip}")
     
-    action = "none"
-
-    # 0. SMART DE-DUPLICATION (Atomic check-and-set to prevent race conditions)
     path = data.get('path', '/')
-    method = data.get('method', 'GET').upper()
-    payload = data.get('payload', '')
-    timestamp_sec = int(datetime.utcnow().timestamp())
+    event_type = data.get('event', 'hit')
     
-    import hashlib
-    fingerprint = hashlib.md5(f"{client_ip}:{path}:{method}:{payload}:{timestamp_sec}".encode()).hexdigest()
-    dedup_key = f"telemetry:smart_dedup:{fingerprint}"
-    
-    # Use 'nx=True' for atomic check-and-set. Only the first request in this second will proceed.
-    is_new_request = await redis_client.redis.set(dedup_key, "1", ex=2, nx=True)
-    if not is_new_request:
-        return {"status": "duplicate ignored"}
-
-    # 1. SHADOW INGRESS (Existing hits on shadow URLs)
-    # We check this FIRST so that even blocked IPs can still be monitored in the shadow environment.
-    # Shadow hits are EXCLUDED from main dashboard counters.
-    is_shadow = routing_manager.is_shadow_url(data.get('full_url', ''))
-    if is_shadow:
-        attacker_ip = data.get("client_ip", "unknown")
-        if attacker_ip != "unknown":
-            await redis_client.redis.sadd("stats.shadow_unique_ips", attacker_ip)
-
-        shadow_log = {
-            "attacker_ip": attacker_ip,
-            "timestamp": data.get("timestamp", datetime.utcnow().isoformat() + "Z"),
-            "shadow_host": data.get("host", "unknown"),
-            "path": data.get("path", "unknown"),
-            "payload": data.get("payload", ""),
-            "user_agent": data.get("user_agent", "unknown"),
-            "source": "telemetry"
-        }
-        await redis_client.publish("shadow.activity", shadow_log)
-        logger.info(f"Telemetry [{request_id}]: Shadow Hit recorded directly in Redis.")
-        return {"status": "shadow activity recorded"}
-
-    # 2. AUTHORITATIVE STATS INCREMENT (Main Domain Only)
-    # This must happen for ALL hits that appear in the dashboard feed (including blocked and logins)
+    # 0. AUTHORITATIVE TOTAL INCREMENT (Count every attempt, even if blocked)
     await redis_client.redis.incr("stats.total_requests")
 
-    # 3. BLOCKLIST CHECK (Main Domain Only)
-    is_blocked = await redis_client.redis.sismember("security.blocklist", data.get('client_ip', '').strip())
+    # --- 1. INSTANT KILL: BLOCKLIST CHECK ---
+    is_blocked = await redis_client.redis.sismember("security.blocklist", client_ip.strip())
     if is_blocked:
-        logger.warning(f"BLOCKED IP attempt on main domain: {data.get('client_ip')}")
-        
-        blocked_event = {
-            "client_ip": data.get('client_ip'),
-            "risk": "BLOCKED",
-            "score": 100,
-            "explain": "Blocked IP attempted access to main domain",
-            "timestamp": datetime.utcnow().isoformat() + "Z",
-            "msg_id": request_id
+        await redis_client.redis.incr("stats.attacks_blocked")
+        blocked_log = {
+            "channel": "risk.events", "client_ip": client_ip, "risk": "BLOCKED", "score": 100,
+            "explain": "Blocked IP attempted access (Connection Killed)",
+            "timestamp": datetime.utcnow().isoformat() + "Z", "msg_id": request_id, "action": "block"
         }
-        await redis_client.publish("risk.events", blocked_event)
+        await redis_client.redis.lpush("dashboard.logs", json.dumps(blocked_log))
+        await redis_client.publish("risk.events", blocked_log)
         return {"status": "blocked", "action": "block", "url": ""}
 
+    # --- 2. INSTANT KILL: SENSITIVE RATE LIMIT ---
+    if "login.php" in path or "login" in path.lower():
+        rl_key = f"rl:login:{client_ip}"
+        hits = await redis_client.redis.incr(rl_key)
+        if hits == 1: await redis_client.redis.expire(rl_key, 5)
+        
+        if hits > 5:
+            await redis_client.redis.sadd("security.blocklist", client_ip)
+            await redis_client.redis.incr("stats.attacks_blocked")
+            block_log = {
+                "channel": "risk.events", "client_ip": client_ip, "risk": "BLOCKED", "score": 100,
+                "explain": f"Brute force detected: {hits} login attempts (Death-Squeeze)",
+                "timestamp": datetime.utcnow().isoformat() + "Z", "msg_id": request_id, "action": "block"
+            }
+            await redis_client.redis.lpush("dashboard.logs", json.dumps(block_log))
+            await redis_client.publish("risk.events", block_log)
+            return {"status": "blocked", "action": "block", "url": ""}
+
+    logger.info(f"Telemetry [{request_id}]: {event_type} from {client_ip}")
+
+    # 3. SMART DE-DUPLICATION (Merge JS + PHP hits for cleaner feed)
+    method = data.get('method', 'GET').upper()
+    timestamp_sec = int(datetime.utcnow().timestamp())
+    import hashlib
+    fingerprint = hashlib.md5(f"{client_ip}:{path}:{method}:{timestamp_sec}".encode()).hexdigest()
+    dedup_key = f"telemetry:smart_dedup:{fingerprint}"
+    
+    if event_type != 'login_success':
+        if not await redis_client.redis.set(dedup_key, "1", ex=2, nx=True):
+            return {"status": "duplicate ignored"}
+
+    # 4. SHADOW INGRESS
+    is_shadow = routing_manager.is_shadow_url(data.get('full_url', ''))
+    if is_shadow:
+        attacker_ip = client_ip
+        if attacker_ip != "unknown":
+            await redis_client.redis.sadd("stats.shadow_unique_ips", attacker_ip)
+        shadow_log = {
+            "attacker_ip": attacker_ip, "timestamp": data.get("timestamp", datetime.utcnow().isoformat() + "Z"),
+            "shadow_host": data.get("host", "unknown"), "path": data.get("path", "unknown"),
+            "payload": data.get("payload", ""), "user_agent": data.get("user_agent", "unknown"), "source": "telemetry"
+        }
+        # Persist shadow logs so they don't clear on refresh
+        await redis_client.redis.lpush("shadow.logs", json.dumps(shadow_log))
+        await redis_client.redis.ltrim("shadow.logs", 0, 99)
+        
+        await redis_client.publish("shadow.activity", shadow_log)
+        return {"status": "shadow activity recorded"}
+
+    # 5. RISK SCORING & LOGGING
     payload_str = data.get('payload', '')
     payload_size = len(payload_str.encode()) if payload_str else 0
-
-    # 4. RISK SCORING (Before De-duplication to allow burst detection)
+    action = "none"
+    url = ""
+    assessment = RiskAssessment(risk="LOW", score=0, tags=[], explain="Normal traffic")
+    
     meta = RequestMetadata(
         timestamp=datetime.utcnow().isoformat() + "Z",
-        client_ip=data.get('client_ip'),
-        request_id=str(request_id),
-        method=data.get('method', 'GET'),
-        path=data.get('path', '/'),
-        host=data.get('host', 'localhost'),
+        client_ip=client_ip,
+        method=method,
+        path=path,
+        host=data.get('host', 'unknown'),
         full_url=data.get('full_url', ''),
         payload=payload_str,
+        payload_size=payload_size,
         headers=data.get('headers', {}),
-        payload_size=payload_size
+        request_id=request_id
     )
 
+    assessment = RiskAssessment(risk="LOW", score=0, tags=[], explain="Normal traffic")
     try:
         app_config = routing_manager.get_route(meta.host)
         if app_config:
             async with httpx.AsyncClient(timeout=10.0) as client:
-                logger.info(f"Calling Agent 1 at {AGENT1_URL} for scoring...")
                 resp = await client.post(AGENT1_URL, json=meta.dict())
                 if resp.status_code == 200:
-                    assessment_data = resp.json()
-                    assessment = RiskAssessment(**assessment_data)
+                    assessment = RiskAssessment(**resp.json())
                     
-                    # Log high risk immediately
-                    if assessment.score > 20: 
-                        logger.info(f"Telemetry [{request_id}]: Scored {assessment.score} ({assessment.risk})")
+                    if assessment.risk == "HIGH" and app_config.protection_enabled:
+                        url = routing_manager.resolve_upstream(app_config, routing_manager.decide_target(app_config, assessment.score, assessment.risk))
+                        if "/DVWA-master/" in meta.full_url:
+                            url = meta.full_url.replace("/DVWA-master/", "/DVWA-rnaster/")
+                        
+                        if 'high_frequency' in assessment.tags:
+                            await redis_client.redis.sadd("security.blocklist", client_ip)
+                            await redis_client.redis.incr("stats.attacks_blocked")
+                            action = "block"
+                        else:
+                            await redis_client.redis.incr("stats.attacks_shadowed")
+                            action = "shadow_redirect"
+                        
+                        # Update Attack Type Stats (Only once for HIGH risk)
+                        for tag in assessment.tags:
+                            if tag not in ['error', 'unregistered_host']:
+                                await redis_client.redis.hincrby("stats.attack_types", tag, 1)
+                        
+                        # Update Suspicious Users
+                        if assessment.score > 20:
+                            await redis_client.redis.sadd("stats.unique_suspicious_ips", client_ip)
 
-                    if assessment.score > 90:
-                        target_type = routing_manager.decide_target(app_config, assessment.score, assessment.risk)
-                        if app_config.protection_enabled:
-                            url = routing_manager.resolve_upstream(app_config, target_type)
-                            if "/DVWA-master/" in meta.full_url:
-                                url = meta.full_url.replace("/DVWA-master/", "/DVWA-rnaster/")
-                            
-                            # --- DEFENSIVE POLICY ---
-                            # 1. HARD BLOCK: Only for high-frequency (Brute force/DoS)
-                            if 'high_frequency' in assessment.tags:
-                                await redis_client.redis.sadd("security.blocklist", client_ip)
-                                logger.warning(f"AUTO-BLOCKED IP due to HIGH FREQUENCY: {client_ip}")
-                                return {"status": "received", "action": "block", "url": ""}
-                            
-                            # 2. SHADOW REDIRECT: For SQL Injection and other exploits
-                            logger.warning(f"SUSPICIOUS ACTIVITY ({assessment.risk}). Redirecting to shadow: {url}")
-                            return {"status": "received", "action": "redirect", "url": url}
     except Exception as e:
         logger.error(f"Scoring error: {e}")
 
-    # 4. LOG PROCESSING
-    # The duplicate check at the top handles the feed consistency.
-    
-    # Baseline publication if unregistered
-    if not routing_manager.get_route(meta.host):
-        baseline_event = {
-            "client_ip": data.get('client_ip'),
-            "timestamp": datetime.utcnow().isoformat() + "Z",
-            "path": data.get('path', '/'),
-            "risk": "LOW",
-            "score": 0,
-            "tags": ["unregistered_host"],
-            "explanation": f"Baseline traffic from unregistered host: {data.get('host')}",
-            "method": data.get('method', 'GET'),
-            "payload": data.get('payload', '')[:200],
-            "host": data.get('host', 'unknown'),
-            "action": "none",
-            "msg_id": request_id
-        }
-        await redis_client.publish("risk.events", baseline_event)
-
-    # Specific Event Handling
-    if data.get('event') == 'login_success':
-        # Removed cooldown to ensure every login counts as +1
+    # --- 7. AUTHORITATIVE STATS CATEGORIZATION ---
+    if assessment.risk == "HIGH":
+        # Counts for HIGH risk are handled in the protection block above 
+        # (stats.attacks_blocked or stats.attacks_shadowed)
+        pass
+    elif event_type == 'login_success':
+        # Successful logins are always counted as normal user activity
         await redis_client.redis.incr("stats.normal_users")
-        login_event = {
-            "client_ip": data.get('client_ip'),
-            "timestamp": datetime.utcnow().isoformat() + "Z",
-            "path": data.get('path'),
-            "event": "Successful Login",
-            "msg_id": request_id,
-            "status_code": 200,
-            "channel": "login.success"
-        }
-        await redis_client.publish("login.success", login_event)
+    elif assessment.score > 20:
+        # Low risk but suspicious (score > 20)
+        await redis_client.redis.sadd("stats.unique_suspicious_ips", client_ip)
+    else:
+        # Clean, low-risk traffic
+        await redis_client.redis.incr("stats.normal_users")
+
+    # FINAL LOG ENTRY (Authoritative)
+    final_event = {
+        "channel": "risk.events" if event_type != 'login_success' else "login.success",
+        "client_ip": client_ip,
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "path": path,
+        "risk": assessment.risk,
+        "score": assessment.score,
+        "tags": assessment.tags,
+        "explain": assessment.explain if event_type != 'login_success' else "Successful Login",
+        "msg_id": request_id,
+        "action": action
+    }
+    
+    await redis_client.redis.lpush("dashboard.logs", json.dumps(final_event))
+    await redis_client.redis.ltrim("dashboard.logs", 0, 99)
+    await redis_client.publish(final_event["channel"], final_event)
 
     return {"status": "received", "action": action, "url": url}
 
@@ -404,7 +335,7 @@ async def get_dashboard_stats():
     """Returns persisted stats and recent logs for dashboard initialization."""
     total = await redis_client.redis.get("stats.total_requests")
     normal = await redis_client.redis.get("stats.normal_users")
-    suspicious = await redis_client.redis.get("stats.suspicious_users")
+    suspicious = await redis_client.redis.scard("stats.unique_suspicious_ips")
     blocked = await redis_client.redis.get("stats.attacks_blocked")
     shadowed = await redis_client.redis.get("stats.attacks_shadowed")
     
