@@ -53,11 +53,15 @@ class RiskEngine:
 
         # -- Rule 3: Header Analysis --
         headers = meta.headers or {}
+<<<<<<< HEAD
         user_agent = ""
         for k, v in headers.items():
             if k.lower() == "user-agent":
                 user_agent = v.lower()
                 break
+=======
+        user_agent = headers.get("User-Agent", "").lower()
+>>>>>>> 27a4b8385bfacb236209d169d98e31a75383214a
         for tool in self.suspicious_headers:
             if tool in user_agent:
                 score += 100 # Immediate block for known attack tools

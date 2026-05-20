@@ -107,6 +107,7 @@
 {"timestamp": "2026-05-06T06:53:07.470473Z", "level": "INFO", "logger": "agent3.shadow", "message": "Agent 3 (Shadow) Starting..."}
 {"timestamp": "2026-05-06T06:58:35.068224Z", "level": "INFO", "logger": "agent3.shadow", "message": "Agent 3 (Shadow) Starting..."}
 {"timestamp": "2026-05-06T07:14:32.183648Z", "level": "INFO", "logger": "agent3.shadow", "message": "Agent 3 (Shadow) Starting..."}
+<<<<<<< HEAD
 {"timestamp": "2026-05-19T05:46:43.033465Z", "level": "INFO", "logger": "agent3.shadow", "message": "Agent 3 (Shadow) Starting..."}
 {"timestamp": "2026-05-19T06:00:21.067254Z", "level": "INFO", "logger": "agent3.shadow", "message": "Agent 3 (Shadow) Starting..."}
 {"timestamp": "2026-05-19T10:57:03.143826Z", "level": "INFO", "logger": "agent3.shadow", "message": "Agent 3 (Shadow) Starting..."}
@@ -117,3 +118,14 @@
 {"timestamp": "2026-05-20T06:58:30.273199Z", "level": "INFO", "logger": "agent3.shadow", "message": "Agent 3 (Shadow) Starting..."}
 {"timestamp": "2026-05-20T14:26:18.367857Z", "level": "INFO", "logger": "agent3.shadow", "message": "Agent 3 (Shadow) Starting..."}
 {"timestamp": "2026-05-20T14:31:33.764300Z", "level": "INFO", "logger": "agent3.shadow", "message": "Agent 3 (Shadow) Starting..."}
+=======
+{"timestamp": "2026-05-08T05:39:22.923956Z", "level": "INFO", "logger": "agent3.shadow", "message": "Agent 3 (Shadow) Starting..."}
+{"timestamp": "2026-05-08T05:55:38.242296Z", "level": "INFO", "logger": "agent3.shadow", "message": "Agent 3 (Shadow) Starting..."}
+{"timestamp": "2026-05-08T05:57:32.662778Z", "level": "INFO", "logger": "agent3.shadow", "message": "Agent 3 (Shadow) Starting..."}
+{"timestamp": "2026-05-08T06:07:15.189855Z", "level": "INFO", "logger": "agent3.shadow", "message": "Agent 3 (Shadow) Starting..."}
+{"timestamp": "2026-05-08T06:13:08.820049Z", "level": "INFO", "logger": "agent3.shadow", "message": "Agent 3 (Shadow) Starting..."}
+{"timestamp": "2026-05-08T06:15:25.133886Z", "level": "INFO", "logger": "agent3.shadow", "message": "Agent 3 (Shadow) Starting..."}
+{"timestamp": "2026-05-08T06:19:21.383128Z", "level": "INFO", "logger": "agent3.shadow", "message": "Agent 3 (Shadow) Starting..."}
+{"timestamp": "2026-05-08T06:22:38.288991Z", "level": "INFO", "logger": "agent3.shadow", "message": "Agent 3 (Shadow) Starting..."}
+{"timestamp": "2026-05-08T06:28:44.396176Z", "level": "INFO", "logger": "agent3.shadow", "message": "Agent 3 (Shadow) Starting..."}
+>>>>>>> 27a4b8385bfacb236209d169d98e31a75383214a

@@ -5788,6 +5788,7 @@
 {"timestamp": "2026-05-06T07:15:40.934512Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
 {"timestamp": "2026-05-06T07:15:54.006206Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to #"}
 {"timestamp": "2026-05-06T07:15:54.008751Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: HIGH (95) for 127.0.0.1"}
+<<<<<<< HEAD
 {"timestamp": "2026-05-19T05:48:33.161996Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.20.249.71 to /DVWA-master/login.php"}
 {"timestamp": "2026-05-19T05:48:33.163656Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: HIGH (100) for 10.20.249.71"}
 {"timestamp": "2026-05-19T06:00:59.314147Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/vulnerabilities/sqli/"}
@@ -6100,3 +6101,111 @@
 {"timestamp": "2026-05-20T14:32:23.967636Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 10.20.249.133"}
 {"timestamp": "2026-05-20T14:32:27.856756Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.20.249.133 to #"}
 {"timestamp": "2026-05-20T14:32:27.863923Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: HIGH (95) for 10.20.249.133"}
+=======
+{"timestamp": "2026-05-08T05:39:52.621109Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:39:52.622714Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:40:04.543100Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to login.php"}
+{"timestamp": "2026-05-08T05:40:04.543882Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:40:06.933912Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:40:06.934580Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:40:07.697544Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/index.php"}
+{"timestamp": "2026-05-08T05:40:07.698169Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:40:08.907591Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/index.php"}
+{"timestamp": "2026-05-08T05:40:08.908222Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:40:23.886113Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/vulnerabilities/sqli_blind/"}
+{"timestamp": "2026-05-08T05:40:23.886903Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:40:24.619426Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/vulnerabilities/sqli_blind/"}
+{"timestamp": "2026-05-08T05:40:24.620074Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:40:25.838172Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/vulnerabilities/sqli/"}
+{"timestamp": "2026-05-08T05:40:25.838813Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:40:46.215932Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:40:46.216586Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:40:47.361003Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:40:47.361763Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:40:51.403189Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to login.php"}
+{"timestamp": "2026-05-08T05:40:51.403889Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:40:52.122642Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:40:52.123333Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:40:52.834058Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:40:52.834741Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:41:00.822995Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to login.php"}
+{"timestamp": "2026-05-08T05:41:00.823787Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:41:01.535661Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:41:01.536269Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:41:02.275947Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:41:02.276624Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:41:02.809798Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:41:02.810494Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:41:12.165259Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to login.php"}
+{"timestamp": "2026-05-08T05:41:12.165936Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:41:12.893571Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:41:12.894236Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:41:13.670648Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/index.php"}
+{"timestamp": "2026-05-08T05:41:13.671304Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:41:16.392496Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/vulnerabilities/sqli/"}
+{"timestamp": "2026-05-08T05:41:16.393132Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:41:16.918187Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/vulnerabilities/sqli/"}
+{"timestamp": "2026-05-08T05:41:16.918870Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:41:43.650943Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to #"}
+{"timestamp": "2026-05-08T05:41:43.653684Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: HIGH (95) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:43:43.525170Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:43:43.526083Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: HIGH (100) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:43:44.302868Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:43:44.303572Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: HIGH (100) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:43:44.313212Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:43:44.314070Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: HIGH (100) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:43:44.316457Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:43:44.317632Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: HIGH (100) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:43:44.320000Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:43:44.320507Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: HIGH (100) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:43:44.325568Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:43:44.326318Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:43:44.330135Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: HIGH (100) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:43:44.331568Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:43:44.332093Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:43:44.332492Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:43:44.333457Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:43:44.552616Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:43:44.556449Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:43:44.561772Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:43:46.337647Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: HIGH (100) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:43:46.338493Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: HIGH (100) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:43:48.344215Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: HIGH (100) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:43:48.345132Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: HIGH (100) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:43:48.345872Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: HIGH (100) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:43:50.355087Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: HIGH (100) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:43:50.356359Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: HIGH (100) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:43:50.357399Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: HIGH (100) for 10.0.21.55"}
+{"timestamp": "2026-05-08T05:51:26.950141Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 192.168.137.71 to /"}
+{"timestamp": "2026-05-08T05:51:26.951399Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 192.168.137.71"}
+{"timestamp": "2026-05-08T05:58:00.903345Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/vulnerabilities/sqli/"}
+{"timestamp": "2026-05-08T05:58:00.904156Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:58:12.216934Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/vulnerabilities/brute/"}
+{"timestamp": "2026-05-08T05:58:12.217579Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:58:13.062164Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/vulnerabilities/brute/"}
+{"timestamp": "2026-05-08T05:58:13.062931Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:58:24.264687Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/logout.php"}
+{"timestamp": "2026-05-08T05:58:24.265423Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:58:25.126555Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:58:25.127244Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:58:26.196453Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:58:26.196996Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:58:36.744962Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to login.php"}
+{"timestamp": "2026-05-08T05:58:36.745759Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:58:37.466928Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/login.php"}
+{"timestamp": "2026-05-08T05:58:37.467641Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:58:38.230481Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/index.php"}
+{"timestamp": "2026-05-08T05:58:38.231198Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:58:38.999958Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/index.php"}
+{"timestamp": "2026-05-08T05:58:39.000586Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/index.php"}
+{"timestamp": "2026-05-08T05:58:39.001398Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T05:58:41.025477Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T06:19:42.970477Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/login.php"}
+{"timestamp": "2026-05-08T06:19:42.971435Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: HIGH (100) for 10.0.21.55"}
+{"timestamp": "2026-05-08T06:22:58.377119Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/vulnerabilities/brute/"}
+{"timestamp": "2026-05-08T06:22:58.379981Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T06:22:59.262552Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 127.0.0.1 to //DVWA-master/vulnerabilities/brute/"}
+{"timestamp": "2026-05-08T06:22:59.263207Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: LOW (0) for 127.0.0.1"}
+{"timestamp": "2026-05-08T06:30:31.686390Z", "level": "INFO", "logger": "agent1.main", "message": "Received scoring request for 10.0.21.55 to /DVWA-master/login.php"}
+{"timestamp": "2026-05-08T06:30:31.687243Z", "level": "INFO", "logger": "agent1.main", "message": "Scored: HIGH (100) for 10.0.21.55"}
+>>>>>>> 27a4b8385bfacb236209d169d98e31a75383214a

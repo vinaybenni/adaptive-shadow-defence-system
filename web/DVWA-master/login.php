@@ -31,11 +31,26 @@ if( isset( $_POST[ 'Login' ] ) ) {
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($telemetry_data));
 	curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+<<<<<<< HEAD
 	curl_setopt($ch, CURLOPT_TIMEOUT, 2);
 	$response = curl_exec($ch);
 	$res_data = json_decode($response, true);
 	curl_close($ch);
 
+=======
+	curl_setopt($ch, CURLOPT_TIMEOUT, 3); // Slightly longer timeout for stability
+	$response = curl_exec($ch);
+	$curl_error = curl_error($ch);
+	curl_close($ch);
+
+	// FAIL-CLOSE POLICY: If security system is down or slow, block the request.
+	if ($response === false) {
+		header('HTTP/1.1 403 Forbidden');
+		die("<h1>Security Alert</h1><p>The security system is currently unavailable. Access denied for safety.</p>");
+	}
+
+	$res_data = json_decode($response, true);
+>>>>>>> 27a4b8385bfacb236209d169d98e31a75383214a
 	if (isset($res_data['action']) && $res_data['action'] === 'block') {
 		header('HTTP/1.1 403 Forbidden');
 		die("<h1>403 Forbidden</h1><p>Your IP has been blocked due to suspicious activity.</p>");
