@@ -25,8 +25,8 @@ class RiskEngine:
 
         # 4. Rate Limit Tracking
         self.request_history = defaultdict(list)
-        self.rate_limit_threshold = 5   # requests per window
-        self.rate_limit_window = 5      # seconds
+        self.rate_limit_threshold = 20  # requests per window
+        self.rate_limit_window = 3      # seconds
 
     def evaluate(self, meta: RequestMetadata) -> RiskAssessment:
         score = 0
@@ -52,13 +52,19 @@ class RiskEngine:
                 explanation_parts.append(f"Detected {attack_type} pattern in request content")
 
         # -- Rule 3: Header Analysis --
-        for header, value in meta.headers.items():
-            val_lower = str(value).lower()
-            for susp in self.suspicious_headers:
-                if susp in val_lower:
-                    score += 50
-                    tags.append("suspicious_tool")
-                    explanation_parts.append(f"Detected suspicious tool {susp} in {header}")
+        headers = meta.headers or {}
+        user_agent = ""
+        for k, v in headers.items():
+            if k.lower() == "user-agent":
+                user_agent = v.lower()
+                break
+        for tool in self.suspicious_headers:
+            if tool in user_agent:
+                score += 100 # Immediate block for known attack tools
+                tags.append("brute_force")
+                tags.append("high_frequency")
+                explanation_parts.append(f"Brute force attack detected ({tool.upper()} Tool)")
+                break
 
         # -- Rule 4: Rate Limiting / High Frequency Detection --
         now = time.time()
@@ -71,9 +77,10 @@ class RiskEngine:
         self.request_history[history_key].append(now)
         
         if len(self.request_history[history_key]) >= self.rate_limit_threshold:
-            score += 95 # Increased from 90 to ensure it is "more than 90"
+            score += 95 
             tags.append("high_frequency")
-            explanation_parts.append(f"High frequency requests detected ({len(self.request_history[history_key])} in {self.rate_limit_window}s)")
+            tags.append("brute_force")
+            explanation_parts.append(f"Brute force attack detected ({len(self.request_history[history_key])} in {self.rate_limit_window}s)")
 
         # -- Rule 5: Payload Anomalies --
         if meta.payload_size > 50000:

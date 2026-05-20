@@ -113,6 +113,100 @@ if (array_key_exists ("Login", $_POST) && $_POST['Login'] == "Login") {
 	}
 }
 
+// --- AEGIS SERVER-SIDE TELEMETRY HOOK ---
+function aegis_telemetry_check() {
+    // 1. Skip if telemetry is already marked as verified by the browser shield
+    if (isset($_GET['telemetry_verified']) || isset($_POST['telemetry_verified']) || isset($_COOKIE['telemetry_verified'])) {
+        return;
+    }
+
+    $is_post = ($_SERVER['REQUEST_METHOD'] === 'POST');
+    $user_agent = strtolower($_SERVER['HTTP_USER_AGENT'] ?? '');
+    
+    // Check if user agent looks like an automated tool/CLI bot
+    $is_bot = empty($user_agent) || 
+              strpos($user_agent, 'curl') !== false || 
+              strpos($user_agent, 'wget') !== false || 
+              strpos($user_agent, 'python') !== false || 
+              strpos($user_agent, 'hydra') !== false || 
+              strpos($user_agent, 'sqlmap') !== false || 
+              strpos($user_agent, 'nikto') !== false ||
+              strpos($user_agent, 'nmap') !== false ||
+              strpos($user_agent, 'perl') !== false ||
+              strpos($user_agent, 'http-client') !== false;
+
+    // Only proceed if it is a POST request OR if it's an automated bot/tool
+    if (!$is_post && !$is_bot) {
+        return;
+    }
+
+    // 2. Build Request Metadata to report to Agent 2
+    $telemetry_host = explode(':', $_SERVER['HTTP_HOST'] ?? 'localhost')[0];
+    $url = "http://" . $telemetry_host . ":8010/api/v1/telemetry";
+
+    // Reconstruct payload
+    $payload = "";
+    if ($is_post) {
+        $payload = http_build_query($_POST);
+    } else {
+        $payload = $_SERVER['QUERY_STRING'] ?? "";
+    }
+
+    // Capture headers
+    $headers = [];
+    foreach ($_SERVER as $key => $value) {
+        if (substr($key, 0, 5) === 'HTTP_') {
+            $headerName = str_replace(' ', '-', ucwords(str_replace('_', ' ', strtolower(substr($key, 5)))));
+            $headers[$headerName] = $value;
+        }
+    }
+
+    $data = array(
+        'event' => 'hit',
+        'method' => $_SERVER['REQUEST_METHOD'],
+        'path' => $_SERVER['SCRIPT_NAME'] ?? $_SERVER['REQUEST_URI'],
+        'host' => $_SERVER['HTTP_HOST'] ?? 'localhost',
+        'full_url' => (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . ($_SERVER['HTTP_HOST'] ?? 'localhost') . ($_SERVER['REQUEST_URI'] ?? '/'),
+        'payload' => $payload,
+        'headers' => $headers,
+        'client_ip' => $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1',
+        'timestamp' => date('c'),
+        'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? 'unknown'
+    );
+
+    // Send cURL POST request to Agent 2 with a fast timeout (300ms)
+    $ch = curl_init($url);
+    $jsonData = json_encode($data);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+    curl_setopt($ch, CURLOPT_TIMEOUT_MS, 300); 
+    
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($httpCode === 200 && $response) {
+        $result = json_decode($response, true);
+        if ($result && isset($result['action'])) {
+            if ($result['action'] === 'block') {
+                header('HTTP/1.1 403 Forbidden');
+                echo '<div style="background: #000; color: #ff0000; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: sans-serif;">';
+                echo '<h1 style="font-size: 3rem;">SECURITY BLOCK</h1>';
+                echo '<p style="font-size: 1.2rem; color: #888;">Access denied by AEGIS Server-Side Protection Shield.</p>';
+                echo '</div>';
+                exit;
+            } elseif ($result['action'] === 'redirect' && isset($result['url'])) {
+                header("Location: " . $result['url']);
+                exit;
+            }
+        }
+    }
+}
+
+aegis_telemetry_check();
+
 if (!array_key_exists ("default_locale", $_DVWA)) {
 	$_DVWA[ 'default_locale' ] = "en";
 }

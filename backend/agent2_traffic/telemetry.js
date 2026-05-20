@@ -1,18 +1,23 @@
 (function () {
     console.log("Risk System Telemetry: Initializing...");
 
+    // Set cookie to identify standard browser sessions to the server-side hook
+    document.cookie = "telemetry_verified=true; path=/";
+
     // Configuration
     // Dynamically use the current host so other network devices send to the correct IP
     const currentHost = window.location.hostname;
     const AGENT_URL = "http://" + currentHost + ":8010/api/v1/telemetry";
 
     // Immediate Breach Prevention: Hide content if URL looks suspicious
-    const attackPatterns = /('\s*(OR|AND)\b\s*[\'\"\d\)\(]|--|union|select|insert|delete|update|drop|truncate|alter|xp_cmdshell|WAITFOR\s+DELAY|SLEEP\s*\(|pg_sleep|benchmark|request_uri\s*\()|' OR '1'='1|' OR 1=1/i;
+    const attackPatterns = /('\s*(OR|AND)\b\s*[\'\"\d\)\(]|--|union|select|insert|delete|update|drop|truncate|alter|xp_cmdshell|WAITFOR\s+DELAY|SLEEP\s*\(|pg_sleep|benchmark|request_uri\s*\()|'\s*OR\s*['\"]?\s*1\s*['\"]?\s*=\s*['\"]?\s*1|<script|alert\(|onerror|onload|javascript:|<iframe|document\.cookie|eval\(|unescape\(/i;
     
     function isSuspiciousContent(text) {
         if (!text) return false;
         try {
-            return attackPatterns.test(text) || attackPatterns.test(decodeURIComponent(text));
+            // Replace '+' with ' ' for proper URL param matching
+            const decoded = decodeURIComponent(text.replace(/\+/g, ' '));
+            return attackPatterns.test(text) || attackPatterns.test(decoded);
         } catch (e) {
             return attackPatterns.test(text);
         }
@@ -82,6 +87,16 @@
 
     function submitFormReliably(form) {
         form.dataset.telemetryVerified = "true";
+        
+        // Add server-side bypass marker to prevent double-counting
+        if (!form.querySelector('input[name="telemetry_verified"]')) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'telemetry_verified';
+            input.value = 'true';
+            form.appendChild(input);
+        }
+
         const submitBtn = form.querySelector('[type="submit"]');
         if (submitBtn && typeof submitBtn.click === 'function') {
             console.log("Risk System: Submitting via button click.");
@@ -101,12 +116,62 @@
 
         const form = e.target;
 
+        // Collect form details
+        const formData = new FormData(form);
+        const params = new URLSearchParams();
+        for (const [key, value] of formData.entries()) {
+            params.append(key, value);
+        }
+        const payload = params.toString();
+        const decodedPayload = decodeURIComponent(payload.replace(/\+/g, ' '));
+        const method = (form.getAttribute('method') || 'GET').toUpperCase();
+        const currentUrl = window.location.href;
+
+        // Synchronous immediate attack detection for XSS & SQLi (exclude if already in shadow)
+        const isShadowUrl = currentUrl.includes("/DVWA-rnaster/") || currentUrl.includes("/dvwa-rnaster/");
+        const isXSS = /<script|alert\(|onerror|onload|javascript:|<iframe|document\.cookie|eval\(|unescape\(/i.test(decodedPayload);
+        const isSQL = /('\s*(OR|AND)\b\s*[\'\"\d\)\(]|--|union|select|insert|delete|update|drop|truncate|alter|xp_cmdshell|WAITFOR\s+DELAY|SLEEP\s*\(|pg_sleep|benchmark|request_uri\s*\()|'\s*OR\s*['\"]?\s*1\s*['\"]?\s*=\s*['\"]?\s*1/i.test(decodedPayload);
+
+        if (!isShadowUrl && (isXSS || isSQL)) {
+            e.preventDefault();
+            console.warn("Risk System: IMMEDIATE BREACH PREVENTION - Attack payload blocked synchronously.");
+            
+            let shadowUrl = currentUrl;
+            if (currentUrl.includes("/DVWA-master/")) {
+                shadowUrl = currentUrl.replace("/DVWA-master/", "/DVWA-rnaster/");
+            } else if (currentUrl.includes("/dvwa-master/")) {
+                shadowUrl = currentUrl.replace("/dvwa-master/", "/dvwa-rnaster/");
+            }
+
+            // Report the attack asynchronously to Agent 2 for stats and learning
+            fetch(AGENT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    event: 'hit',
+                    method: method,
+                    path: form.getAttribute('action') || window.location.pathname,
+                    host: window.location.host,
+                    full_url: currentUrl,
+                    payload: payload,
+                    referrer: document.referrer,
+                    timestamp: new Date().toISOString()
+                }),
+                keepalive: true
+            }).then(() => {
+                window.location.href = shadowUrl;
+            }).catch(() => {
+                window.location.href = shadowUrl;
+            });
+            return;
+        }
+
         const currentPath = window.location.pathname.toLowerCase();
         if (currentPath.includes('login.php') || currentPath.includes('login/') || currentPath.endsWith('login')) {
             console.log("Risk System: Login page detected. Verifying before submission.");
             e.preventDefault(); // Prevent double form submission and double telemetry counting
             sendTelemetry('hit', {
-                method: (form.getAttribute('method') || 'GET').toUpperCase(),
+                method: method,
                 path: form.getAttribute('action') || window.location.pathname,
                 payload: "login_attempt=true"
             }).then(result => {
@@ -125,14 +190,6 @@
 
         e.preventDefault();
 
-        const formData = new FormData(form);
-        const params = new URLSearchParams();
-        for (const [key, value] of formData.entries()) {
-            params.append(key, value);
-        }
-        const payload = params.toString();
-        const method = (form.getAttribute('method') || 'GET').toUpperCase();
-
         console.log("Risk System: Verifying form submission before clearing...");
         sendTelemetry('hit', {
             method: method,
@@ -148,8 +205,6 @@
                     console.warn("Risk System: HIGH RISK DETECTED in Form. Redirecting to shadow.");
                     window.location.href = result.url;
                 }
-                // For 'block' action, the main telemetry loader handles the UI block on next page load/reload, 
-                // but we can also execute block UI here if needed.
             }
         });
     }, true);

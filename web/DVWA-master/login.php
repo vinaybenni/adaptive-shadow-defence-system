@@ -14,6 +14,33 @@ dvwaPageStartup( array( ) );
 dvwaDatabaseConnect();
 
 if( isset( $_POST[ 'Login' ] ) ) {
+	// --- ASDS SERVER-SIDE TELEMETRY HOOK ---
+	$telemetry_data = [
+		'event' => 'hit',
+		'client_ip' => $_SERVER['REMOTE_ADDR'],
+		'method' => 'POST',
+		'path' => $_SERVER['REQUEST_URI'],
+		'host' => $_SERVER['HTTP_HOST'],
+		'full_url' => (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",
+		'payload' => "username=" . ($_POST['username'] ?? '') . "&password=" . ($_POST['password'] ?? ''),
+		'timestamp' => gmdate("Y-m-d\TH:i:s\Z"),
+		'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? 'unknown'
+	];
+
+	$ch = curl_init('http://localhost:8010/api/v1/telemetry');
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($telemetry_data));
+	curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 2);
+	$response = curl_exec($ch);
+	$res_data = json_decode($response, true);
+	curl_close($ch);
+
+	if (isset($res_data['action']) && $res_data['action'] === 'block') {
+		header('HTTP/1.1 403 Forbidden');
+		die("<h1>403 Forbidden</h1><p>Your IP has been blocked due to suspicious activity.</p>");
+	}
+	// --- END ASDS HOOK ---
 	// Anti-CSRF
 	if (array_key_exists ("session_token", $_SESSION)) {
 		$session_token = $_SESSION[ 'session_token' ];
@@ -45,6 +72,20 @@ if( isset( $_POST[ 'Login' ] ) ) {
 	$query  = "SELECT * FROM `users` WHERE user='$user' AND password='$pass';";
 	$result = @mysqli_query($GLOBALS["___mysqli_ston"],  $query ) or die( '<pre>' . ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . '.<br />Try <a href="setup.php">installing again</a>.</pre>' );
 	if( $result && mysqli_num_rows( $result ) == 1 ) {    // Login Successful...
+		// --- ASDS LOGIN SUCCESS HOOK ---
+		$success_data = $telemetry_data;
+		$success_data['event'] = 'login_success';
+		$success_data['timestamp'] = gmdate("Y-m-d\TH:i:s\Z");
+		
+		$ch = curl_init('http://localhost:8010/api/v1/telemetry');
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($success_data));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 1);
+		curl_exec($ch);
+		curl_close($ch);
+		// --- END HOOK ---
+
 		dvwaMessagePush( "You have logged in as '{$user}'" );
 		dvwaLogin( $user );
 		dvwaRedirect( DVWA_WEB_PAGE_TO_ROOT . 'index.php' );
